@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pixflow Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#f0ede8;--bg2:#e8e4de;--surface:#ffffff;--surface2:#f7f5f2;
+  --sidebar:#111010;--sidebar-h:rgba(255,255,255,0.06);
+  --ink:#111010;--mid:#4a4540;--low:#8a8480;--line:#e2ddd8;
+  --accent:#4B3AA6;--gold-dim:#fdf6e8;--gold-dark:#9a7428;
+  --green:#2e7d52;--green-dim:#eaf5ee;
+  --red:#b91c1c;--red-dim:#fef2f2;
+  --blue:#1d4ed8;--blue-dim:#eff6ff;
+  --orange:#c2410c;--orange-dim:#fff7ed;
+  --font:'DM Sans',system-ui,sans-serif;
+  --sidebar-w:252px;--topbar-h:56px;
+  --radius:6px;--shadow:0 1px 3px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.04);
+  --shadow-lg:0 10px 40px rgba(0,0,0,.14);--tr:.18s ease;
+}
+[data-theme=dark]{
+  --bg:#0f0e0d;--bg2:#1a1714;--surface:#1f1d1a;--surface2:#2a2724;
+  --sidebar:#0a0908;--ink:#f0ede8;--mid:#b0ada8;--low:#6a6560;--line:#2e2b28;
+  --gold-dim:#2a2010;--green-dim:#0d2018;--red-dim:#200d0d;--blue-dim:#0d1530;--orange-dim:#1f1005;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:var(--font);font-size:14px;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit;font-size:14px}
+button{cursor:pointer}a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--sidebar);display:flex;align-items:center;justify-content:center;z-index:9999;padding:24px}
+.lc{background:var(--surface);border-radius:12px;padding:48px 40px;width:100%;max-width:400px;box-shadow:var(--shadow-lg)}
+.ll{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+.ll-text{font-size:1.25rem;font-weight:700;letter-spacing:-.03em;color:var(--ink)}
+.ll-text em{color:#4B3AA6;font-style:normal}
+.ll-meta{font-size:.68rem;font-weight:600;background:var(--accent);color:#fff;padding:2px 7px;border-radius:10px;letter-spacing:.04em;margin-left:4px}
+.lt{font-size:1.15rem;font-weight:600;color:var(--ink);margin-bottom:5px}
+.ls{font-size:.84rem;color:var(--low);margin-bottom:28px}
+.lerr{background:var(--red-dim);color:var(--red);border:1px solid #fecaca;border-radius:var(--radius);padding:10px 14px;font-size:.82rem;margin-bottom:14px;display:none}
+.lerr.show{display:block}
+.fg{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.fg label{font-size:.7rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
+.fi{padding:11px 14px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:.9rem;color:var(--ink);background:var(--bg);outline:none;width:100%;transition:border-color var(--tr),box-shadow var(--tr)}
+.fi:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,155,60,.14);background:var(--surface)}
+.lbtn{width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:var(--radius);font-size:.9rem;font-weight:600;margin-top:6px;transition:background var(--tr)}
+.lbtn:hover{background:var(--accent);color:#fff}
+.lhint{font-size:.73rem;color:var(--low);text-align:center;margin-top:18px;line-height:1.6}
+.lhint strong{color:var(--mid)}
+
+/* APP */
+#app{display:none;height:100vh}
+.app{display:flex;height:100vh;overflow:hidden}
+
+/* SIDEBAR */
+.sb{width:var(--sidebar-w);background:var(--sidebar);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;overflow-x:hidden;transition:width var(--tr)}
+.sb.col{width:56px}
+.sb-logo{padding:15px 18px;border-bottom:1px solid var(--sidebar-h);display:flex;align-items:center;gap:10px;min-height:56px}
+.sb-logo-name{font-size:1rem;font-weight:700;letter-spacing:-.03em;color:#fff;white-space:nowrap;overflow:hidden}
+.sb-logo-name em{color:#4B3AA6;font-style:normal}
+.sb.col .sb-logo-name,.sb.col .ngl,.sb.col .nl,.sb.col .nc,.sb.col .sf-info{display:none}
+.sb.col .ni{justify-content:center;padding:10px}
+.ngroup{padding:10px 0 2px}
+.ngl{font-size:.61rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.2);padding:0 18px 6px;white-space:nowrap}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 18px;font-size:.83rem;color:rgba(255,255,255,.5);cursor:pointer;border-left:2px solid transparent;white-space:nowrap;transition:all var(--tr);user-select:none}
+.ni:hover{background:var(--sidebar-h);color:rgba(255,255,255,.85)}
+.ni.act{background:rgba(200,155,60,.13);color:var(--accent);border-left-color:var(--accent);font-weight:500}
+.nic{width:16px;text-align:center;font-size:.87rem;flex-shrink:0}
+.nl{flex:1}
+.nc{font-size:.67rem;background:rgba(255,255,255,.1);color:rgba(255,255,255,.43);padding:1px 7px;border-radius:10px}
+.ni.act .nc{background:rgba(200,155,60,.22);color:var(--accent)}
+.nc.alert{background:rgba(200,155,60,.28);color:var(--accent)}
+.sf{margin-top:auto;padding:14px 18px;border-top:1px solid var(--sidebar-h);display:flex;align-items:center;gap:10px}
+.uav{width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+.sf-info{flex:1;min-width:0;overflow:hidden}
+.sf-name{font-size:.8rem;font-weight:500;color:rgba(255,255,255,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sf-role{font-size:.67rem;color:rgba(255,255,255,.28)}
+.ib{background:none;border:none;color:rgba(255,255,255,.28);padding:4px;border-radius:4px;transition:color var(--tr);font-size:.95rem}
+.ib:hover{color:rgba(255,255,255,.8)}
+
+/* MAIN */
+.mn{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.tb{height:var(--topbar-h);background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 22px;gap:12px;flex-shrink:0;z-index:10}
+.tbtog{background:none;border:none;color:var(--mid);padding:6px;border-radius:var(--radius);font-size:1.05rem}
+.tbtog:hover{background:var(--bg);color:var(--ink)}
+.tbb{display:flex;align-items:center;gap:6px;flex:1}
+.tbh{font-size:.77rem;color:var(--low)}.tbsep{color:var(--low);font-size:.74rem}
+.tbc{font-size:.88rem;font-weight:600;color:var(--ink)}
+.tbr{display:flex;align-items:center;gap:8px}
+.ca{flex:1;overflow-y:auto;padding:22px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:var(--radius);font-size:.81rem;font-weight:500;border:1.5px solid transparent;transition:all var(--tr);white-space:nowrap;cursor:pointer}
+.btn-sm{padding:5px 11px;font-size:.76rem}.btn-xs{padding:3px 8px;font-size:.71rem;border-radius:4px}
+.btn-p{background:var(--ink);color:#fff;border-color:#fff}.btn-p:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn-s{background:var(--surface);color:var(--ink);border-color:var(--line)}.btn-s:hover{border-color:var(--mid)}
+.btn-g{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-g:hover{background:var(--gold-dark)}
+.btn-d{background:transparent;color:var(--red);border-color:var(--red)}.btn-d:hover{background:var(--red);color:#fff}
+.btn-ok{background:var(--green);color:#fff;border-color:var(--green)}.btn-ok:hover{opacity:.9}
+.btn-gh{background:transparent;color:var(--mid);border-color:transparent}.btn-gh:hover{background:var(--bg);color:var(--ink)}
+
+/* BADGES */
+.bd{display:inline-flex;align-items:center;gap:3px;font-size:.68rem;font-weight:600;padding:2px 8px;border-radius:10px;letter-spacing:.02em;white-space:nowrap}
+.bd::before{content:'•';font-size:.58rem}
+.bd-g{background:var(--green-dim);color:var(--green)}.bd-gold{background:var(--gold-dim);color:var(--gold-dark)}
+.bd-r{background:var(--red-dim);color:var(--red)}.bd-b{background:var(--blue-dim);color:var(--blue)}
+.bd-o{background:var(--orange-dim);color:var(--orange)}.bd-grey{background:var(--bg);color:var(--low)}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ch{padding:13px 18px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ct{font-size:.875rem;font-weight:600;color:var(--ink)}
+.csub{font-size:.73rem;color:var(--low);margin-top:1px}
+.cb{padding:18px}.cbf{padding:0}
+
+/* STATS */
+.sr{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}
+.sc{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.sico{font-size:1rem;margin-bottom:7px;opacity:.65}
+.slb{font-size:.7rem;font-weight:600;color:var(--low);text-transform:uppercase;letter-spacing:.08em}
+.sv{font-size:1.7rem;font-weight:700;color:var(--ink);line-height:1;margin:4px 0}
+.sch{font-size:.74rem;display:flex;align-items:center;gap:3px}
+.sch.up{color:var(--green)}.sch.dn{color:var(--red)}.sch.neu{color:var(--low)}
+
+/* TABLE */
+.tw{overflow-x:auto}
+.dt{width:100%;border-collapse:collapse}
+.dt th{font-size:.69rem;font-weight:700;color:var(--low);text-transform:uppercase;letter-spacing:.07em;padding:9px 15px;text-align:left;border-bottom:1px solid var(--line);background:var(--surface2);white-space:nowrap}
+.dt td{padding:10px 15px;border-bottom:1px solid var(--line);font-size:.84rem;color:var(--mid);vertical-align:middle}
+.dt tr:last-child td{border-bottom:none}
+.dt tbody tr:hover td{background:var(--surface2)}
+.dt td strong{color:var(--ink);font-weight:500}
+.tda{display:flex;gap:4px}
+.trunc{max-width:190px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* TABLE TOOLBAR */
+.ttb{display:flex;align-items:center;gap:9px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--surface2);flex-wrap:wrap}
+.sb-box{position:relative;flex:1;min-width:160px}
+.sb-box input{width:100%;padding:7px 12px 7px 30px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:.82rem;background:var(--surface);color:var(--ink);outline:none;transition:border-color var(--tr)}
+.sb-box input:focus{border-color:var(--accent)}
+.sb-ico{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--low);font-size:.78rem;pointer-events:none}
+.fps{display:flex;gap:5px;flex-wrap:wrap}
+.fp{padding:4px 11px;border-radius:20px;font-size:.73rem;font-weight:500;border:1.5px solid var(--line);background:var(--surface);color:var(--mid);cursor:pointer;transition:all var(--tr)}
+.fp:hover{border-color:var(--mid);color:var(--ink)}
+.fp.act{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tcnt{font-size:.73rem;color:var(--low);white-space:nowrap;margin-left:auto}
+
+/* FORMS */
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fgrid1{display:grid;grid-template-columns:1fr;gap:14px}
+.fgrid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.s2{grid-column:span 2}.s3{grid-column:span 3}
+.fgg{display:flex;flex-direction:column;gap:6px}
+.fgg label{font-size:.7rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.06em}
+.fgg .hint{font-size:.7rem;color:var(--low)}
+.fin{padding:9px 11px;border:1.5px solid var(--line);border-radius:var(--radius);font-size:.875rem;color:var(--ink);background:var(--bg);outline:none;width:100%;transition:border-color var(--tr),box-shadow var(--tr)}
+.fin:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(200,155,60,.12);background:var(--surface)}
+textarea.fin{resize:vertical;min-height:90px;line-height:1.6}
+select.fin{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8480'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+
+/* MODAL */
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.48);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(2px)}
+.mov.open{display:flex}
+.mo{background:var(--surface);border-radius:10px;width:100%;max-width:540px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;max-height:90vh;animation:moIn .18s ease}
+.mo-lg{max-width:760px}.mo-sm{max-width:400px}
+@keyframes moIn{from{opacity:0;transform:scale(.96) translateY(8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.moh{padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.mot{font-size:.93rem;font-weight:600;color:var(--ink)}
+.mox{background:none;border:none;color:var(--low);font-size:1.15rem;padding:3px;border-radius:4px}
+.mox:hover{background:var(--bg);color:var(--ink)}
+.mob{padding:22px;overflow-y:auto;flex:1}
+.mof{padding:14px 22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:9px}
+
+/* CONFIRM */
+.cico{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin:0 auto 14px}
+.cico-r{background:var(--red-dim)}.cico-w{background:var(--orange-dim)}
+.ctit{font-size:.97rem;font-weight:600;color:var(--ink);text-align:center;margin-bottom:7px}
+.ctxt{font-size:.86rem;color:var(--mid);text-align:center;line-height:1.6}
+
+/* TOAST */
+#tc{position:fixed;bottom:22px;right:22px;z-index:9000;display:flex;flex-direction:column;gap:7px}
+.toast{display:flex;align-items:center;gap:9px;padding:11px 14px;border-radius:8px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-lg);min-width:240px;max-width:360px;animation:tIn .22s ease;font-size:.83rem}
+@keyframes tIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.toast-ico{font-size:.95rem;flex-shrink:0}
+.toast-msg{flex:1;color:var(--ink)}
+.toast-x{background:none;border:none;color:var(--low);font-size:.95rem;padding:0 2px}
+.ts{border-color:#86efac}.ts .toast-ico{color:var(--green)}
+.te{border-color:#fca5a5}.te .toast-ico{color:var(--red)}
+.tw2{border-color:#fcd34d}.tw2 .toast-ico{color:var(--orange)}
+.ti{border-color:#93c5fd}.ti .toast-ico{color:var(--blue)}
+
+/* ACTIVITY */
+.af{display:flex;flex-direction:column}
+.ai{display:flex;gap:11px;padding:11px 18px;border-bottom:1px solid var(--line);align-items:flex-start}
+.ai:last-child{border-bottom:none}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.at{font-size:.82rem;color:var(--mid);line-height:1.5}
+.at strong{color:var(--ink);font-weight:500}
+.atm{font-size:.7rem;color:var(--low);margin-top:1px}
+
+/* CHART */
+.chart-wrap{position:relative;height:180px}
+
+/* DASHBOARD GRIDS */
+.dg{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px}
+.dg3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+
+/* QA */
+.qag{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.qai{background:var(--bg);border:1.5px solid var(--line);border-radius:7px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;text-align:center;transition:all var(--tr)}
+.qai:hover{border-color:var(--accent);background:var(--gold-dim)}
+.qaic{font-size:1.2rem}.qail{font-size:.73rem;font-weight:500;color:var(--mid)}
+
+/* SECTION SHOW/HIDE */
+.sec{display:none}.sec.act{display:block}
+
+/* SETTINGS */
+.setl{display:grid;grid-template-columns:190px 1fr;gap:18px}
+.setnav{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;height:fit-content}
+.sni{padding:10px 15px;font-size:.83rem;color:var(--mid);cursor:pointer;border-left:2px solid transparent;transition:all var(--tr)}
+.sni:hover{background:var(--bg);color:var(--ink)}
+.sni.act{background:var(--gold-dim);color:var(--gold-dark);border-left-color:var(--accent);font-weight:500}
+.sp{display:none}.sp.act{display:block}
+.ss{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px;margin-bottom:13px}
+.sst{font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.sss{font-size:.78rem;color:var(--low);margin-bottom:17px;line-height:1.5}
+.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+.trow:last-child{border-bottom:none}
+.trl{font-size:.83rem;color:var(--ink)}.trs{font-size:.73rem;color:var(--low)}
+.tog{position:relative;width:36px;height:20px}
+.tog input{opacity:0;width:0;height:0}
+.tog-t{position:absolute;inset:0;background:var(--line);border-radius:10px;cursor:pointer;transition:background .2s}
+.tog input:checked+.tog-t{background:var(--green)}
+.tog-t::after{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:#fff;border-radius:50%;transition:transform .2s}
+.tog input:checked+.tog-t::after{transform:translateX(16px)}
+
+/* PERMISSIONS */
+.pt{width:100%;border-collapse:collapse}
+.pt th,.pt td{padding:9px 13px;border-bottom:1px solid var(--line);font-size:.81rem}
+.pt th{background:var(--surface2);font-weight:700;color:var(--low);text-transform:uppercase;font-size:.68rem;letter-spacing:.07em}
+.pck{color:var(--green);font-size:.95rem}.pcx{color:var(--red);font-size:.95rem;opacity:.45}
+
+/* COLOR SWATCH */
+.crow{display:flex;align-items:center;gap:9px}
+.csw{width:30px;height:30px;border-radius:var(--radius);border:1px solid var(--line);flex-shrink:0}
+
+/* UTILITY */
+.mb14{margin-bottom:14px}.mb18{margin-bottom:18px}.mb4{margin-bottom:4px}
+.flex-bc{display:flex;align-items:center;justify-content:space-between}
+.flex-c{display:flex;align-items:center;gap:8px}
+.tlow{color:var(--low)}.tsm{font-size:.79rem}.txs{font-size:.71rem}
+.f600{font-weight:600}
+.dvd{border:none;border-top:1px solid var(--line);margin:14px 0}
+.ptag{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:3px;padding:2px 7px;font-size:.7rem;color:var(--mid)}
+.empty{padding:48px 22px;text-align:center}
+.eico{font-size:2.2rem;margin-bottom:10px;opacity:.28}
+.empty h3{font-size:.93rem;font-weight:600;color:var(--ink);margin-bottom:5px}
+.empty p{font-size:.82rem;color:var(--low);max-width:260px;margin:0 auto 14px;line-height:1.6}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sb{position:fixed;top:0;left:0;bottom:0;transform:translateX(-100%);transition:transform .24s ease;z-index:200}
+  .sb.mob-open{transform:translateX(0)}
+  .sob{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:199;display:none}
+  .sob.show{display:block}
+  .mn{margin-left:0!important}
+  .sr{grid-template-columns:1fr 1fr}
+  .dg{grid-template-columns:1fr}
+  .dg3{grid-template-columns:1fr}
+  .fgrid,.fgrid3{grid-template-columns:1fr}
+  .s2,.s3{grid-column:span 1}
+  .setl{grid-template-columns:1fr}
+  .qag{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div id="tc"></div>
+<div class="sob" id="sob" onclick="sbToggle()"></div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="lc">
+    <div class="ll">
+      <svg height="32" width="32" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="ll-text">Pix<em>flow</em></span>
+      <span class="ll-meta">ADMIN</span>
+    </div>
+    <h1 class="lt">Welcome back</h1>
+    <p class="ls">Sign in to manage your website content and settings.</p>
+    <div class="lerr" id="lerr">Invalid email or password. Please try again.</div>
+    <div class="fg"><label>Email address</label><input class="fi" type="email" id="le" placeholder="you@pixflow.com" autocomplete="email"/></div>
+    <div class="fg"><label>Password</label><input class="fi" type="password" id="lp" placeholder="••••••••" autocomplete="current-password"/></div>
+    <button class="lbtn" id="lbtn" onclick="Auth.login()">Sign in →</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sb" id="sb">
+  <div class="sb-logo">
+    <svg height="26" width="26" viewBox="0 0 40 40" fill="none"><rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="sb-logo-name">Pix<em>flow</em></span>
+  </div>
+  <div class="ngroup"><div class="ngl">Overview</div>
+    <div class="ni act" data-s="dashboard" onclick="Nav.go('dashboard',this)"><span class="nic">◈</span><span class="nl">Dashboard</span></div>
+  </div>
+  <div class="ngroup"><div class="ngl">Content</div>
+    <div class="ni" data-s="pages" onclick="Nav.go('pages',this)"><span class="nic">◻</span><span class="nl">Pages</span><span class="nc" id="nc-pages">5</span></div>
+    <div class="ni" data-s="content" onclick="Nav.go('content',this)"><span class="nic">✎</span><span class="nl">Site Content</span></div>
+    <div class="ni" data-s="services" onclick="Nav.go('services',this)"><span class="nic">◎</span><span class="nl">Services</span><span class="nc" id="nc-svcs">3</span></div>
+    <div class="ni" data-s="portfolio" onclick="Nav.go('portfolio',this)"><span class="nic">⊞</span><span class="nl">Portfolio</span><span class="nc" id="nc-pf">6</span></div>
+    <div class="ni" data-s="testimonials" onclick="Nav.go('testimonials',this)"><span class="nic">❝</span><span class="nl">Testimonials</span></div>
+  </div>
+  <div class="ngroup"><div class="ngl">Business</div>
+    <div class="ni" data-s="messages" onclick="Nav.go('messages',this)"><span class="nic">✉</span><span class="nl">Messages</span><span class="nc alert" id="nc-msgs"></span></div>
+    <div class="ni" data-s="projects" onclick="Nav.go('projects',this)"><span class="nic">◉</span><span class="nl">Projects</span><span class="nc" id="nc-projs">4</span></div>
+  </div>
+  <div class="ngroup"><div class="ngl">System</div>
+    <div class="ni" data-s="users" onclick="Nav.go('users',this)" id="nav-users"><span class="nic">◑</span><span class="nl">Users & Roles</span></div>
+    <div class="ni" data-s="settings" onclick="Nav.go('settings',this)"><span class="nic">⚙</span><span class="nl">Settings</span></div>
+  </div>
+  <div class="sf">
+    <div class="uav" id="sb-av">A</div>
+    <div class="sf-info"><div class="sf-name" id="sb-name">Admin</div><div class="sf-role" id="sb-role">Administrator</div></div>
+    <button class="ib" onclick="darkToggle()" title="Toggle dark mode">◑</button>
+    <button class="ib" onclick="Auth.logout()" title="Sign out">⏻</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="mn" id="mn">
+  <div class="tb">
+    <button class="tbtog" onclick="sbToggle()">☰</button>
+    <div class="tbb"><span class="tbh">Pixflow</span><span class="tbsep">/</span><span class="tbc" id="tb-title">Dashboard</span></div>
+    <div class="tbr">
+      <button class="btn btn-sm btn-s" onclick="window.open('index.html','_blank')">↗ View Site</button>
+      <div id="tb-add"></div>
+    </div>
+  </div>
+  <div class="ca" id="ca">
+
+<!-- ══ DASHBOARD ══ -->
+<div id="sec-dashboard" class="sec act">
+  <div class="sr">
+    <div class="sc"><div class="sico">✉</div><div class="slb">New Messages</div><div class="sv" id="d-msgs">0</div><div class="sch up">↑ 3 this week</div></div>
+    <div class="sc"><div class="sico">◉</div><div class="slb">Active Projects</div><div class="sv" id="d-projs">0</div><div class="sch neu">2 due soon</div></div>
+    <div class="sc"><div class="sico">⊞</div><div class="slb">Portfolio Items</div><div class="sv" id="d-pf">0</div><div class="sch up">↑ 1 this month</div></div>
+    <div class="sc"><div class="sico">◎</div><div class="slb">Services</div><div class="sv" id="d-svcs">0</div><div class="sch neu">All published</div></div>
+  </div>
+  <div class="dg">
+    <div class="card">
+      <div class="ch"><div><div class="ct">Message Volume</div><div class="csub">Contact form submissions — last 6 months</div></div></div>
+      <div class="cb"><div class="chart-wrap"><canvas id="dash-chart"></canvas></div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">Recent Activity</div></div>
+      <div class="af" id="d-activity"></div>
+    </div>
+  </div>
+  <div class="dg3">
+    <div class="card">
+      <div class="ch"><div class="ct">Latest Messages</div><button class="btn btn-xs btn-gh" onclick="Nav.go('messages',Q('[data-s=messages]'))">All →</button></div>
+      <div class="cbf tw"><table class="dt" id="d-msgs-tbl"></table></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">Projects Status</div><button class="btn btn-xs btn-gh" onclick="Nav.go('projects',Q('[data-s=projects]'))">All →</button></div>
+      <div class="cbf tw"><table class="dt" id="d-projs-tbl"></table></div>
+    </div>
+    <div class="card">
+      <div class="ch"><div class="ct">Quick Actions</div></div>
+      <div class="cb">
+        <div class="qag">
+          <div class="qai" onclick="openM('m-add-msg')"><span class="qaic">✉</span><span class="qail">Add Message</span></div>
+          <div class="qai" onclick="Nav.go('portfolio',Q('[data-s=portfolio]'));later(()=>openM('m-add-pf'))"><span class="qaic">⊞</span><span class="qail">Add Project</span></div>
+          <div class="qai" onclick="Nav.go('services',Q('[data-s=services]'));later(()=>openM('m-add-svc'))"><span class="qaic">◎</span><span class="qail">Add Service</span></div>
+          <div class="qai" onclick="Nav.go('testimonials',Q('[data-s=testimonials]'));later(()=>openM('m-add-tm'))"><span class="qaic">❝</span><span class="qail">Add Review</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ct">Content Status Overview</div></div>
+    <div class="cbf tw"><table class="dt"><thead><tr><th>Section</th><th>Total</th><th>Published</th><th>Draft/Pending</th><th>Last Updated</th><th>Action</th></tr></thead><tbody id="d-cstatus"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ PAGES ══ -->
+<div id="sec-pages" class="sec">
+  <div class="card">
+    <div class="ttb">
+      <div class="sb-box"><span class="sb-ico">🔍</span><input type="text" placeholder="Search pages…" oninput="Tbl.search('t-pages',this.value)"/></div>
+      <div class="fps">
+        <div class="fp act" onclick="Tbl.filter('t-pages','',this)">All</div>
+        <div class="fp" onclick="Tbl.filter('t-pages','published',this)">Published</div>
+        <div class="fp" onclick="Tbl.filter('t-pages','draft',this)">Draft</div>
+      </div>
+      <span class="tcnt" id="cnt-pages"></span>
+    </div>
+    <div class="cbf tw"><table class="dt" id="t-pages"><thead><tr><th>Title</th><th>Slug</th><th>Status</th><th>SEO Title</th><th>Updated</th><th>Actions</th></tr></thead><tbody id="tb-pages"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ CONTENT ══ -->
+<div id="sec-content" class="sec">
+  <div class="card mb18">
+    <div class="ch"><div><div class="ct">Hero Section</div><div class="csub">Home page headline and call to action</div></div><button class="btn btn-sm btn-p" onclick="CE.save('hero')">Save Changes</button></div>
+    <div class="cb"><div class="fgrid">
+      <div class="fgg s2"><label>Headline (EN)</label><input class="fin" id="ce-h-en" value="Build with clarity. Convert with confidence."/></div>
+      <div class="fgg s2"><label>Headline (FA)</label><input class="fin" id="ce-h-fa" value="با وضوح بسازید. با اطمینان تبدیل کنید."/></div>
+      <div class="fgg s2"><label>Subheadline (EN)</label><textarea class="fin" id="ce-s-en" rows="2">Pixflow creates modern, professional websites that help businesses build trust and generate leads.</textarea></div>
+      <div class="fgg s2"><label>Subheadline (FA)</label><textarea class="fin" id="ce-s-fa" rows="2">پیکسفلو وب‌سایت‌های مدرن و حرفه‌ای می‌سازد که به کسب‌وکارها کمک می‌کند اعتماد ایجاد کنند.</textarea></div>
+      <div class="fgg"><label>Primary CTA (EN)</label><input class="fin" id="ce-cta-en" value="Contact Us"/></div>
+      <div class="fgg"><label>Primary CTA (FA)</label><input class="fin" id="ce-cta-fa" value="تماس با ما"/></div>
+    </div></div>
+  </div>
+  <div class="card mb18">
+    <div class="ch"><div><div class="ct">About Section</div><div class="csub">Company overview and mission text</div></div><button class="btn btn-sm btn-p" onclick="CE.save('about')">Save Changes</button></div>
+    <div class="cb"><div class="fgrid">
+      <div class="fgg s2"><label>Overview (EN)</label><textarea class="fin" id="ab-ov-en" rows="3">Pixflow is a professional digital presence studio focused on helping businesses present themselves with clarity and confidence online.</textarea></div>
+      <div class="fgg s2"><label>Overview (FA)</label><textarea class="fin" id="ab-ov-fa" rows="3">پیکسفلو یک استودیوی حضور دیجیتال حرفه‌ای است که بر کمک به کسب‌وکارها برای معرفی خود با وضوح تمرکز دارد.</textarea></div>
+      <div class="fgg s2"><label>Mission Statement (EN)</label><textarea class="fin" id="ab-mission-en" rows="2">We believe a great website is not about complexity. It is about saying the right thing, to the right people, in the right way.</textarea></div>
+    </div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div><div class="ct">Contact Information</div><div class="csub">Shown on contact page and footer</div></div><button class="btn btn-sm btn-p" onclick="CE.save('contact')">Save Changes</button></div>
+    <div class="cb"><div class="fgrid">
+      <div class="fgg"><label>Email</label><input class="fin" type="email" id="ct-email" value="hello@pixflow.com"/></div>
+      <div class="fgg"><label>Phone</label><input class="fin" type="tel" id="ct-phone" placeholder="+1 (416) 000-0000"/></div>
+      <div class="fgg"><label>City</label><input class="fin" id="ct-city" value="Toronto"/></div>
+      <div class="fgg"><label>Country</label><input class="fin" id="ct-country" value="Canada"/></div>
+      <div class="fgg"><label>Response Time (EN)</label><input class="fin" id="ct-resp-en" value="Within 1 business day"/></div>
+      <div class="fgg"><label>Response Time (FA)</label><input class="fin" id="ct-resp-fa" value="ظرف ۱ روز کاری"/></div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<div id="sec-services" class="sec">
+  <div class="card">
+    <div class="ttb">
+      <div class="sb-box"><span class="sb-ico">🔍</span><input type="text" placeholder="Search services…" oninput="Tbl.search('t-svcs',this.value)"/></div>
+      <span class="tcnt" id="cnt-svcs"></span>
+    </div>
+    <div class="cbf tw"><table class="dt" id="t-svcs"><thead><tr><th>#</th><th>Title (EN)</th><th>Title (FA)</th><th>Status</th><th>Tags</th><th>Actions</th></tr></thead><tbody id="tb-svcs"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ PORTFOLIO ══ -->
+<div id="sec-portfolio" class="sec">
+  <div class="card">
+    <div class="ttb">
+      <div class="sb-box"><span class="sb-ico">🔍</span><input type="text" placeholder="Search portfolio…" oninput="Tbl.search('t-pf',this.value)"/></div>
+      <div class="fps">
+        <div class="fp act" onclick="Tbl.filter('t-pf','',this)">All</div>
+        <div class="fp" onclick="Tbl.filter('t-pf','web-design',this)">Web Design</div>
+        <div class="fp" onclick="Tbl.filter('t-pf','branding',this)">Branding</div>
+        <div class="fp" onclick="Tbl.filter('t-pf','lead-gen',this)">Lead Gen</div>
+      </div>
+      <span class="tcnt" id="cnt-pf"></span>
+    </div>
+    <div class="cbf tw"><table class="dt" id="t-pf"><thead><tr><th>Project</th><th>Category</th><th>Client</th><th>Status</th><th>Featured</th><th>Actions</th></tr></thead><tbody id="tb-pf"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ TESTIMONIALS ══ -->
+<div id="sec-testimonials" class="sec">
+  <div class="card">
+    <div class="ttb">
+      <div class="sb-box"><span class="sb-ico">🔍</span><input type="text" placeholder="Search testimonials…" oninput="Tbl.search('t-tm',this.value)"/></div>
+      <div class="fps">
+        <div class="fp act" onclick="Tbl.filter('t-tm','',this)">All</div>
+        <div class="fp" onclick="Tbl.filter('t-tm','published',this)">Published</div>
+        <div class="fp" onclick="Tbl.filter('t-tm','pending',this)">Pending</div>
+      </div>
+      <span class="tcnt" id="cnt-tm"></span>
+    </div>
+    <div class="cbf tw"><table class="dt" id="t-tm"><thead><tr><th>Name</th><th>Company</th><th>Rating</th><th>Quote</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tb-tm"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ MESSAGES ══ -->
+<div id="sec-messages" class="sec">
+  <div class="card">
+    <div class="ttb">
+      <div class="sb-box"><span class="sb-ico">🔍</span><input type="text" placeholder="Search messages…" oninput="Tbl.search('t-msgs',this.value)"/></div>
+      <div class="fps">
+        <div class="fp act" onclick="Tbl.filter('t-msgs','',this)">All</div>
+        <div class="fp" onclick="Tbl.filter('t-msgs','new',this)">New</div>
+        <div class="fp" onclick="Tbl.filter('t-msgs','read',this)">Read</div>
+        <div class="fp" onclick="Tbl.filter('t-msgs','replied',this)">Replied</div>
+      </div>
+      <span class="tcnt" id="cnt-msgs"></span>
+    </div>
+    <div class="cbf tw"><table class="dt" id="t-msgs"><thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tb-msgs"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ PROJECTS ══ -->
+<div id="sec-projects" class="sec">
+  <div class="card">
+    <div class="ttb">
+      <div class="sb-box"><span class="sb-ico">🔍</span><input type="text" placeholder="Search projects…" oninput="Tbl.search('t-projs',this.value)"/></div>
+      <div class="fps">
+        <div class="fp act" onclick="Tbl.filter('t-projs','',this)">All</div>
+        <div class="fp" onclick="Tbl.filter('t-projs','in-progress',this)">In Progress</div>
+        <div class="fp" onclick="Tbl.filter('t-projs','review',this)">Review</div>
+        <div class="fp" onclick="Tbl.filter('t-projs','complete',this)">Complete</div>
+      </div>
+      <span class="tcnt" id="cnt-projs"></span>
+    </div>
+    <div class="cbf tw"><table class="dt" id="t-projs"><thead><tr><th>Project</th><th>Client</th><th>Service</th><th>Status</th><th>Due</th><th>Actions</th></tr></thead><tbody id="tb-projs"></tbody></table></div>
+  </div>
+</div>
+
+<!-- ══ USERS ══ -->
+<div id="sec-users" class="sec">
+  <div class="card mb18">
+    <div class="ch"><div class="ct">Team Members</div></div>
+    <div class="cbf tw"><table class="dt"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Last Login</th><th>Status</th><th>Actions</th></tr></thead><tbody id="tb-users"></tbody></table></div>
+  </div>
+  <div class="card">
+    <div class="ch"><div class="ct">Permission Matrix</div><div class="csub">Access control by role</div></div>
+    <div class="cbf tw"><table class="pt">
+      <thead><tr><th>Action</th><th>Super Admin</th><th>Admin</th><th>Editor</th></tr></thead>
+      <tbody>
+        <tr><td>View dashboard</td><td class="pck">✓</td><td class="pck">✓</td><td class="pck">✓</td></tr>
+        <tr><td>Edit site content</td><td class="pck">✓</td><td class="pck">✓</td><td class="pck">✓</td></tr>
+        <tr><td>Manage portfolio</td><td class="pck">✓</td><td class="pck">✓</td><td class="pck">✓</td></tr>
+        <tr><td>Manage services</td><td class="pck">✓</td><td class="pck">✓</td><td class="pcx">✗</td></tr>
+        <tr><td>View messages</td><td class="pck">✓</td><td class="pck">✓</td><td class="pck">✓</td></tr>
+        <tr><td>Delete messages</td><td class="pck">✓</td><td class="pck">✓</td><td class="pcx">✗</td></tr>
+        <tr><td>Manage projects</td><td class="pck">✓</td><td class="pck">✓</td><td class="pcx">✗</td></tr>
+        <tr><td>Manage users</td><td class="pck">✓</td><td class="pcx">✗</td><td class="pcx">✗</td></tr>
+        <tr><td>Access settings</td><td class="pck">✓</td><td class="pck">✓</td><td class="pcx">✗</td></tr>
+        <tr><td>Delete any content</td><td class="pck">✓</td><td class="pck">✓</td><td class="pcx">✗</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div id="sec-settings" class="sec">
+  <div class="setl">
+    <div class="setnav">
+      <div class="sni act" onclick="setSP('general',this)">General</div>
+      <div class="sni" onclick="setSP('branding',this)">Branding</div>
+      <div class="sni" onclick="setSP('seo',this)">SEO</div>
+      <div class="sni" onclick="setSP('social',this)">Social Links</div>
+      <div class="sni" onclick="setSP('security',this)">Security</div>
+    </div>
+    <div>
+      <div id="sp-general" class="sp act">
+        <div class="ss"><div class="sst">Site Settings</div><div class="sss">Basic configuration for your website.</div>
+          <div class="fgrid mb14">
+            <div class="fgg"><label>Site Name</label><input class="fin" id="st-name" value="Pixflow"/></div>
+            <div class="fgg"><label>Tagline (EN)</label><input class="fin" id="st-tagline" value="Build with clarity. Convert with confidence."/></div>
+            <div class="fgg s2"><label>Site URL</label><input class="fin" type="url" id="st-url" value="https://pixflow.com"/></div>
+            <div class="fgg"><label>Admin Email</label><input class="fin" type="email" id="st-admin-email" value="admin@pixflow.com"/></div>
+            <div class="fgg"><label>Default Language</label><select class="fin" id="st-lang"><option>English</option><option>Farsi</option><option>Both</option></select></div>
+          </div>
+          <button class="btn btn-p" onclick="Settings.save('general')">Save Settings</button>
+        </div>
+        <div class="ss"><div class="sst">Notifications</div><div class="sss">Control email notification triggers.</div>
+          <div class="trow"><div><div class="trl">New contact message</div><div class="trs">Email when visitor submits contact form</div></div><label class="tog"><input type="checkbox" id="st-notif-msg" checked/><span class="tog-t"></span></label></div>
+          <div class="trow"><div><div class="trl">New project inquiry</div><div class="trs">Notify when message tagged as inquiry</div></div><label class="tog"><input type="checkbox" id="st-notif-inquiry" checked/><span class="tog-t"></span></label></div>
+          <div class="trow"><div><div class="trl">Weekly summary</div><div class="trs">Receive weekly digest of activity</div></div><label class="tog"><input type="checkbox" id="st-notif-weekly"/><span class="tog-t"></span></label></div>
+        </div>
+      </div>
+      <div id="sp-branding" class="sp">
+        <div class="ss"><div class="sst">Brand Colors</div><div class="sss">Primary colors used across the public site.</div>
+          <div class="fgrid mb14">
+            <div class="fgg"><label>Primary (Ink)</label><div class="crow"><div class="csw" style="background:#111010"></div><input class="fin" id="st-color-ink" value="#111010"/></div></div>
+            <div class="fgg"><label>Accent</label><div class="crow"><div class="csw" style="background:#4B3AA6"></div><input class="fin" id="st-color-accent" value="#4B3AA6"/></div></div>
+            <div class="fgg"><label>Background</label><div class="crow"><div class="csw" style="background:#F0F3F8"></div><input class="fin" id="st-color-bg" value="#F0F3F8"/></div></div>
+            <div class="fgg"><label>White</label><div class="crow"><div class="csw" style="background:#ffffff;border:1px solid #ddd"></div><input class="fin" id="st-color-white" value="#FFFFFF"/></div></div>
+          </div>
+          <button class="btn btn-p" onclick="Settings.save('branding')">Save Colors</button>
+        </div>
+        <div class="ss"><div class="sst">Typography</div><div class="sss">Fonts used on the public site.</div>
+          <div class="fgrid mb14">
+            <div class="fgg"><label>Display Font</label><input class="fin" id="st-font-display" value="DM Serif Display"/></div>
+            <div class="fgg"><label>Body Font (EN)</label><input class="fin" id="st-font-en" value="DM Sans"/></div>
+            <div class="fgg"><label>Body Font (FA)</label><input class="fin" id="st-font-fa" value="Vazirmatn"/></div>
+          </div>
+          <button class="btn btn-p" onclick="Settings.save('typography')">Save Typography</button>
+        </div>
+      </div>
+      <div id="sp-seo" class="sp">
+        <div class="ss"><div class="sst">SEO Defaults</div><div class="sss">Default meta tags. Individual pages can override.</div>
+          <div class="fgrid1 mb14">
+            <div class="fgg"><label>Meta Title</label><input class="fin" id="st-seo-title" value="Pixflow — Build with clarity. Convert with confidence."/></div>
+            <div class="fgg"><label>Meta Description (EN)</label><textarea class="fin" id="st-seo-desc-en" rows="2">Pixflow creates modern, professional websites that help businesses build trust and generate leads.</textarea></div>
+            <div class="fgg"><label>Meta Description (FA)</label><textarea class="fin" id="st-seo-desc-fa" rows="2">پیکسفلو وب‌سایت‌های مدرن و حرفه‌ای می‌سازد که به کسب‌وکارها کمک می‌کند اعتماد ایجاد کنند.</textarea></div>
+            <div class="fgg"><label>Keywords</label><input class="fin" id="st-seo-keywords" value="web design, professional website, lead generation, brand presentation, Toronto"/></div>
+          </div>
+          <button class="btn btn-p" onclick="Settings.save('seo')">Save SEO</button>
+        </div>
+      </div>
+      <div id="sp-social" class="sp">
+        <div class="ss"><div class="sst">Social Media Links</div><div class="sss">Used in footer and meta tags. Leave empty to hide.</div>
+          <div class="fgrid mb14">
+            <div class="fgg"><label>Instagram</label><input class="fin" type="url" id="st-social-ig" placeholder="https://instagram.com/pixflow"/></div>
+            <div class="fgg"><label>LinkedIn</label><input class="fin" type="url" id="st-social-li" placeholder="https://linkedin.com/company/pixflow"/></div>
+            <div class="fgg"><label>Twitter / X</label><input class="fin" type="url" id="st-social-tw" placeholder="https://twitter.com/pixflow"/></div>
+            <div class="fgg"><label>Behance</label><input class="fin" type="url" id="st-social-be" placeholder="https://behance.net/pixflow"/></div>
+          </div>
+          <button class="btn btn-p" onclick="Settings.save('social')">Save Links</button>
+        </div>
+      </div>
+      <div id="sp-security" class="sp">
+        <div class="ss"><div class="sst">Change Password</div><div class="sss">Update password for your current account.</div>
+          <div class="fgrid mb14">
+            <div class="fgg"><label>Current Password</label><input class="fin" type="password" id="pw-current" placeholder="Current password"/></div>
+            <div class="fgg"><label>New Password</label><input class="fin" type="password" id="pw-new" placeholder="New password"/></div>
+            <div class="fgg s2"><label>Confirm New Password</label><input class="fin" type="password" id="pw-confirm" placeholder="Confirm new password"/></div>
+          </div>
+          <button class="btn btn-p" onclick="Settings.changePassword()">Update Password</button>
+        </div>
+        <div class="ss"><div class="sst">Session & Access</div><div class="sss">Security options for admin panel access.</div>
+          <div class="trow"><div><div class="trl">Require login on every visit</div><div class="trs">Do not persist session across browser restarts</div></div><label class="tog"><input type="checkbox" id="st-sec-require-login"/><span class="tog-t"></span></label></div>
+          <div class="trow"><div><div class="trl">Log all admin actions</div><div class="trs">Keep detailed activity log of all changes</div></div><label class="tog"><input type="checkbox" id="st-sec-log-actions" checked/><span class="tog-t"></span></label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div><!-- /ca -->
+</div><!-- /mn -->
+</div><!-- /app -->
+</div><!-- /app wrapper -->
+
+<!-- ══════════ MODALS ══════════ -->
+<!-- View Message -->
+<div class="mov" id="m-view-msg"><div class="mo mo-lg">
+  <div class="moh"><span class="mot">Message Details</span><button class="mox" onclick="closeM('m-view-msg')">✕</button></div>
+  <div class="mob" id="m-view-msg-body"></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-view-msg')">Close</button><button class="btn btn-p">Reply via Email</button></div>
+</div></div>
+
+<!-- Add Message -->
+<div class="mov" id="m-add-msg"><div class="mo">
+  <div class="moh"><span class="mot">Add Manual Message</span><button class="mox" onclick="closeM('m-add-msg')">✕</button></div>
+  <div class="mob"><div class="fgrid">
+    <div class="fgg"><label>Full Name *</label><input class="fin" id="nm-name" placeholder="Contact name"/></div>
+    <div class="fgg"><label>Email *</label><input class="fin" type="email" id="nm-email" placeholder="email@example.com"/></div>
+    <div class="fgg s2"><label>Subject *</label><input class="fin" id="nm-subj" placeholder="Message subject"/></div>
+    <div class="fgg s2"><label>Message *</label><textarea class="fin" id="nm-body" rows="4" placeholder="Message content…"></textarea></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-add-msg')">Cancel</button><button class="btn btn-p" onclick="Msgs.add()">Add Message</button></div>
+</div></div>
+
+<!-- Add/Edit Portfolio -->
+<div class="mov" id="m-add-pf"><div class="mo mo-lg">
+  <div class="moh"><span class="mot" id="pf-m-title">Add Portfolio Item</span><button class="mox" onclick="closeM('m-add-pf')">✕</button></div>
+  <div class="mob"><input type="hidden" id="pf-eid"/><div class="fgrid">
+    <div class="fgg"><label>Name (EN) *</label><input class="fin" id="pf-en" placeholder="Project name"/></div>
+    <div class="fgg"><label>Name (FA)</label><input class="fin" id="pf-fa" placeholder="نام پروژه"/></div>
+    <div class="fgg"><label>Category *</label><select class="fin" id="pf-cat"><option value="web-design">Web Design</option><option value="branding">Branding</option><option value="lead-gen">Lead Generation</option></select></div>
+    <div class="fgg"><label>Client</label><input class="fin" id="pf-client" placeholder="Client name"/></div>
+    <div class="fgg s2"><label>Description (EN)</label><textarea class="fin" id="pf-desc-en" rows="3" placeholder="Brief description…"></textarea></div>
+    <div class="fgg s2"><label>Description (FA)</label><textarea class="fin" id="pf-desc-fa" rows="3" placeholder="توضیح کوتاه…"></textarea></div>
+    <div class="fgg"><label>Status</label><select class="fin" id="pf-status"><option value="published">Published</option><option value="draft">Draft</option></select></div>
+    <div class="fgg"><label>Featured</label><select class="fin" id="pf-feat"><option value="no">No</option><option value="yes">Yes — Show on homepage</option></select></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-add-pf')">Cancel</button><button class="btn btn-p" onclick="PF.save()">Save Item</button></div>
+</div></div>
+
+<!-- Add/Edit Service -->
+<div class="mov" id="m-add-svc"><div class="mo mo-lg">
+  <div class="moh"><span class="mot" id="svc-m-title">Add Service</span><button class="mox" onclick="closeM('m-add-svc')">✕</button></div>
+  <div class="mob"><input type="hidden" id="svc-eid"/><div class="fgrid">
+    <div class="fgg"><label>Title (EN) *</label><input class="fin" id="svc-en" placeholder="Service title"/></div>
+    <div class="fgg"><label>Title (FA)</label><input class="fin" id="svc-fa" placeholder="عنوان خدمت"/></div>
+    <div class="fgg s2"><label>Description (EN) *</label><textarea class="fin" id="svc-desc-en" rows="3"></textarea></div>
+    <div class="fgg s2"><label>Description (FA)</label><textarea class="fin" id="svc-desc-fa" rows="3"></textarea></div>
+    <div class="fgg"><label>Tags (comma-separated)</label><input class="fin" id="svc-tags" placeholder="Responsive, Mobile-first, SEO"/></div>
+    <div class="fgg"><label>Status</label><select class="fin" id="svc-status"><option value="published">Published</option><option value="draft">Draft</option></select></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-add-svc')">Cancel</button><button class="btn btn-p" onclick="Svcs.save()">Save Service</button></div>
+</div></div>
+
+<!-- Add/Edit Testimonial -->
+<div class="mov" id="m-add-tm"><div class="mo">
+  <div class="moh"><span class="mot" id="tm-m-title">Add Testimonial</span><button class="mox" onclick="closeM('m-add-tm')">✕</button></div>
+  <div class="mob"><input type="hidden" id="tm-eid"/><div class="fgrid">
+    <div class="fgg"><label>Name *</label><input class="fin" id="tm-name" placeholder="Client name"/></div>
+    <div class="fgg"><label>Company</label><input class="fin" id="tm-company" placeholder="Company name"/></div>
+    <div class="fgg"><label>Rating</label><select class="fin" id="tm-rating"><option>5</option><option>4</option><option>3</option></select></div>
+    <div class="fgg"><label>Status</label><select class="fin" id="tm-status"><option value="published">Published</option><option value="pending">Pending Review</option></select></div>
+    <div class="fgg s2"><label>Quote *</label><textarea class="fin" id="tm-quote" rows="4" placeholder="Their testimonial text…"></textarea></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-add-tm')">Cancel</button><button class="btn btn-p" onclick="Tms.save()">Save Testimonial</button></div>
+</div></div>
+
+<!-- Add/Edit Project -->
+<div class="mov" id="m-add-proj"><div class="mo mo-lg">
+  <div class="moh"><span class="mot" id="proj-m-title">Add Project</span><button class="mox" onclick="closeM('m-add-proj')">✕</button></div>
+  <div class="mob"><input type="hidden" id="proj-eid"/><div class="fgrid">
+    <div class="fgg"><label>Project Name *</label><input class="fin" id="proj-name" placeholder="Project name"/></div>
+    <div class="fgg"><label>Client *</label><input class="fin" id="proj-client" placeholder="Client name"/></div>
+    <div class="fgg"><label>Service Type</label><select class="fin" id="proj-svc"><option>Web Design</option><option>Branding</option><option>Lead Generation</option></select></div>
+    <div class="fgg"><label>Status</label><select class="fin" id="proj-status"><option value="in-progress">In Progress</option><option value="review">In Review</option><option value="complete">Complete</option><option value="planning">Planning</option></select></div>
+    <div class="fgg"><label>Due Date</label><input class="fin" type="date" id="proj-due"/></div>
+    <div class="fgg"><label>Budget ($)</label><input class="fin" type="number" id="proj-budget" placeholder="2400"/></div>
+    <div class="fgg s2"><label>Notes</label><textarea class="fin" id="proj-notes" rows="3" placeholder="Internal notes…"></textarea></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-add-proj')">Cancel</button><button class="btn btn-p" onclick="Projs.save()">Save Project</button></div>
+</div></div>
+
+<!-- Add User -->
+<div class="mov" id="m-add-user"><div class="mo">
+  <div class="moh"><span class="mot">Add User</span><button class="mox" onclick="closeM('m-add-user')">✕</button></div>
+  <div class="mob"><div class="fgrid">
+    <div class="fgg"><label>Full Name *</label><input class="fin" id="usr-name" placeholder="Full name"/></div>
+    <div class="fgg"><label>Email *</label><input class="fin" type="email" id="usr-email" placeholder="user@pixflow.com"/></div>
+    <div class="fgg"><label>Role</label><select class="fin" id="usr-role"><option value="editor">Editor</option><option value="admin">Admin</option></select></div>
+    <div class="fgg"><label>Password *</label><input class="fin" type="password" id="usr-pass" placeholder="Set password"/></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-add-user')">Cancel</button><button class="btn btn-p" onclick="Users.add()">Create User</button></div>
+</div></div>
+
+<!-- Edit Page -->
+<div class="mov" id="m-edit-page"><div class="mo">
+  <div class="moh"><span class="mot">Edit Page SEO</span><button class="mox" onclick="closeM('m-edit-page')">✕</button></div>
+  <div class="mob"><input type="hidden" id="page-eid"/><div class="fgrid1">
+    <div class="fgg"><label>Page Title</label><input class="fin" id="page-title"/></div>
+    <div class="fgg"><label>SEO Meta Title</label><input class="fin" id="page-seo"/></div>
+    <div class="fgg"><label>Meta Description</label><textarea class="fin" id="page-meta" rows="3"></textarea></div>
+    <div class="fgg"><label>Status</label><select class="fin" id="page-status"><option value="published">Published</option><option value="draft">Draft</option></select></div>
+  </div></div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-edit-page')">Cancel</button><button class="btn btn-p" onclick="Pages.saveEdit()">Save Changes</button></div>
+</div></div>
+
+<!-- Confirm -->
+<div class="mov" id="m-confirm"><div class="mo mo-sm">
+  <div class="mob" style="padding:28px 22px">
+    <div class="cico cico-r" id="c-ico">🗑</div>
+    <div class="ctit" id="c-title">Delete this item?</div>
+    <div class="ctxt" id="c-text">This action cannot be undone.</div>
+  </div>
+  <div class="mof"><button class="btn btn-s" onclick="closeM('m-confirm')">Cancel</button><button class="btn btn-d" id="c-btn">Delete</button></div>
+</div></div>
+<script>
+const Q=s=>document.querySelector(s);
+const QQ=s=>document.querySelectorAll(s);
+const G=id=>document.getElementById(id);
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).substr(2,5);
+const esc=s=>String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const fmt=d=>d?new Date(d).toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'}):'—';
+const later=f=>setTimeout(f,120);
+
+/* STORE — local-only preferences & content not yet wired to a backend
+   (pages/testimonials/activity/theme). Services, portfolio, projects,
+   messages, and users are handled by Api below, backed by the real server. */
+const S={
+  _cache:{},
+  get(k){return this._cache[k]??null},
+  set(k,v){this._cache[k]=v;localStorage.setItem('pxa_'+k,JSON.stringify(v))},
+  init(k,d){if(!S.get(k))S.set(k,d);return S.get(k)}
+};
+
+/* API — talks to the real Pixflow backend (server.js). Handles services,
+   portfolio, projects, and messages. Users is handled separately below
+   because account creation must hash passwords server-side. */
+const Api={
+  async list(key){
+    const r=await fetch(`/api/${key}`,{credentials:'include'});
+    if(!r.ok)throw new Error('Could not load data from the server.');
+    return r.json();
+  },
+  async create(key,data){
+    const r=await fetch(`/api/${key}`,{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(data)});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(d.error||'Could not save — please try again.');
+    return d;
+  },
+  async update(key,id,data){
+    const r=await fetch(`/api/${key}/${id}`,{method:'PUT',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(data)});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(d.error||'Could not save — please try again.');
+    return d;
+  },
+  async remove(key,id){
+    const r=await fetch(`/api/${key}/${id}`,{method:'DELETE',credentials:'include'});
+    if(!r.ok){const d=await r.json().catch(()=>({}));throw new Error(d.error||'Could not delete — please try again.')}
+  }
+};
+
+/* BOOT — pulls live data from the server once, after login */
+const Boot={
+  async loadRemote(){
+    for(const key of ['services','portfolio','projects','messages']){
+      try{S._cache[key]=await Api.list(key)}
+      catch{S._cache[key]=[];Toast.show(`Could not load ${key} from the server.`,'error')}
+    }
+  }
+};
+
+/* SEED — demo/local-only content. Real business data (services, portfolio,
+   projects, messages, users) now lives on the server — see Api above. */
+const SEED={
+  pages:[
+    {id:'p1',title:'Home',slug:'/',status:'published',seo:'Pixflow — Build with clarity.',meta:'Pixflow creates modern websites.',updated:'Jun 3'},
+    {id:'p2',title:'About',slug:'/about',status:'published',seo:'About — Pixflow',meta:'Learn about Pixflow.',updated:'Jun 3'},
+    {id:'p3',title:'Services',slug:'/services',status:'published',seo:'Services — Pixflow',meta:'Pixflow web design services.',updated:'Jun 3'},
+    {id:'p4',title:'Portfolio',slug:'/portfolio',status:'published',seo:'Portfolio — Pixflow',meta:'Selected Pixflow projects.',updated:'Jun 3'},
+    {id:'p5',title:'Contact',slug:'/contact',status:'published',seo:'Contact — Pixflow',meta:'Get in touch with Pixflow.',updated:'Jun 3'}
+  ],
+  testimonials:[
+    {id:'t1',name:'James Miller',company:'Meridian',rating:'5',quote:'Exceptional work. Our enquiries tripled.',status:'published'},
+    {id:'t2',name:'Sara Chen',company:'Vantage Studio',rating:'5',quote:'Pixflow nailed our brand. Clean and fast.',status:'published'},
+    {id:'t3',name:'Tom Bryce',company:'Harvest',rating:'4',quote:'Great process and a site that converts.',status:'published'},
+    {id:'t4',name:'Nadia Rezaei',company:'Grove Health',rating:'5',quote:'Professional, clear, and on time.',status:'pending'}
+  ],
+  activity:[
+    {color:'#2e7d52',text:'<strong>New message</strong> received from Sarah K.',time:'2 hours ago'},
+    {color:'#4B3AA6',text:'<strong>Portfolio item</strong> edited — Vantage Studio.',time:'5 hours ago'},
+    {color:'#1d4ed8',text:'<strong>Testimonial</strong> from Nadia R. awaiting approval.',time:'Yesterday'},
+    {color:'#2e7d52',text:'<strong>Project</strong> Apex Brand updated to Review.',time:'2 days ago'},
+    {color:'#4B3AA6',text:'<strong>Service</strong> description updated.',time:'3 days ago'}
+  ]
+};
+['pages','testimonials','activity'].forEach(k=>S.init(k,SEED[k]));
+
+/* TOAST */
+const Toast={
+  icons:{success:'✓',error:'✕',warning:'⚠',info:'ℹ'},
+  cls:{success:'ts',error:'te',warning:'tw2',info:'ti'},
+  show(msg,type='info',dur=3000){
+    const tc=G('tc'),t=document.createElement('div');
+    t.className=`toast ${Toast.cls[type]||'ti'}`;
+    t.innerHTML=`<span class="toast-ico">${Toast.icons[type]}</span><span class="toast-msg">${esc(msg)}</span><button class="toast-x" onclick="this.parentElement.remove()">✕</button>`;
+    tc.appendChild(t);setTimeout(()=>t.remove(),dur);
+  }
+};
+
+/* MODAL */
+const openM=id=>G(id).classList.add('open');
+const closeM=id=>G(id).classList.remove('open');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')QQ('.mov.open').forEach(m=>m.classList.remove('open'))});
+
+/* CONFIRM */
+function confirm(title,text,cb,danger=true){
+  G('c-title').textContent=title;G('c-text').textContent=text;
+  G('c-ico').textContent=danger?'🗑':'⚠';
+  G('c-ico').className='cico '+(danger?'cico-r':'cico-w');
+  const btn=G('c-btn');btn.className=danger?'btn btn-d':'btn btn-g';btn.textContent=danger?'Delete':'Confirm';
+  const nb=btn.cloneNode(true);btn.parentNode.replaceChild(nb,btn);
+  nb.onclick=()=>{cb();closeM('m-confirm')};openM('m-confirm');
+}
+
+/* SIDEBAR */
+function sbToggle(){
+  const sb=G('sb'),ob=G('sob');
+  if(window.innerWidth<=900){sb.classList.toggle('mob-open');ob.classList.toggle('show')}
+  else sb.classList.toggle('col');
+}
+
+/* DARK MODE */
+function darkToggle(){
+  const d=document.documentElement;
+  d.dataset.theme=d.dataset.theme==='dark'?'light':'dark';
+  S.set('theme',d.dataset.theme);
+}
+const th=S.get('theme');if(th)document.documentElement.dataset.theme=th;
+
+/* BADGE HELPERS */
+function sbdg(s){
+  const m={published:'bd-g',draft:'bd-grey',active:'bd-g',pending:'bd-gold','in-progress':'bd-g',review:'bd-gold',complete:'bd-g',planning:'bd-b',new:'bd-gold',read:'bd-b',replied:'bd-g',inactive:'bd-grey'};
+  return`<span class="bd ${m[s]||'bd-grey'}">${esc(s)}</span>`;
+}
+function catbdg(c){
+  const m={'web-design':'bd-b','branding':'bd-gold','lead-gen':'bd-g'};
+  const l={'web-design':'Web Design','branding':'Branding','lead-gen':'Lead Gen'};
+  return`<span class="bd ${m[c]||'bd-grey'}">${l[c]||esc(c)}</span>`;
+}
+function stars(n){return'★'.repeat(n)+'☆'.repeat(5-n)}
+
+/* TABLE UTILS */
+const Tbl={
+  search(tid,q){
+    const rows=QQ(`#${tid} tbody tr`);const lq=q.toLowerCase();let v=0;
+    rows.forEach(r=>{const ok=!lq||r.textContent.toLowerCase().includes(lq);r.style.display=ok?'':'none';if(ok)v++});
+    const c=G(tid.replace('t-','cnt-'));if(c)c.textContent=`${v} item${v!==1?'s':''}`;
+  },
+  filter(tid,val,pill){
+    pill.closest('.fps').querySelectorAll('.fp').forEach(p=>p.classList.remove('act'));pill.classList.add('act');
+    const rows=QQ(`#${tid} tbody tr`);let v=0;
+    rows.forEach(r=>{const ok=!val||(r.dataset.f||'').includes(val);r.style.display=ok?'':'none';if(ok)v++});
+    const c=G(tid.replace('t-','cnt-'));if(c)c.textContent=`${v} item${v!==1?'s':''}`;
+  },
+  cnt(tid,n){const c=G(tid.replace('t-','cnt-'));if(c)c.textContent=`${n} item${n!==1?'s':''}`}
+};
+
+/* SETTINGS PANELS */
+function setSP(id,el){
+  QQ('.sp').forEach(p=>p.classList.remove('act'));QQ('.sni').forEach(n=>n.classList.remove('act'));
+  G('sp-'+id).classList.add('act');el.classList.add('act');
+}
+
+/* AUTH — credentials are verified server-side only. The client never sees
+   a password hash and never decides on its own whether a login is valid. */
+const Auth={
+  cur:null,
+  async login(){
+    const em=G('le').value.trim(),pw=G('lp').value;
+    if(!em||!pw){G('lerr').textContent='Enter your email and password.';G('lerr').classList.add('show');return}
+    const btn=G('lbtn');btn.disabled=true;const label=btn.textContent;btn.textContent='Signing in…';
+    try{
+      const r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({email:em,password:pw})});
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok){G('lerr').textContent=d.error||'Invalid email or password. Please try again.';G('lerr').classList.add('show');return}
+      G('lerr').classList.remove('show');
+      Auth.cur=d.user;Auth.apply(d.user);
+      G('login-screen').style.display='none';G('app').style.display='block';
+      await Boot.loadRemote();Dash.init();CE.load();Settings.load();
+    }catch{
+      G('lerr').textContent='Network error — could not reach the server.';G('lerr').classList.add('show');
+    }finally{
+      btn.disabled=false;btn.textContent=label;
+    }
+  },
+  apply(u){
+    G('sb-av').textContent=u.name[0].toUpperCase();
+    G('sb-name').textContent=u.name;
+    G('sb-role').textContent=u.role==='admin'?'Administrator':'Editor';
+    if(u.role==='editor')G('nav-users').style.display='none';
+  },
+  async logout(){
+    try{await fetch('/api/auth/logout',{method:'POST',credentials:'include'})}catch{}
+    Auth.cur=null;G('app').style.display='none';G('login-screen').style.display='flex';
+    G('le').value='';G('lp').value='';
+  },
+  can(a){
+    const r=Auth.cur?.role||'editor';
+    const p={admin:['view','edit','delete','del_msgs','manage_proj','manage_users','settings'],editor:['view','edit','manage_pf']};
+    return(p[r]||[]).includes(a)||r==='admin';
+  }
+};
+document.addEventListener('DOMContentLoaded',async()=>{
+  // Theme is already restored above (local-only preference). Here we check
+  // for a valid server session via the httpOnly cookie — the client never
+  // decides on its own whether it's logged in.
+  try{
+    const r=await fetch('/api/auth/me',{credentials:'include'});
+    if(r.ok){
+      const d=await r.json();
+      Auth.cur=d.user;Auth.apply(d.user);
+      G('login-screen').style.display='none';G('app').style.display='block';
+      await Boot.loadRemote();Dash.init();CE.load();Settings.load();
+    }
+  }catch{/* not logged in — login screen stays visible */}
+});
+['le','lp'].forEach(id=>{const el=G(id);if(el)el.addEventListener('keydown',e=>{if(e.key==='Enter')Auth.login()})});
+
+/* NAVIGATION */
+const secMeta={
+  dashboard:{title:'Dashboard',add:null},
+  pages:{title:'Pages',add:null},
+  content:{title:'Site Content',add:null},
+  services:{title:'Services',add:{label:'+ Add Service',m:'m-add-svc',reset:()=>resetSvc()}},
+  portfolio:{title:'Portfolio',add:{label:'+ Add Item',m:'m-add-pf',reset:()=>resetPF()}},
+  testimonials:{title:'Testimonials',add:{label:'+ Add Testimonial',m:'m-add-tm',reset:()=>resetTm()}},
+  messages:{title:'Messages',add:{label:'+ Add Message',m:'m-add-msg',reset:()=>resetMsg()}},
+  projects:{title:'Projects',add:{label:'+ Add Project',m:'m-add-proj',reset:()=>resetProj()}},
+  users:{title:'Users & Roles',add:{label:'+ Add User',m:'m-add-user',reset:null}},
+  settings:{title:'Settings',add:null}
+};
+const renders={pages:()=>Pages.render(),services:()=>Svcs.render(),portfolio:()=>PF.render(),testimonials:()=>Tms.render(),messages:()=>Msgs.render(),projects:()=>Projs.render(),users:()=>Users.render()};
+
+const Nav={
+  go(id,el){
+    QQ('.sec').forEach(s=>s.classList.remove('act'));QQ('.ni').forEach(n=>n.classList.remove('act'));
+    const sec=G('sec-'+id);if(sec)sec.classList.add('act');if(el)el.classList.add('act');
+    const m=secMeta[id]||{};G('tb-title').textContent=m.title||id;
+    const ab=G('tb-add');
+    if(m.add&&Auth.can('edit')){ab.innerHTML=`<button class="btn btn-sm btn-p" onclick="openM('${m.add.m}');${m.add.reset?`(${m.add.reset.toString()})()`:''}">${esc(m.add.label)}</button>`}
+    else ab.innerHTML='';
+    if(renders[id])renders[id]();
+    if(window.innerWidth<=900){G('sb').classList.remove('mob-open');G('sob').classList.remove('show')}
+    G('ca').scrollTop=0;
+  }
+};
+
+/* ═══ DASHBOARD ═══ */
+const Dash={
+  init(){Dash.stats();Dash.activity();Dash.msgsTbl();Dash.projsTbl();Dash.cstatus();Dash.chart();Pages.render();Svcs.render();PF.render()},
+  stats(){
+    const newMsgs=(S.get('messages')||[]).filter(m=>m.status==='new').length;
+    G('d-msgs').textContent=newMsgs;G('d-projs').textContent=(S.get('projects')||[]).length;
+    G('d-pf').textContent=(S.get('portfolio')||[]).length;G('d-svcs').textContent=(S.get('services')||[]).length;
+    const nc=G('nc-msgs');if(nc)nc.textContent=newMsgs||'';
+  },
+  activity(){
+    const acts=S.get('activity')||[];
+    G('d-activity').innerHTML=acts.map(a=>`<div class="ai"><div class="adot" style="background:${a.color}"></div><div><div class="at">${a.text}</div><div class="atm">${a.time}</div></div></div>`).join('');
+  },
+  msgsTbl(){
+    const msgs=(S.get('messages')||[]).slice(0,4);
+    G('d-msgs-tbl').innerHTML=`<thead><tr><th>Name</th><th>Subject</th><th>Status</th></tr></thead><tbody>${msgs.map(m=>`<tr><td><strong>${esc(m.name)}</strong></td><td class="trunc">${esc(m.subject)}</td><td>${sbdg(m.status)}</td></tr>`).join('')}</tbody>`;
+  },
+  projsTbl(){
+    const ps=(S.get('projects')||[]).slice(0,4);
+    G('d-projs-tbl').innerHTML=`<thead><tr><th>Project</th><th>Status</th><th>Due</th></tr></thead><tbody>${ps.map(p=>`<tr><td><strong>${esc(p.name)}</strong></td><td>${sbdg(p.status)}</td><td class="tsm tlow">${fmt(p.due)}</td></tr>`).join('')}</tbody>`;
+  },
+  cstatus(){
+    const secs=[
+      {n:'Pages',k:'pages'},{n:'Services',k:'services'},{n:'Portfolio',k:'portfolio'},{n:'Testimonials',k:'testimonials'}
+    ];
+    G('d-cstatus').innerHTML=secs.map(sec=>{
+      const items=S.get(sec.k)||[];
+      const pub=items.filter(i=>i.status==='published').length;
+      const drft=items.filter(i=>i.status==='draft'||i.status==='pending').length;
+      return`<tr><td><strong>${sec.n}</strong></td><td>${items.length}</td><td>${pub?`<span class="bd bd-g">${pub} published</span>`:'—'}</td><td>${drft?`<span class="bd bd-gold">${drft} draft</span>`:'—'}</td><td class="tsm tlow">Jun 2025</td><td><button class="btn btn-xs btn-s" onclick="Nav.go('${sec.k}',Q('[data-s=${sec.k}]'))">Manage</button></td></tr>`;
+    }).join('');
+  },
+  chart(){
+    const canvas=G('dash-chart');if(!canvas)return;
+    const ctx=canvas.getContext('2d');
+    canvas.width=canvas.offsetWidth||500;canvas.height=160;
+    const data=[3,5,2,7,4,8],labels=['Jan','Feb','Mar','Apr','May','Jun'],max=Math.max(...data);
+    const W=canvas.width,H=canvas.height,pad={t:14,r:12,b:26,l:24};
+    const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+    const bw=(cw/data.length)*.52,gap=(cw/data.length)*.48;
+    ctx.clearRect(0,0,W,H);
+    const style=getComputedStyle(document.documentElement);
+    const lineC=style.getPropertyValue('--line').trim()||'#e2ddd8';
+    const lowC=style.getPropertyValue('--low').trim()||'#8a8480';
+    const inkC=style.getPropertyValue('--ink').trim()||'#111010';
+    [0,.25,.5,.75,1].forEach(t=>{const y=pad.t+ch*(1-t);ctx.strokeStyle=lineC;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke()});
+    data.forEach((v,i)=>{
+      const x=pad.l+i*(bw+gap)+gap/2,bh=(v/max)*ch,y=pad.t+ch-bh;
+      ctx.fillStyle='#4B3AA6';ctx.globalAlpha=.82;
+      ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,y,bw,bh,3);else ctx.rect(x,y,bw,bh);ctx.fill();ctx.globalAlpha=1;
+      ctx.fillStyle=lowC;ctx.font=`11px DM Sans,system-ui,sans-serif`;ctx.textAlign='center';ctx.fillText(labels[i],x+bw/2,H-5);
+      ctx.fillStyle=inkC;ctx.font=`bold 11px DM Sans,system-ui,sans-serif`;ctx.fillText(v,x+bw/2,y-3);
+    });
+  }
+};
+
+/* ═══ PAGES ═══ */
+const Pages={
+  async render(){
+    let items=[];
+    try{items=await Api.list('pages')}
+    catch(e){Toast.show(e.message,'error');return}
+    S._cache.pages=items;
+    G('tb-pages').innerHTML=items.length?items.map(p=>`<tr data-f="${p.status}"><td><strong>${esc(p.title)}</strong></td><td><code style="font-size:.76rem;background:var(--bg);padding:2px 6px;border-radius:3px">${esc(p.slug)}</code></td><td>${sbdg(p.status)}</td><td class="trunc tsm tlow">${esc(p.seo)}</td><td class="tsm tlow">${esc(p.updated)}</td><td><div class="tda"><button class="btn btn-xs btn-s" onclick="Pages.edit('${p.id}')">Edit SEO</button><button class="btn btn-xs btn-s" onclick="Pages.toggle('${p.id}')">${p.status==='published'?'Unpublish':'Publish'}</button></div></td></tr>`).join(''):emptyRow(6,'◻','No pages found.');
+    Tbl.cnt('t-pages',items.length);G('nc-pages').textContent=items.length;
+  },
+  edit(id){
+    const p=(S.get('pages')||[]).find(x=>x.id===id);if(!p)return;
+    G('page-eid').value=id;G('page-title').value=p.title;G('page-seo').value=p.seo||'';G('page-meta').value=p.meta||'';G('page-status').value=p.status;
+    openM('m-edit-page');
+  },
+  async saveEdit(){
+    const id=G('page-eid').value;
+    const d={title:G('page-title').value,seo:G('page-seo').value,meta:G('page-meta').value,status:G('page-status').value,updated:new Date().toLocaleDateString('en-CA',{month:'short',day:'numeric'})};
+    try{
+      await Api.update('pages',id,d);
+      Pages.render();closeM('m-edit-page');Toast.show('Page updated.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  async toggle(id){
+    const p=(S.get('pages')||[]).find(x=>x.id===id);if(!p)return;
+    try{
+      await Api.update('pages',id,{status:p.status==='published'?'draft':'published'});
+      Pages.render();Toast.show('Status updated.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  }
+};
+
+/* ═══ SETTINGS ═══ */
+const Settings={
+  panels:{
+    general:{fields:['st-name','st-tagline','st-url','st-admin-email','st-lang'],checks:['st-notif-msg','st-notif-inquiry','st-notif-weekly']},
+    branding:{fields:['st-color-ink','st-color-accent','st-color-bg','st-color-white'],checks:[]},
+    typography:{fields:['st-font-display','st-font-en','st-font-fa'],checks:[]},
+    seo:{fields:['st-seo-title','st-seo-desc-en','st-seo-desc-fa','st-seo-keywords'],checks:[]},
+    social:{fields:['st-social-ig','st-social-li','st-social-tw','st-social-be'],checks:[]},
+    security:{fields:[],checks:['st-sec-require-login','st-sec-log-actions']}
+  },
+  async load(){
+    let s={};
+    try{s=await fetch('/api/settings',{credentials:'include'}).then(r=>r.ok?r.json():{})}catch{return}
+    for(const cfg of Object.values(Settings.panels)){
+      cfg.fields.forEach(id=>{if(s[id]!==undefined&&G(id))G(id).value=s[id]});
+      cfg.checks.forEach(id=>{if(s[id]!==undefined&&G(id))G(id).checked=!!s[id]});
+    }
+  },
+  async save(panel){
+    const cfg=Settings.panels[panel];if(!cfg)return;
+    const d={};
+    cfg.fields.forEach(id=>{if(G(id))d[id]=G(id).value});
+    cfg.checks.forEach(id=>{if(G(id))d[id]=G(id).checked});
+    try{
+      const r=await fetch('/api/settings',{method:'PUT',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify(d)});
+      if(!r.ok)throw new Error('Save failed');
+      Toast.show(panel==='seo'?'SEO saved.':panel==='social'?'Social links saved.':panel==='branding'?'Colors saved.':panel==='typography'?'Typography saved.':panel==='security'?'Security preferences saved.':'Settings saved.','success');
+    }catch{Toast.show('Could not save — check your connection.','error')}
+  },
+  async changePassword(){
+    const cur=G('pw-current').value,nw=G('pw-new').value,cf=G('pw-confirm').value;
+    if(!cur||!nw||!cf){Toast.show('All password fields are required.','error');return}
+    if(nw!==cf){Toast.show('New passwords do not match.','error');return}
+    if(nw.length<10){Toast.show('New password must be at least 10 characters.','error');return}
+    try{
+      const r=await fetch('/api/auth/password',{method:'PUT',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({currentPassword:cur,newPassword:nw})});
+      const d=await r.json().catch(()=>({}));
+      if(!r.ok)throw new Error(d.error||'Could not update password.');
+      ['pw-current','pw-new','pw-confirm'].forEach(id=>G(id).value='');
+      Toast.show('Password updated.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  }
+};
+const CE={
+  fields:{
+    hero:['ce-h-en','ce-h-fa','ce-s-en','ce-s-fa','ce-cta-en','ce-cta-fa'],
+    about:['ab-ov-en','ab-ov-fa','ab-mission-en'],
+    contact:['ct-email','ct-phone','ct-city','ct-country','ct-resp-en','ct-resp-fa']
+  },
+  async load(){
+    let content={};
+    try{content=await fetch('/api/content',{credentials:'include'}).then(r=>r.ok?r.json():{})}catch{return}
+    for(const [section,ids] of Object.entries(CE.fields)){
+      const data=content[section];if(!data)continue;
+      ids.forEach(id=>{if(data[id]!==undefined&&G(id))G(id).value=data[id]});
+    }
+  },
+  async save(section){
+    const ids=CE.fields[section]||[];
+    const data={};ids.forEach(id=>{if(G(id))data[id]=G(id).value});
+    try{
+      await fetch('/api/content',{method:'PUT',headers:{'Content-Type':'application/json'},credentials:'include',body:JSON.stringify({section,data})});
+      Toast.show(`${section.charAt(0).toUpperCase()+section.slice(1)} content saved.`,'success');
+    }catch{Toast.show('Could not save — check your connection.','error')}
+  }
+};
+
+/* ═══ SERVICES ═══ */
+const Svcs={
+  render(){
+    const items=S.get('services')||[];
+    G('tb-svcs').innerHTML=items.length?items.map((s,i)=>`<tr><td><strong>0${i+1}</strong></td><td><strong>${esc(s.en)}</strong></td><td>${esc(s.fa)}</td><td>${sbdg(s.status)}</td><td>${(s.tags||'').split(',').map(t=>`<span class="ptag">${esc(t.trim())}</span>`).join(' ')}</td><td><div class="tda"><button class="btn btn-xs btn-s" onclick="Svcs.edit('${s.id}')">Edit</button>${Auth.can('delete')?`<button class="btn btn-xs btn-d" onclick="Svcs.del('${s.id}')">Delete</button>`:''}</div></td></tr>`).join(''):emptyRow(6,'◎','No services yet.');
+    Tbl.cnt('t-svcs',items.length);G('nc-svcs').textContent=items.length;G('d-svcs').textContent=items.length;
+  },
+  edit(id){
+    const s=(S.get('services')||[]).find(x=>x.id===id);if(!s)return;
+    G('svc-m-title').textContent='Edit Service';G('svc-eid').value=id;
+    G('svc-en').value=s.en||'';G('svc-fa').value=s.fa||'';G('svc-desc-en').value=s.descEn||'';G('svc-desc-fa').value=s.descFa||'';G('svc-tags').value=s.tags||'';G('svc-status').value=s.status||'published';
+    openM('m-add-svc');
+  },
+  async save(){
+    if(!G('svc-en').value.trim()){Toast.show('Title (EN) is required.','error');return}
+    const eid=G('svc-eid').value;
+    const d={en:G('svc-en').value,fa:G('svc-fa').value,descEn:G('svc-desc-en').value,descFa:G('svc-desc-fa').value,tags:G('svc-tags').value,status:G('svc-status').value};
+    try{
+      if(eid)await Api.update('services',eid,d);
+      else await Api.create('services',d);
+      S._cache.services=await Api.list('services');
+      Svcs.render();closeM('m-add-svc');resetSvc();Toast.show(eid?'Service updated.':'Service added.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  del(id){confirm('Delete service?','This will remove the service permanently.',async()=>{
+    try{
+      await Api.remove('services',id);
+      S._cache.services=await Api.list('services');
+      Svcs.render();Toast.show('Service deleted.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  })}
+};
+function resetSvc(){G('svc-m-title').textContent='Add Service';G('svc-eid').value='';['svc-en','svc-fa','svc-desc-en','svc-desc-fa','svc-tags'].forEach(id=>G(id).value='')}
+
+/* ═══ PORTFOLIO ═══ */
+const PF={
+  render(){
+    const items=S.get('portfolio')||[];
+    G('tb-pf').innerHTML=items.length?items.map(p=>`<tr data-f="${p.cat}"><td><strong>${esc(p.en)}</strong><div class="txs tlow">${esc(p.fa)}</div></td><td>${catbdg(p.cat)}</td><td>${esc(p.client)}</td><td>${sbdg(p.status)}</td><td>${p.feat==='yes'?'<span class="bd bd-gold">★ Featured</span>':'—'}</td><td><div class="tda"><button class="btn btn-xs btn-s" onclick="PF.edit('${p.id}')">Edit</button>${Auth.can('delete')?`<button class="btn btn-xs btn-d" onclick="PF.del('${p.id}')">Delete</button>`:''}</div></td></tr>`).join(''):emptyRow(6,'⊞','No portfolio items yet.','Add your first project to the portfolio.');
+    Tbl.cnt('t-pf',items.length);G('nc-pf').textContent=items.length;G('d-pf').textContent=items.length;
+  },
+  edit(id){
+    const p=(S.get('portfolio')||[]).find(x=>x.id===id);if(!p)return;
+    G('pf-m-title').textContent='Edit Portfolio Item';G('pf-eid').value=id;
+    G('pf-en').value=p.en||'';G('pf-fa').value=p.fa||'';G('pf-cat').value=p.cat||'web-design';G('pf-client').value=p.client||'';G('pf-desc-en').value=p.descEn||'';G('pf-desc-fa').value=p.descFa||'';G('pf-status').value=p.status||'published';G('pf-feat').value=p.feat||'no';
+    openM('m-add-pf');
+  },
+  async save(){
+    if(!G('pf-en').value.trim()){Toast.show('Project name is required.','error');return}
+    const eid=G('pf-eid').value;
+    const d={en:G('pf-en').value,fa:G('pf-fa').value,cat:G('pf-cat').value,client:G('pf-client').value,descEn:G('pf-desc-en').value,descFa:G('pf-desc-fa').value,status:G('pf-status').value,feat:G('pf-feat').value,date:new Date().toISOString().split('T')[0]};
+    try{
+      if(eid)await Api.update('portfolio',eid,d);
+      else await Api.create('portfolio',d);
+      S._cache.portfolio=await Api.list('portfolio');
+      PF.render();closeM('m-add-pf');resetPF();Toast.show(eid?'Item updated.':'Item added.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  del(id){confirm('Delete portfolio item?','This project will be removed permanently.',async()=>{
+    try{
+      await Api.remove('portfolio',id);
+      S._cache.portfolio=await Api.list('portfolio');
+      PF.render();Toast.show('Item deleted.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  })}
+};
+function resetPF(){G('pf-m-title').textContent='Add Portfolio Item';G('pf-eid').value='';['pf-en','pf-fa','pf-client','pf-desc-en','pf-desc-fa'].forEach(id=>G(id).value='')}
+
+/* ═══ TESTIMONIALS ═══ */
+const Tms={
+  async render(){
+    let items=[];
+    try{items=await Api.list('testimonials/all')}
+    catch(e){Toast.show(e.message,'error');return}
+    S._cache.testimonials=items;
+    G('tb-tm').innerHTML=items.length?items.map(t=>`<tr data-f="${t.status}"><td><strong>${esc(t.name)}</strong></td><td>${esc(t.company)}</td><td style="color:var(--accent)">${stars(parseInt(t.rating))}</td><td class="trunc tsm tlow">${esc(t.quote)}</td><td>${sbdg(t.status)}</td><td><div class="tda"><button class="btn btn-xs btn-s" onclick="Tms.edit('${t.id}')">Edit</button>${t.status==='pending'?`<button class="btn btn-xs btn-ok" onclick="Tms.approve('${t.id}')">Approve</button>`:''}<button class="btn btn-xs btn-d" onclick="Tms.del('${t.id}')">Delete</button></div></td></tr>`).join(''):emptyRow(6,'❝','No testimonials yet.');
+    Tbl.cnt('t-tm',items.length);
+  },
+  edit(id){
+    const t=(S.get('testimonials')||[]).find(x=>x.id===id);if(!t)return;
+    G('tm-m-title').textContent='Edit Testimonial';G('tm-eid').value=id;
+    G('tm-name').value=t.name||'';G('tm-company').value=t.company||'';G('tm-rating').value=t.rating||'5';G('tm-status').value=t.status||'published';G('tm-quote').value=t.quote||'';
+    openM('m-add-tm');
+  },
+  async save(){
+    if(!G('tm-name').value.trim()||!G('tm-quote').value.trim()){Toast.show('Name and quote are required.','error');return}
+    const eid=G('tm-eid').value;
+    const d={name:G('tm-name').value,company:G('tm-company').value,rating:G('tm-rating').value,status:G('tm-status').value,quote:G('tm-quote').value};
+    try{
+      if(eid)await Api.update('testimonials',eid,d);
+      else await Api.create('testimonials',d);
+      Tms.render();closeM('m-add-tm');resetTm();Toast.show(eid?'Updated.':'Added — pending approval.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  async approve(id){
+    try{
+      const r=await fetch('/api/testimonials/'+id+'/approve',{method:'PATCH',credentials:'include'});
+      if(!r.ok)throw new Error((await r.json().catch(()=>({}))).error||'Could not approve.');
+      Tms.render();Toast.show('Testimonial approved — now live on the site.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  del(id){confirm('Delete testimonial?','This review will be permanently removed.',async()=>{
+    try{
+      await Api.remove('testimonials',id);
+      Tms.render();Toast.show('Deleted.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  })}
+};
+function resetTm(){G('tm-m-title').textContent='Add Testimonial';G('tm-eid').value='';['tm-name','tm-company','tm-quote'].forEach(id=>G(id).value='')}
+
+/* ═══ MESSAGES ═══ */
+const Msgs={
+  render(){
+    const items=S.get('messages')||[];
+    const newC=items.filter(m=>m.status==='new').length;
+    const nc=G('nc-msgs');if(nc)nc.textContent=newC||'';G('d-msgs').textContent=newC;
+    G('tb-msgs').innerHTML=items.length?items.map(m=>`<tr data-f="${m.status}" style="${m.status==='new'?'font-weight:500':''}"><td><strong>${esc(m.name)}</strong></td><td><a href="mailto:${esc(m.email)}" style="color:var(--accent)">${esc(m.email)}</a></td><td>${esc(m.subject)}</td><td class="trunc tsm tlow">${esc(m.message)}</td><td class="tsm tlow">${fmt(m.date)}</td><td>${sbdg(m.status)}</td><td><div class="tda"><button class="btn btn-xs btn-s" onclick="Msgs.view('${m.id}')">View</button>${m.status==='new'?`<button class="btn btn-xs btn-ok" onclick="Msgs.read('${m.id}')">Read</button>`:''}${Auth.can('del_msgs')?`<button class="btn btn-xs btn-d" onclick="Msgs.del('${m.id}')">Delete</button>`:''}</div></td></tr>`).join(''):emptyRow(7,'✉','No messages yet.','Contact form submissions will appear here.');
+    Tbl.cnt('t-msgs',items.length);
+  },
+  view(id){
+    const m=(S.get('messages')||[]).find(x=>x.id===id);if(!m)return;
+    G('m-view-msg-body').innerHTML=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px"><div><div class="txs tlow mb4">From</div><div class="f600">${esc(m.name)}</div></div><div><div class="txs tlow mb4">Email</div><a href="mailto:${esc(m.email)}" style="color:var(--accent)">${esc(m.email)}</a></div><div><div class="txs tlow mb4">Subject</div><div>${esc(m.subject)}</div></div><div><div class="txs tlow mb4">Date</div><div>${fmt(m.date)}</div></div></div><hr class="dvd"/><div><div class="txs tlow mb4">Message</div><p style="font-size:.88rem;line-height:1.8;color:var(--mid)">${esc(m.message)}</p></div>`;
+    if(m.status==='new')Msgs.read(id,true);openM('m-view-msg');
+  },
+  async add(){
+    const n=G('nm-name').value.trim(),e=G('nm-email').value.trim(),s=G('nm-subj').value.trim(),b=G('nm-body').value.trim();
+    if(!n||!e||!s||!b){Toast.show('All fields are required.','error');return}
+    try{
+      await Api.create('messages',{name:n,email:e,subject:s,message:b});
+      S._cache.messages=await Api.list('messages');
+      Msgs.render();Dash.msgsTbl();closeM('m-add-msg');resetMsg();Toast.show('Message added.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  async read(id,silent=false){
+    try{
+      const r=await fetch('/api/messages/'+id+'/read',{method:'PATCH',credentials:'include'});
+      if(!r.ok)throw new Error((await r.json().catch(()=>({}))).error||'Could not update message.');
+      S._cache.messages=await Api.list('messages');
+      Msgs.render();if(!silent)Toast.show('Marked as read.','info');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  del(id){confirm('Delete message?','This contact message will be permanently removed.',async()=>{
+    try{
+      const r=await fetch('/api/messages/'+id,{method:'DELETE',credentials:'include'});
+      if(!r.ok)throw new Error((await r.json().catch(()=>({}))).error||'Could not delete message.');
+      S._cache.messages=await Api.list('messages');
+      Msgs.render();Dash.msgsTbl();Toast.show('Deleted.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  })}
+};
+function resetMsg(){['nm-name','nm-email','nm-subj','nm-body'].forEach(id=>G(id).value='')}
+
+/* ═══ PROJECTS ═══ */
+const Projs={
+  render(){
+    const items=S.get('projects')||[];
+    G('tb-projs').innerHTML=items.length?items.map(p=>`<tr data-f="${p.status}"><td><strong>${esc(p.name)}</strong></td><td>${esc(p.client)}</td><td><span class="ptag">${esc(p.svc)}</span></td><td>${sbdg(p.status)}</td><td class="tsm tlow">${fmt(p.due)}</td><td><div class="tda"><button class="btn btn-xs btn-s" onclick="Projs.edit('${p.id}')">Edit</button>${Auth.can('delete')?`<button class="btn btn-xs btn-d" onclick="Projs.del('${p.id}')">Delete</button>`:''}</div></td></tr>`).join(''):emptyRow(6,'◉','No projects yet.','Add a project to track progress.');
+    Tbl.cnt('t-projs',items.length);G('nc-projs').textContent=items.length;G('d-projs').textContent=items.length;
+  },
+  edit(id){
+    const p=(S.get('projects')||[]).find(x=>x.id===id);if(!p)return;
+    G('proj-m-title').textContent='Edit Project';G('proj-eid').value=id;
+    G('proj-name').value=p.name||'';G('proj-client').value=p.client||'';G('proj-svc').value=p.svc||'Web Design';G('proj-status').value=p.status||'in-progress';G('proj-due').value=p.due||'';G('proj-budget').value=p.budget||'';G('proj-notes').value=p.notes||'';
+    openM('m-add-proj');
+  },
+  async save(){
+    if(!G('proj-name').value.trim()||!G('proj-client').value.trim()){Toast.show('Name and client are required.','error');return}
+    const eid=G('proj-eid').value;
+    const d={name:G('proj-name').value,client:G('proj-client').value,svc:G('proj-svc').value,status:G('proj-status').value,due:G('proj-due').value,budget:parseInt(G('proj-budget').value)||0,notes:G('proj-notes').value};
+    try{
+      if(eid)await Api.update('projects',eid,d);
+      else await Api.create('projects',d);
+      S._cache.projects=await Api.list('projects');
+      Projs.render();Dash.projsTbl();closeM('m-add-proj');resetProj();Toast.show(eid?'Project updated.':'Project added.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  del(id){confirm('Delete project?','This project will be permanently removed.',async()=>{
+    try{
+      await Api.remove('projects',id);
+      S._cache.projects=await Api.list('projects');
+      Projs.render();Dash.projsTbl();Toast.show('Deleted.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  })}
+};
+function resetProj(){G('proj-m-title').textContent='Add Project';G('proj-eid').value='';['proj-name','proj-client','proj-due','proj-budget','proj-notes'].forEach(id=>G(id).value='')}
+
+/* ═══ USERS ═══ */
+const Users={
+  async render(){
+    if(!Auth.can('manage_users')){G('tb-users').innerHTML=`<tr><td colspan="6">${emptyHTML('🔒','Access Restricted','Only administrators can manage users.')}</td></tr>`;return}
+    let items=[];
+    try{items=await Api.list('users')}
+    catch(e){Toast.show(e.message,'error');return}
+    G('tb-users').innerHTML=items.map(u=>`<tr><td><strong>${esc(u.name)}</strong></td><td>${esc(u.email)}</td><td><span class="bd ${u.role==='admin'?'bd-r':'bd-b'}">${esc(u.role)}</span></td><td class="tsm tlow">${u.lastLogin?fmt(u.lastLogin):'Never'}</td><td>${sbdg(u.status||'active')}</td><td><div class="tda">${u.id!==Auth.cur?.id?`<button class="btn btn-xs btn-d" onclick="Users.del('${u.id}')">Remove</button>`:'<span class="txs tlow">You</span>'}</div></td></tr>`).join('');
+  },
+  async add(){
+    const n=G('usr-name').value.trim(),e=G('usr-email').value.trim(),r=G('usr-role').value,p=G('usr-pass').value;
+    if(!n||!e||!p){Toast.show('All fields are required.','error');return}
+    if(p.length<10){Toast.show('Password must be at least 10 characters.','error');return}
+    try{
+      await Api.create('users',{name:n,email:e,password:p,role:r});
+      Users.render();closeM('m-add-user');['usr-name','usr-email','usr-pass'].forEach(id=>G(id).value='');Toast.show('User created.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  },
+  del(id){confirm('Remove user?','This user will lose all admin access.',async()=>{
+    try{
+      await Api.remove('users',id);
+      Users.render();Toast.show('User removed.','success');
+    }catch(e){Toast.show(e.message,'error')}
+  })}
+};
+
+/* EMPTY ROW */
+function emptyHTML(ico,h,p=''){return`<div class="empty"><div class="eico">${ico}</div><h3>${h}</h3>${p?`<p>${p}</p>`:''}</div>`}
+function emptyRow(cols,ico,h,p=''){return`<tr><td colspan="${cols}">${emptyHTML(ico,h,p)}</td></tr>`}
+
+/* KEYBOARD SHORTCUTS */
+document.addEventListener('keydown',e=>{
+  if(!Auth.cur)return;
+  if(e.altKey){
+    const map={'1':'dashboard','2':'messages','3':'portfolio','4':'services','5':'projects','6':'settings'};
+    if(map[e.key]){e.preventDefault();Nav.go(map[e.key],Q(`[data-s="${map[e.key]}"]`))}
+  }
+});
+</script>
+</body>
+</html>
