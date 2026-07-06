@@ -17,24 +17,21 @@ Edit `.env`:
 - `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` — your first admin login.
   `ADMIN_PASSWORD` must be at least 10 characters.
 
-Create the first admin account (hashes the password, never stores it in plain text):
+**The server auto-seeds on first boot** — the first admin account and 5
+starter pages are created automatically from your `.env` values the first
+time you run `node server.js`, no separate command needed. This is what
+makes it deployable on platforms like Railway/Render with no CLI/SSH access:
+just set the environment variables in their dashboard and deploy.
 
+If you prefer to seed manually before starting the server (e.g. local dev),
+you can still run:
 ```bash
 node seed.js
 ```
 
-After it runs once, you can delete `ADMIN_PASSWORD` from `.env` — it's only
-needed for that one-time step. Adding more users (admin or editor) afterward
-is done from the admin panel itself.
-
-Then seed starter page metadata (safe structural content, no fake reviews):
-
-```bash
-node seed-content.js
-```
-
-Testimonials are intentionally left empty — add only real client reviews
-from the admin panel's Testimonials tab.
+After the admin account exists, you can remove `ADMIN_PASSWORD` from `.env`
+— it's only read on that first boot. Adding more users afterward is done
+from the admin panel itself.
 
 ## Run
 
@@ -54,11 +51,36 @@ pixflow/          <- the public site (index.html, admin.html, etc.)
 
 Keep them as sibling folders, e.g. both inside one project root.
 
-## Deploying
+## Deploying to Railway (no CLI/SSH needed)
 
-Any Node host works (Railway, Render, a small VPS with pm2, etc.). Checklist:
+1. **New Project → Deploy from GitHub repo** → pick your repo.
+2. Since `pixflow` and `pixflow-server` are two folders in one repo, go to
+   **Settings → Root Directory** and set it to `pixflow-server`. Railway
+   will then run `npm install` and `node server.js` from inside that folder.
+3. **Variables tab** → add:
+   ```
+   SESSION_SECRET=<generate one, see above>
+   ADMIN_EMAIL=you@example.com
+   ADMIN_PASSWORD=<a strong password, 10+ characters>
+   ADMIN_NAME=Your Name
+   NODE_ENV=production
+   ```
+   (Don't set `PORT` — Railway injects it automatically.)
+4. **Add a Volume** (Settings → Volumes) and mount it at `/app/data`. This
+   is required — without it, your database (`data/db.json`) is wiped every
+   time you redeploy, since Railway's filesystem is otherwise temporary.
+5. Deploy. Check the deploy logs for `✓ Admin account created` to confirm
+   the auto-seed worked.
+6. Visit your Railway-provided URL, then `/admin` to log in.
+7. Once you have a working login, you can remove `ADMIN_PASSWORD` from the
+   Variables tab if you'd like (optional — it's only read on first boot).
+
+## Deploying elsewhere (Render, a VPS, etc.)
+
+Any Node host works. Checklist:
 - Set `NODE_ENV=production` so session cookies require HTTPS.
 - Put this behind HTTPS — session cookies won't work correctly over plain HTTP in production mode.
+- Make sure `data/` is on persistent storage, not a wiped-on-redeploy filesystem.
 - Back up `data/db.json` regularly — it's the entire database.
 - Never commit `.env` or `data/db.json` (already in `.gitignore`).
 

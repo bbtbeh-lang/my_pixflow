@@ -1,14 +1,12 @@
-import 'dotenv/config';
 import bcrypt from 'bcryptjs';
 import { randomUUID } from 'crypto';
 import { db } from './db.js';
 
-async function seed() {
+export async function ensureAdminSeeded() {
   await db.read();
 
   if (db.data.users.length > 0) {
-    console.log('Users already exist — seed skipped. Delete data/db.json to reseed.');
-    return;
+    return { seeded: false, reason: 'Users already exist' };
   }
 
   const email = process.env.ADMIN_EMAIL;
@@ -16,12 +14,10 @@ async function seed() {
   const name = process.env.ADMIN_NAME || 'Admin';
 
   if (!email || !password) {
-    console.error('Set ADMIN_EMAIL and ADMIN_PASSWORD in your .env file before seeding.');
-    process.exit(1);
+    return { seeded: false, reason: 'ADMIN_EMAIL / ADMIN_PASSWORD not set' };
   }
   if (password.length < 10) {
-    console.error('ADMIN_PASSWORD must be at least 10 characters.');
-    process.exit(1);
+    return { seeded: false, reason: 'ADMIN_PASSWORD must be at least 10 characters' };
   }
 
   const passwordHash = await bcrypt.hash(password, 12);
@@ -37,8 +33,31 @@ async function seed() {
   });
 
   await db.write();
-  console.log(`Admin user created: ${email}`);
-  console.log('You can now delete ADMIN_PASSWORD from .env — it is only needed for this one-time seed.');
+  return { seeded: true, email };
 }
 
-seed();
+export async function ensurePagesSeeded() {
+  await db.read();
+  if (db.data.pages.length > 0) return { seeded: false };
+
+  const today = new Date().toLocaleDateString('en-CA', { month: 'short', day: 'numeric' });
+  db.data.pages = [
+    { id: randomUUID(), title: 'Home', slug: '/', status: 'published', seo: 'Pixflow — Build with clarity.', meta: 'Pixflow creates modern websites.', updated: today },
+    { id: randomUUID(), title: 'About', slug: '/about', status: 'published', seo: 'About — Pixflow', meta: 'Learn about Pixflow.', updated: today },
+    { id: randomUUID(), title: 'Services', slug: '/services', status: 'published', seo: 'Services — Pixflow', meta: 'Pixflow web design services.', updated: today },
+    { id: randomUUID(), title: 'Portfolio', slug: '/portfolio', status: 'published', seo: 'Portfolio — Pixflow', meta: 'Selected Pixflow projects.', updated: today },
+    { id: randomUUID(), title: 'Contact', slug: '/contact', status: 'published', seo: 'Contact — Pixflow', meta: 'Get in touch with Pixflow.', updated: today }
+  ];
+  await db.write();
+  return { seeded: true };
+}
+
+// Still runnable directly for local/manual use: `node seed.js`
+if (process.argv[1] && process.argv[1].endsWith('seed.js')) {
+  const { config } = await import('dotenv');
+  config();
+  const r1 = await ensureAdminSeeded();
+  console.log(r1.seeded ? `Admin user created: ${r1.email}` : `Skipped: ${r1.reason}`);
+  const r2 = await ensurePagesSeeded();
+  console.log(r2.seeded ? 'Seeded 5 pages.' : 'Pages already exist — skipped.');
+}

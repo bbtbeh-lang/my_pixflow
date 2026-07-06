@@ -11,6 +11,7 @@ import settingsRoutes from './routes/settings.js';
 import contentRoutes from './routes/content.js';
 import testimonialsRoutes from './routes/testimonials.js';
 import { makeCollectionRouter } from './routes/collection.js';
+import { ensureAdminSeeded, ensurePagesSeeded } from './seed.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -58,6 +59,16 @@ app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 app.get('/robots.txt', (req, res) => {
   res.type('text/plain').send('User-agent: *\nDisallow: /admin.html\n');
 });
+
+// Seed BEFORE accepting any connections — doing this inside listen()'s
+// callback is too late, since Express already accepts requests as soon as
+// listen() is called, which can race with these writes and corrupt data.js.
+const adminResult = await ensureAdminSeeded();
+if (adminResult.seeded) console.log(`✓ Admin account created: ${adminResult.email}`);
+else console.log(`Admin seed skipped: ${adminResult.reason}`);
+
+const pagesResult = await ensurePagesSeeded();
+if (pagesResult.seeded) console.log('✓ Starter pages seeded.');
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Pixflow server running on port ${process.env.PORT || 3000}`);
