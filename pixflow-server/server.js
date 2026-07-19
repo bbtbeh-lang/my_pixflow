@@ -49,10 +49,10 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 
-// ── Static site (public html files, one level up) ──────────
+// ── Static site (public html files, nested inside this folder) ────
 // `extensions: ['html']` lets clean URLs like /about resolve to about.html —
 // every internal nav link on the site uses this clean-URL format.
-const PUBLIC_DIR = path.join(__dirname, '..', 'pixflow');
+const PUBLIC_DIR = path.join(__dirname, 'pixflow');
 app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 
 // admin.html must never be indexed by search engines
