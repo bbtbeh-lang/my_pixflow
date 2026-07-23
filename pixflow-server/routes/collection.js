@@ -3,14 +3,27 @@ import { randomUUID } from 'crypto';
 import { db } from '../db.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 
-// Builds an authenticated CRUD router for a top-level array in db.data[key]
-export function makeCollectionRouter(key) {
+// Builds an authenticated CRUD router for a top-level array in db.data[key].
+// If publicRead is true, GET / is open to everyone (still returns only
+// published items) — used for collections the live public site displays.
+export function makeCollectionRouter(key, { publicRead = false } = {}) {
   const router = Router();
 
-  router.get('/', requireAuth, requireRole('view'), async (req, res) => {
-    await db.read();
-    res.json(db.data[key]);
-  });
+  if (publicRead) {
+    router.get('/', async (req, res) => {
+      await db.read();
+      res.json(db.data[key].filter(x => x.status === 'published'));
+    });
+    router.get('/all', requireAuth, requireRole('view'), async (req, res) => {
+      await db.read();
+      res.json(db.data[key]);
+    });
+  } else {
+    router.get('/', requireAuth, requireRole('view'), async (req, res) => {
+      await db.read();
+      res.json(db.data[key]);
+    });
+  }
 
   router.post('/', requireAuth, requireRole('edit'), async (req, res) => {
     await db.read();

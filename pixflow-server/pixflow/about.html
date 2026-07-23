@@ -269,7 +269,10 @@
           <span class="label" style="display:block;margin-bottom:12px;"><span class="en">Who We Are</span><span class="fa">ما کی هستیم</span></span>
           <h2 class="section-title" id="overview-heading"><span class="en">A studio built around what matters most</span><span class="fa">استودیویی ساخته شده بر آنچه بیشترین اهمیت دارد</span></h2>
         </div>
-        <p class="anim"><span class="en">Pixflow is a professional web design studio focused on one thing — helping businesses present themselves with <strong>clarity and confidence</strong> online.</span><span class="fa">پیکسفلو یک استودیوی طراحی وب حرفه‌ای است که بر یک چیز تمرکز دارد — کمک به کسب‌وکارها برای معرفی خود با <strong>وضوح و اطمینان</strong> در فضای آنلاین.</span></p>
+        <div id="about-photo-wrap" class="anim" style="display:none;margin-bottom:24px;">
+          <img id="about-photo" alt="" style="width:140px;height:140px;border-radius:10px;object-fit:cover;"/>
+        </div>
+        <p class="anim"><span class="en" id="about-ov-en">Pixflow is a professional web design studio focused on one thing — helping businesses present themselves with <strong>clarity and confidence</strong> online.</span><span class="fa" id="about-ov-fa">پیکسفلو یک استودیوی طراحی وب حرفه‌ای است که بر یک چیز تمرکز دارد — کمک به کسب‌وکارها برای معرفی خود با <strong>وضوح و اطمینان</strong> در فضای آنلاین.</span></p>
         <p class="anim"><span class="en">Every project starts with understanding the business, the audience, and the goal. The result is always a clean, purposeful digital presence that works — not just looks good.</span><span class="fa">هر پروژه با درک کسب‌وکار، مخاطب و هدف شروع می‌شود. نتیجه همیشه یک حضور دیجیتال تمیز و هدفمند است که کار می‌کند — نه فقط خوب به نظر می‌رسد.</span></p>
         <p class="anim"><span class="en">We believe a great website is not about complexity. It is about <strong>saying the right thing, to the right people, in the right way</strong>.</span><span class="fa">ما معتقدیم یک وب‌سایت عالی پیچیدگی نیست. بلکه <strong>گفتن چیز درست، به افراد درست، به شکل درست</strong> است.</span></p>
       </div>
@@ -462,6 +465,21 @@
       } catch (e) { /* leave fallback value */ }
     }
   })();
+
+  // ── About content (photo + overview text) from the real backend ─────
+  fetch('/api/content')
+    .then(r => r.ok ? r.json() : {})
+    .then(content => {
+      const about = content && content.about;
+      if (!about) return;
+      if (about['ab-photo']) {
+        document.getElementById('about-photo').src = about['ab-photo'];
+        document.getElementById('about-photo-wrap').style.display = 'block';
+      }
+      if (about['ab-ov-en']) document.getElementById('about-ov-en').textContent = about['ab-ov-en'];
+      if (about['ab-ov-fa']) document.getElementById('about-ov-fa').textContent = about['ab-ov-fa'];
+    })
+    .catch(() => {});
 
   function setLang(lang) {
     document.documentElement.lang = lang;

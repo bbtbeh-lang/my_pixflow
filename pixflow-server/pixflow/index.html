@@ -327,36 +327,9 @@
       <p class="section-sub"><span class="en">Quality, consistency, and clarity across every project we deliver.</span><span class="fa">کیفیت، ثبات و وضوح در هر پروژه‌ای که تحویل می‌دهیم.</span></p>
     </header>
     <div class="portfolio-grid">
-      <article class="portfolio-card anim">
-        <div class="portfolio-thumb" style="background:#1a1714;">
-          <svg class="p-pattern" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="50" x2="400" y2="50" stroke="white" stroke-width="0.5"/><line x1="0" y1="100" x2="400" y2="100" stroke="white" stroke-width="0.5"/><line x1="0" y1="150" x2="400" y2="150" stroke="white" stroke-width="0.5"/><line x1="100" y1="0" x2="100" y2="200" stroke="white" stroke-width="0.5"/><line x1="200" y1="0" x2="200" y2="200" stroke="white" stroke-width="0.5"/><line x1="300" y1="0" x2="300" y2="200" stroke="white" stroke-width="0.5"/></svg>
-          <span class="p-label"><span class="en">Branding & Web</span><span class="fa">برند و وب</span></span>
-        </div>
-        <div class="portfolio-body">
-          <p class="portfolio-tag"><span class="en">Web Design</span><span class="fa">طراحی وب</span></p>
-          <h3 class="portfolio-title"><span class="en">Modern Business Presence</span><span class="fa">حضور آنلاین مدرن</span></h3>
-        </div>
-      </article>
-      <article class="portfolio-card anim">
-        <div class="portfolio-thumb" style="background:#2d2520;">
-          <svg class="p-pattern" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><circle cx="200" cy="100" r="60" fill="none" stroke="white" stroke-width="0.5"/><circle cx="200" cy="100" r="100" fill="none" stroke="white" stroke-width="0.5"/><circle cx="200" cy="100" r="140" fill="none" stroke="white" stroke-width="0.5"/></svg>
-          <span class="p-label"><span class="en">Lead Generation</span><span class="fa">جذب مشتری</span></span>
-        </div>
-        <div class="portfolio-body">
-          <p class="portfolio-tag"><span class="en">Conversion</span><span class="fa">تبدیل</span></p>
-          <h3 class="portfolio-title"><span class="en">Service Provider Landing</span><span class="fa">لندینگ ارائه‌دهنده خدمات</span></h3>
-        </div>
-      </article>
-      <article class="portfolio-card anim">
-        <div class="portfolio-thumb" style="background:#1e1a2e;">
-          <svg class="p-pattern" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg"><polygon points="200,10 390,180 10,180" fill="none" stroke="white" stroke-width="0.5"/><polygon points="200,40 360,180 40,180" fill="none" stroke="white" stroke-width="0.5"/></svg>
-          <span class="p-label"><span class="en">Brand Presentation</span><span class="fa">ارائه برند</span></span>
-        </div>
-        <div class="portfolio-body">
-          <p class="portfolio-tag"><span class="en">Branding</span><span class="fa">برندینگ</span></p>
-          <h3 class="portfolio-title"><span class="en">Brand Identity & Launch</span><span class="fa">هویت برند و راه‌اندازی</span></h3>
-        </div>
-      </article>
+    <div class="portfolio-grid" id="home-portfolio-grid">
+      <!-- populated dynamically from /api/portfolio (featured items) -->
+    </div>
     </div>
     <div class="portfolio-cta anim">
       <a href="/portfolio" class="btn btn-outline"><span class="en">View Full Portfolio</span><span class="fa">مشاهده همه نمونه کارها</span></a>
@@ -522,6 +495,43 @@
       grid.querySelectorAll('.anim').forEach(el => observer.observe(el));
     })
     .catch(() => {}); // fail silently — section just stays hidden
+
+  // ── Featured portfolio (dynamic, from the real backend) ─────
+  const PORTFOLIO_CAT_LABELS = {
+    'web-design': { en: 'Web Design', fa: 'طراحی وب' },
+    'branding':   { en: 'Branding',   fa: 'برندینگ' },
+    'lead-gen':   { en: 'Lead Generation', fa: 'جذب مشتری' }
+  };
+  fetch('/api/portfolio')
+    .then(r => r.ok ? r.json() : [])
+    .then(items => {
+      const featured = (items || []).filter(p => p.feat === 'yes').slice(0, 3);
+      const grid = document.getElementById('home-portfolio-grid');
+      if (!featured.length) {
+        grid.innerHTML = `<p class="anim" style="grid-column:1/-1;text-align:center;color:var(--ink-low);padding:20px 0;">
+          <span class="en">Featured projects coming soon.</span><span class="fa">پروژه‌های ویژه به‌زودی.</span>
+        </p>`;
+        return;
+      }
+      grid.innerHTML = featured.map(p => {
+        const cat = PORTFOLIO_CAT_LABELS[p.cat] || { en: p.cat, fa: p.cat };
+        const thumb = p.image
+          ? `<img src="${escHtml(p.image)}" alt="${escHtml(p.en)}" style="width:100%;height:100%;object-fit:cover;"/>`
+          : `<span class="p-label"><span class="en">${escHtml(p.en)}</span><span class="fa">${escHtml(p.fa || p.en)}</span></span>`;
+        return `
+          <article class="portfolio-card anim">
+            <div class="portfolio-thumb" style="background:#1a1714;">${thumb}</div>
+            <div class="portfolio-body">
+              <p class="portfolio-tag"><span class="en">${escHtml(cat.en)}</span><span class="fa">${escHtml(cat.fa)}</span></p>
+              <h3 class="portfolio-title"><span class="en">${escHtml(p.en)}</span><span class="fa">${escHtml(p.fa || p.en)}</span></h3>
+            </div>
+          </article>`;
+      }).join('');
+      grid.querySelectorAll('.anim').forEach(el => observer.observe(el));
+    })
+    .catch(() => {
+      document.getElementById('home-portfolio-grid').innerHTML = '';
+    });
 
   function escHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));

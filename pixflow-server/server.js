@@ -10,6 +10,7 @@ import messageRoutes from './routes/messages.js';
 import settingsRoutes from './routes/settings.js';
 import contentRoutes from './routes/content.js';
 import testimonialsRoutes from './routes/testimonials.js';
+import uploadRoutes from './routes/upload.js';
 import { makeCollectionRouter } from './routes/collection.js';
 import { ensureAdminSeeded, ensurePagesSeeded } from './seed.js';
 
@@ -41,13 +42,18 @@ app.use(session({
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/messages', messageRoutes);
-app.use('/api/services', makeCollectionRouter('services'));
-app.use('/api/portfolio', makeCollectionRouter('portfolio'));
+app.use('/api/services', makeCollectionRouter('services', { publicRead: true }));
+app.use('/api/portfolio', makeCollectionRouter('portfolio', { publicRead: true }));
 app.use('/api/projects', makeCollectionRouter('projects'));
 app.use('/api/pages', makeCollectionRouter('pages'));
 app.use('/api/settings', settingsRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
+app.use('/api/upload', uploadRoutes);
+
+// Serve uploaded images — this folder lives inside data/, which is why it
+// MUST be on the same persistent Volume as db.json (see README).
+app.use('/uploads', express.static(path.join(__dirname, 'data', 'uploads')));
 
 // ── Static site (public html files, nested inside this folder) ────
 // `extensions: ['html']` lets clean URLs like /about resolve to about.html —
