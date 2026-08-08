@@ -66,6 +66,13 @@ app.get('/robots.txt', (req, res) => {
   res.type('text/plain').send('User-agent: *\nDisallow: /admin.html\n');
 });
 
+// Lightweight endpoint for uptime monitors (UptimeRobot, cron-job.org, etc.)
+// to ping and prevent the free-tier host from sleeping. Deliberately does
+// NOT touch db.json or any collection, so it carries zero read/write risk.
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', uptime: process.uptime() });
+});
+
 // Seed BEFORE accepting any connections — doing this inside listen()'s
 // callback is too late, since Express already accepts requests as soon as
 // listen() is called, which can race with these writes and corrupt data.js.
