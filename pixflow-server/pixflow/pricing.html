@@ -75,7 +75,7 @@
     .page-hero-sub { font-size: 1.05rem; color: var(--ink-mid); font-weight: 300; line-height: 1.75; max-width: 540px; margin: 0 auto; }
 
     .plans { background: var(--white); }
-    .plans-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 900px; margin: 0 auto; align-items: stretch; }
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; max-width: 1140px; margin: 0 auto; align-items: stretch; }
     .plan-card { background: var(--white); border: 1.5px solid var(--line); border-radius: 8px; padding: 40px 32px; display: flex; flex-direction: column; transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s; }
     .plan-card:hover { box-shadow: 0 16px 48px rgba(26,23,20,0.08); transform: translateY(-4px); }
     .plan-card.featured { border-color: var(--accent); border-width: 2px; position: relative; }
@@ -92,6 +92,11 @@
     .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
 
     .plans-note { text-align: center; max-width: 620px; margin: 40px auto 0; font-size: 0.85rem; color: var(--ink-low); line-height: 1.7; }
+
+    .early-client-badge { display: block; text-align: center; margin: 0 auto 32px; }
+    .early-client-badge span { display: inline-flex; align-items: center; gap: 8px; background: var(--cream); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 18px; border-radius: 20px; }
+    html[lang="fa"] .early-client-badge span { letter-spacing: 0; font-size: 0.85rem; }
+    .early-client-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 
     .addons { background: var(--cream); }
     .addons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -192,17 +197,20 @@
       <span class="en">Simple pricing.<br>No <em>surprises.</em></span>
       <span class="fa">قیمت‌گذاری ساده.<br>بدون <em>غافلگیری.</em></span>
     </h1>
-    <p class="page-hero-sub anim"><span class="en">Two straightforward packages. Every project starts with a free consultation so you know exactly what you're getting before you commit.</span><span class="fa">دو پکیج ساده و شفاف. هر پروژه با یک مشاوره رایگان شروع می‌شود تا دقیقاً بدانید قبل از تعهد چه چیزی دریافت می‌کنید.</span></p>
+    <p class="page-hero-sub anim"><span class="en">Three straightforward packages. Every project starts with a free consultation so you know exactly what you're getting before you commit.</span><span class="fa">سه پکیج ساده و شفاف. هر پروژه با یک مشاوره رایگان شروع می‌شود تا دقیقاً بدانید قبل از تعهد چه چیزی دریافت می‌کنید.</span></p>
   </div>
 </section>
 
 <section class="plans">
   <div class="container">
+    <div class="early-client-badge anim">
+      <span><span class="dot"></span><span class="en">Early Client Pricing — limited time</span><span class="fa">قیمت ویژه‌ی مشتریان اولیه — زمان محدود</span></span>
+    </div>
     <div class="plans-grid">
       <div class="plan-card anim">
         <span class="plan-name"><span class="en">Basic</span><span class="fa">پایه</span></span>
         <p class="plan-desc"><span class="en">A clean, professional launch for a new business.</span><span class="fa">یک شروع تمیز و حرفه‌ای برای کسب‌وکار جدید.</span></p>
-        <div class="plan-price"><span class="amount">799</span><span class="currency">CAD</span></div>
+        <div class="plan-price"><span class="amount">649</span><span class="currency">CAD</span></div>
         <p class="plan-price-note"><span class="en">One-time — starting price, final quote after a free consultation</span><span class="fa">یک‌بار — قیمت شروع، قیمت نهایی پس از مشاوره رایگان</span></p>
         <ul class="plan-features">
           <li><span class="en">Up to 5 responsive pages</span><span class="fa">تا ۵ صفحه واکنش‌گرا</span></li>
@@ -218,7 +226,7 @@
         <span class="plan-badge"><span class="en">Most Popular</span><span class="fa">پرطرفدارترین</span></span>
         <span class="plan-name"><span class="en">Professional</span><span class="fa">حرفه‌ای</span></span>
         <p class="plan-desc"><span class="en">Everything in Basic, plus a self-managed admin panel.</span><span class="fa">همه چیز پکیج پایه، به‌علاوه پنل مدیریت مستقل.</span></p>
-        <div class="plan-price"><span class="amount">1,499</span><span class="currency">CAD</span></div>
+        <div class="plan-price"><span class="amount">1,199</span><span class="currency">CAD</span></div>
         <p class="plan-price-note"><span class="en">One-time — starting price, final quote after a free consultation</span><span class="fa">یک‌بار — قیمت شروع، قیمت نهایی پس از مشاوره رایگان</span></p>
         <ul class="plan-features">
           <li><span class="en">Everything in Basic</span><span class="fa">همه امکانات پکیج پایه</span></li>
@@ -230,8 +238,25 @@
         </ul>
         <a href="/contact" class="btn btn-accent"><span class="en">Get Started</span><span class="fa">شروع کنید</span></a>
       </div>
+
+      <div class="plan-card anim">
+        <span class="plan-name"><span class="en">Growth</span><span class="fa">رشد</span></span>
+        <p class="plan-desc"><span class="en">Everything in Professional, built to sell and scale online.</span><span class="fa">همه چیز پکیج حرفه‌ای، برای فروش و رشد آنلاین.</span></p>
+        <div class="plan-price"><span class="amount">1,999</span><span class="currency">CAD</span></div>
+        <p class="plan-price-note"><span class="en">One-time — starting price, final quote after a free consultation</span><span class="fa">یک‌بار — قیمت شروع، قیمت نهایی پس از مشاوره رایگان</span></p>
+        <ul class="plan-features">
+          <li><span class="en">Everything in Professional</span><span class="fa">همه امکانات پکیج حرفه‌ای</span></li>
+          <li><span class="en">Online store with payments</span><span class="fa">فروشگاه آنلاین با درگاه پرداخت</span></li>
+          <li><span class="en">Simple built-in CRM</span><span class="fa">CRM ساده داخلی</span></li>
+          <li><span class="en">Analytics dashboard</span><span class="fa">داشبورد آنالیتیکس</span></li>
+          <li><span class="en">Email / SMS automation</span><span class="fa">اتوماسیون ایمیل / پیامک</span></li>
+          <li><span class="en">3 rounds of revisions</span><span class="fa">سه دور اصلاحات</span></li>
+        </ul>
+        <a href="/contact" class="btn btn-outline"><span class="en">Get Started</span><span class="fa">شروع کنید</span></a>
+      </div>
     </div>
     <p class="plans-note anim"><span class="en">Prices are starting points — every project gets a fixed quote after a free consultation, so there are never surprise costs.</span><span class="fa">قیمت‌ها نقطه شروع هستند — هر پروژه پس از یک مشاوره رایگان قیمت نهایی و ثابت دریافت می‌کند، بدون هزینه‌ی غافلگیرکننده.</span></p>
+    <p class="plans-note anim" style="margin-top:12px;"><span class="en">Most Canadian agencies charge $3,500–$10,000+ for a comparable small-business website. Because Pixflow builds on a proven, reusable foundation instead of starting from scratch, we pass that saving on to you.</span><span class="fa">اکثر آژانس‌های کانادایی برای یک سایت مشابه کسب‌وکار کوچک بین ۳٬۵۰۰ تا بیش از ۱۰٬۰۰۰ دلار دریافت می‌کنند. چون Pixflow روی یک زیرساخت اثبات‌شده و قابل‌استفادهٔ مجدد ساخته می‌شود نه از صفر، این صرفه‌جویی را به شما منتقل می‌کنیم.</span></p>
   </div>
 </section>
 
