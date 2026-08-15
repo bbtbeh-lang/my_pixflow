@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Order your project with Pixflow — tell us about your business and get a clear plan back." />
-  <title>Order a Project — Pixflow</title>
+  <meta name="description" content="Pixflow's privacy policy: what we collect, why, how it is stored, and your rights under Canadian privacy law (PIPEDA) and CASL." />
+  <title>Privacy Policy — Pixflow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -218,7 +218,7 @@
         <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
         <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
         <li><a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a></li>
-        <li><a href="/order" class="active"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
         <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
       </ul></nav>
       <div class="header-right">
@@ -263,191 +263,89 @@
   </div>
 </section>
 
-<!-- ═══ ORDER MAIN ═══ -->
-<section class="order-main" aria-label="Order form">
+
+
+<!-- ═══ PAGE HERO ═══ -->
+<section class="page-hero" aria-labelledby="privacy-heading">
   <div class="container">
-    <div class="order-inner">
+    <div class="page-hero-inner">
+      <span class="label anim"><span class="en">Legal</span><span class="fa">حقوقی</span></span>
+      <h1 class="page-hero-headline anim" id="privacy-heading" style="font-size:clamp(2rem,4vw,2.8rem);">
+        <span class="en">Privacy <em>Policy</em></span>
+        <span class="fa">سیاست <em>حریم خصوصی</em></span>
+      </h1>
+      <p class="page-hero-sub anim">
+        <span class="en">Last updated: August 2026. This policy explains what information Pixflow collects, why, and your rights under Canadian privacy law.</span>
+        <span class="fa">آخرین به‌روزرسانی: اوت ۲۰۲۶. این سیاست توضیح می‌دهد Pixflow چه اطلاعاتی جمع‌آوری می‌کند، چرا، و حقوق شما طبق قوانین حریم خصوصی کانادا.</span>
+      </p>
+    </div>
+  </div>
+</section>
 
-      <!-- FORM -->
+<!-- ═══ POLICY BODY ═══ -->
+<section aria-label="Privacy policy details">
+  <div class="container" style="max-width:760px;">
+    <div class="anim" style="display:flex;flex-direction:column;gap:32px;">
+
       <div>
-        <div class="form-header anim">
-          <span class="label"><span class="en">Project Order</span><span class="fa">سفارش پروژه</span></span>
-          <h2><span class="en">Tell us about your business</span><span class="fa">درباره کسب‌وکار خود بگویید</span></h2>
-          <p><span class="en">The more accurate this is, the more accurate your plan will be.</span><span class="fa">هرچه دقیق‌تر پر کنید، برنامه‌ی ارائه‌شده دقیق‌تر خواهد بود.</span></p>
-        </div>
-
-        <form class="order-form anim" id="order-form" novalidate>
-
-          <!-- Contact person -->
-          <div class="form-block">
-            <span class="form-block-title"><span class="en">Your Contact Info</span><span class="fa">اطلاعات تماس شما</span></span>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="contactName"><span class="en">Full Name</span><span class="fa">نام کامل</span> <span class="required">*</span></label>
-                <input type="text" id="contactName" name="contactName" autocomplete="name" required />
-              </div>
-              <div class="form-group">
-                <label for="contactEmail"><span class="en">Email Address</span><span class="fa">آدرس ایمیل</span> <span class="required">*</span></label>
-                <input type="email" id="contactEmail" name="contactEmail" autocomplete="email" placeholder="you@example.com" required />
-              </div>
-            </div>
-          </div>
-
-          <!-- Business info -->
-          <div class="form-block">
-            <span class="form-block-title"><span class="en">Business Information</span><span class="fa">اطلاعات کسب‌وکار</span></span>
-            <div class="form-group">
-              <label for="businessName"><span class="en">Business Name</span><span class="fa">نام کسب‌وکار</span> <span class="required">*</span></label>
-              <input type="text" id="businessName" name="businessName" required />
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="industry"><span class="en">Industry / Niche</span><span class="fa">صنعت / حوزه فعالیت</span> <span class="required">*</span></label>
-                <input type="text" id="industry" name="industry" required />
-              </div>
-              <div class="form-group">
-                <label for="location"><span class="en">Service Area</span><span class="fa">منطقه خدمات‌رسانی</span> <span class="required">*</span></label>
-                <input type="text" id="location" name="location" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="goal"><span class="en">Primary Goal</span><span class="fa">هدف اصلی</span> <span class="required">*</span></label>
-              <select id="goal" name="goal" required>
-                <option value="" disabled selected>— <span class="en">Select</span><span class="fa">انتخاب کنید</span> —</option>
-                <option value="calls"><span class="en">More phone calls</span><span class="fa">تماس تلفنی بیشتر</span></option>
-                <option value="leads"><span class="en">Form leads</span><span class="fa">دریافت فرم لید</span></option>
-                <option value="sales"><span class="en">Online sales</span><span class="fa">فروش آنلاین</span></option>
-                <option value="bookings"><span class="en">Bookings</span><span class="fa">رزرو / نوبت‌دهی</span></option>
-                <option value="other"><span class="en">Other</span><span class="fa">سایر</span></option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Package -->
-          <div class="form-block">
-            <span class="form-block-title"><span class="en">Package</span><span class="fa">پکیج</span> <span class="required">*</span></span>
-            <div class="package-cards">
-              <label class="package-card">
-                <input type="radio" name="package" value="Starter" required>
-                <span class="package-card-name">Starter</span>
-                <span class="package-card-desc"><span class="en">Up to 3 pages, responsive, simple contact form.</span><span class="fa">تا ۳ صفحه، ریسپانسیو، فرم تماس ساده.</span></span>
-              </label>
-              <label class="package-card">
-                <input type="radio" name="package" value="Standard">
-                <span class="package-card-name">Standard</span>
-                <span class="package-card-desc"><span class="en">5–6 pages, advanced UI, content admin.</span><span class="fa">۵-۶ صفحه، UI پیشرفته، مدیریت محتوا.</span></span>
-              </label>
-              <label class="package-card">
-                <input type="radio" name="package" value="Business">
-                <span class="package-card-name">Business</span>
-                <span class="package-card-desc"><span class="en">10+ pages, booking/store, advanced admin.</span><span class="fa">۱۰+ صفحه، رزرو/فروشگاه، ادمین پیشرفته.</span></span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Features -->
-          <div class="form-block">
-            <span class="form-block-title"><span class="en">Requested Features</span><span class="fa">امکانات مورد نیاز</span></span>
-            <div class="check-grid" id="featureChecks">
-              <label class="check-item"><input type="checkbox" name="features" value="Gallery"><span class="en">Gallery</span><span class="fa">گالری تصاویر</span></label>
-              <label class="check-item"><input type="checkbox" name="features" value="Contact Form"><span class="en">Contact Form</span><span class="fa">فرم تماس</span></label>
-              <label class="check-item"><input type="checkbox" name="features" value="Booking System"><span class="en">Booking System</span><span class="fa">سیستم رزرو</span></label>
-              <label class="check-item"><input type="checkbox" name="features" value="Multilingual"><span class="en">Multilingual</span><span class="fa">چندزبانه</span></label>
-              <label class="check-item"><input type="checkbox" name="features" value="Payment Gateway"><span class="en">Payment Gateway</span><span class="fa">درگاه پرداخت</span></label>
-              <label class="check-item"><input type="checkbox" name="features" value="Online Store"><span class="en">Online Store</span><span class="fa">فروشگاه آنلاین</span></label>
-            </div>
-          </div>
-
-          <!-- Domain & Admin -->
-          <div class="form-block">
-            <span class="form-block-title"><span class="en">Domain & Admin</span><span class="fa">دامنه و سطح مدیریت</span></span>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="domainStatus"><span class="en">Domain Status</span><span class="fa">وضعیت دامنه</span></label>
-                <select id="domainStatus" name="domainStatus">
-                  <option value="existing"><span class="en">I have a domain</span><span class="fa">دامنه دارم</span></option>
-                  <option value="new"><span class="en">Need to buy one</span><span class="fa">نیاز به خرید دامنه دارم</span></option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="adminLevel"><span class="en">Admin Level</span><span class="fa">سطح ادمین</span></label>
-                <select id="adminLevel" name="adminLevel">
-                  <option value="0"><span class="en">Level 0 — Static</span><span class="fa">سطح ۰ — استاتیک</span></option>
-                  <option value="1" selected><span class="en">Level 1 — Basic edits</span><span class="fa">سطح ۱ — ویرایش پایه</span></option>
-                  <option value="2"><span class="en">Level 2 — Content panel</span><span class="fa">سطح ۲ — پنل محتوا</span></option>
-                  <option value="3"><span class="en">Level 3 — Full dashboard</span><span class="fa">سطح ۳ — داشبورد کامل</span></option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- Timeline -->
-          <div class="form-block">
-            <span class="form-block-title"><span class="en">Timeline & Notes</span><span class="fa">زمان‌بندی و توضیحات</span></span>
-            <div class="form-group">
-              <textarea id="timeline" name="timeline" placeholder=""></textarea>
-            </div>
-          </div>
-
-          <!-- Honeypot -->
-          <div style="position:absolute;left:-9999px;" aria-hidden="true">
-            <label for="website">Website</label>
-            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <div class="form-error" id="form-error"></div>
-
-          <div class="check-item" style="align-items:flex-start;">
-            <input type="checkbox" id="privacyConsent" name="privacyConsent" required style="margin-top:3px;">
-            <label for="privacyConsent" style="cursor:pointer;">
-              <span class="en">I agree to the <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">Privacy Policy</a>. <span class="required">*</span></span>
-              <span class="fa">با <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">سیاست حریم خصوصی</a> موافقم. <span class="required">*</span></span>
-            </label>
-          </div>
-
-          <div class="check-item" style="align-items:flex-start;">
-            <input type="checkbox" id="marketingConsent" name="marketingConsent" style="margin-top:3px;">
-            <label for="marketingConsent" style="cursor:pointer;">
-              <span class="en">I agree to receive occasional project/service emails from Pixflow (optional — you can unsubscribe anytime).</span>
-              <span class="fa">موافقم گاهی ایمیل دربارهٔ پروژه/خدمات از Pixflow دریافت کنم (اختیاری — هر زمان می‌توانید لغو کنید).</span>
-            </label>
-          </div>
-
-          <p class="form-note">
-            <span class="en">Submitting this form sends your info to our team to prepare a project plan. See our <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);">Privacy Policy</a> for how it's stored and your rights.</span>
-            <span class="fa">ارسال این فرم اطلاعات شما را برای تیم ما جهت آماده‌سازی برنامهٔ پروژه ارسال می‌کند. برای نحوهٔ ذخیره‌سازی و حقوق خود، <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);">سیاست حریم خصوصی</a> را ببینید.</span>
-          </p>
-
-          <button type="submit" class="btn btn-accent">
-            <span class="en">Submit Order →</span>
-            <span class="fa">ارسال سفارش ←</span>
-          </button>
-        </form>
-
-        <div class="form-success" id="form-success">
-          <span class="success-icon">✦</span>
-          <h3><span class="en">Order received!</span><span class="fa">سفارش دریافت شد!</span></h3>
-          <p id="success-detail"><span class="en">Thank you. We'll review your request and get back to you within one business day.</span><span class="fa">ممنون. درخواست شما را بررسی کرده و ظرف یک روز کاری پاسخ می‌دهیم.</span></p>
-        </div>
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:12px;">
+          <span class="en">1. Who we are</span><span class="fa">۱. ما که هستیم</span>
+        </h2>
+        <p style="color:var(--ink-mid);font-weight:300;line-height:1.8;">
+          <span class="en">Pixflow ("we", "us") designs and builds websites for small businesses. This policy applies to visitors of Pixflow's own website and to businesses who submit an order or contact request through it. We comply with Canada's Personal Information Protection and Electronic Documents Act (PIPEDA) and Canada's Anti-Spam Legislation (CASL).</span>
+          <span class="fa">Pixflow («ما») برای کسب‌وکارهای کوچک وب‌سایت طراحی و می‌سازد. این سیاست برای بازدیدکنندگان سایت Pixflow و کسب‌وکارهایی که از طریق فرم سفارش یا تماس درخواست ارسال می‌کنند اعمال می‌شود. ما با قانون حفاظت از اطلاعات شخصی و اسناد الکترونیکی کانادا (PIPEDA) و قانون ضد هرزنامهٔ کانادا (CASL) مطابقت داریم.</span>
+        </p>
       </div>
 
-      <!-- ASIDE — live order summary -->
-      <aside class="order-aside" aria-label="Order summary">
-        <div class="aside-card">
-          <h3><span class="en">Order Summary</span><span class="fa">خلاصه سفارش</span></h3>
-          <dl>
-            <div class="summary-row"><dt><span class="en">Business</span><span class="fa">کسب‌وکار</span></dt><dd id="sumBusiness">—</dd></div>
-            <div class="summary-row"><dt><span class="en">Package</span><span class="fa">پکیج</span></dt><dd id="sumPackage"><span class="en">Not selected</span><span class="fa">انتخاب نشده</span></dd></div>
-            <div class="summary-row"><dt><span class="en">Admin</span><span class="fa">ادمین</span></dt><dd id="sumAdmin">Level 1</dd></div>
-            <div class="summary-row" style="border-bottom:none;margin-bottom:0;"><dt><span class="en">Domain</span><span class="fa">دامنه</span></dt><dd id="sumDomain"><span class="en">Have one</span><span class="fa">دارم</span></dd></div>
-          </dl>
-          <p class="summary-features-title"><span class="en">Features</span><span class="fa">امکانات</span></p>
-          <ul class="summary-features-list" id="sumFeatures">
-            <li class="summary-features-empty"><span class="en">None selected yet</span><span class="fa">هنوز چیزی انتخاب نشده</span></li>
-          </ul>
-          <p class="aside-note"><span class="en">This is just for your review. Final pricing follows package validation by the Pixflow team.</span><span class="fa">این فقط برای مرور شماست. قیمت نهایی پس از بررسی پکیج توسط تیم Pixflow اعلام می‌شود.</span></p>
-        </div>
-      </aside>
+      <div>
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:12px;">
+          <span class="en">2. What we collect</span><span class="fa">۲. چه اطلاعاتی جمع‌آوری می‌کنیم</span>
+        </h2>
+        <p style="color:var(--ink-mid);font-weight:300;line-height:1.8;">
+          <span class="en">When you submit our Order or Contact forms, we collect your name, email address, business details, and any project information you provide. We do not collect payment information through these forms.</span>
+          <span class="fa">وقتی فرم سفارش یا تماس ما را ارسال می‌کنید، نام، آدرس ایمیل، اطلاعات کسب‌وکار، و هر اطلاعات پروژه‌ای که ارائه می‌دهید را جمع‌آوری می‌کنیم. اطلاعات پرداخت از طریق این فرم‌ها جمع‌آوری نمی‌شود.</span>
+        </p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:12px;">
+          <span class="en">3. Email communications &amp; CASL consent</span><span class="fa">۳. ارتباطات ایمیلی و رضایت CASL</span>
+        </h2>
+        <p style="color:var(--ink-mid);font-weight:300;line-height:1.8;">
+          <span class="en">We only send project-related emails to reply to a form you submitted (implied consent under CASL). If you separately check the "I agree to receive email updates" box on our Order form, you're giving express consent to receive occasional project or service updates. You can withdraw this consent at any time by emailing us — we'll remove you within 10 business days, as required by CASL.</span>
+          <span class="fa">ما فقط برای پاسخ به فرمی که ارسال کرده‌اید ایمیل می‌فرستیم (رضایت ضمنی طبق CASL). اگر جداگانه گزینهٔ «موافقم ایمیل دریافت کنم» را در فرم سفارش تیک بزنید، رضایت صریح برای دریافت به‌روزرسانی‌های پروژه یا خدمات می‌دهید. می‌توانید هر زمان با ایمیل به ما، این رضایت را پس بگیرید — طبق CASL ظرف ۱۰ روز کاری شما را حذف می‌کنیم.</span>
+        </p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:12px;">
+          <span class="en">4. Where your data is stored</span><span class="fa">۴. کجا اطلاعات شما ذخیره می‌شود</span>
+        </h2>
+        <p style="color:var(--ink-mid);font-weight:300;line-height:1.8;">
+          <span class="en">Form submissions are stored in a Supabase database hosted in the Canada (Central) region. Uploaded images are stored with Cloudflare R2. Both providers are contractually bound to protect your data and do not sell it to third parties.</span>
+          <span class="fa">اطلاعات ارسالی فرم‌ها در دیتابیس Supabase میزبانی‌شده در منطقه کانادا (مرکزی) ذخیره می‌شود. تصاویر آپلودشده با Cloudflare R2 ذخیره می‌شوند. هر دو ارائه‌دهنده متعهد به حفاظت از اطلاعات شما هستند و آن را به اشخاص ثالث نمی‌فروشند.</span>
+        </p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:12px;">
+          <span class="en">5. Your rights</span><span class="fa">۵. حقوق شما</span>
+        </h2>
+        <p style="color:var(--ink-mid);font-weight:300;line-height:1.8;">
+          <span class="en">Under PIPEDA, you can request a copy of the personal information we hold about you, ask us to correct it, or ask us to delete it. Contact us at <a href="mailto:bbtbeh@gmail.com" style="color:var(--accent);">bbtbeh@gmail.com</a> and we'll respond within 30 days.</span>
+          <span class="fa">طبق PIPEDA، می‌توانید درخواست کپی از اطلاعات شخصی نگه‌داری‌شده، اصلاح آن، یا حذف آن را داشته باشید. با <a href="mailto:bbtbeh@gmail.com" style="color:var(--accent);">bbtbeh@gmail.com</a> تماس بگیرید؛ ظرف ۳۰ روز پاسخ می‌دهیم.</span>
+        </p>
+      </div>
+
+      <div>
+        <h2 style="font-family:var(--font-serif);font-size:1.4rem;color:var(--ink);margin-bottom:12px;">
+          <span class="en">6. Contact us</span><span class="fa">۶. تماس با ما</span>
+        </h2>
+        <p style="color:var(--ink-mid);font-weight:300;line-height:1.8;">
+          <span class="en">Questions about this policy? Email <a href="mailto:bbtbeh@gmail.com" style="color:var(--accent);">bbtbeh@gmail.com</a>.</span>
+          <span class="fa">سؤالی درباره این سیاست دارید؟ به <a href="mailto:bbtbeh@gmail.com" style="color:var(--accent);">bbtbeh@gmail.com</a> ایمیل بزنید.</span>
+        </p>
+      </div>
 
     </div>
   </div>
@@ -477,10 +375,12 @@
     </div>
     <div class="footer-bottom">
       <p><span class="en">© <span id="cy-en">2025</span> Pixflow. All rights reserved.</span><span class="fa">© <span id="cy-fa">۱۴۰۴</span> پیکسفلو. تمامی حقوق محفوظ است.</span></p>
-      <a href="/privacy">Privacy</a> &middot; <a href="mailto:bbtbeh@gmail.com">bbtbeh@gmail.com</a>
+      <a href="mailto:bbtbeh@gmail.com">bbtbeh@gmail.com</a>
     </div>
   </div>
 </footer>
+
+
 
 <script>
   (function() {
@@ -627,3 +527,4 @@ Marketing emails consent: ${form.marketingConsent.checked ? 'Yes (opted in)' : '
 </script>
 </body>
 </html>
+

@@ -455,7 +455,7 @@
     </div>
     <div class="footer-bottom">
       <p><span class="en">© <span id="cy-en">2025</span> Pixflow. All rights reserved.</span><span class="fa">© <span id="cy-fa">۱۴۰۴</span> پیکسفلو. تمامی حقوق محفوظ است.</span></p>
-      <a href="/contact">bbtbeh@gmail.com</a>
+      <a href="/privacy">Privacy</a> &middot; <a href="/contact">bbtbeh@gmail.com</a>
     </div>
   </div>
 </footer>
@@ -481,7 +481,9 @@
       const about = content && content.about;
       if (!about) return;
       if (about['ab-photo']) {
-        document.getElementById('about-photo').src = about['ab-photo'];
+        const photoEl = document.getElementById('about-photo');
+        photoEl.src = about['ab-photo'];
+        photoEl.alt = document.documentElement.lang === 'fa' ? 'تصویر تیم Pixflow' : 'Photo of the Pixflow team';
         document.getElementById('about-photo-wrap').style.display = 'block';
       }
       if (about['ab-ov-en']) document.getElementById('about-ov-en').textContent = about['ab-ov-en'];
