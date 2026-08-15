@@ -51,13 +51,29 @@ pixflow/          <- the public site (index.html, admin.html, etc.)
 
 Keep them as sibling folders, e.g. both inside one project root.
 
-## Deploying to Railway (no CLI/SSH needed)
+## Data storage
 
-1. **New Project → Deploy from GitHub repo** → pick your repo.
-2. Since `pixflow` and `pixflow-server` are two folders in one repo, go to
-   **Settings → Root Directory** and set it to `pixflow-server`. Railway
-   will then run `npm install` and `node server.js` from inside that folder.
-3. **Variables tab** → add:
+As of the Supabase/R2 migration, this app **no longer stores anything on
+local disk** — the old `data/db.json` (lowdb) and local `data/uploads/`
+folder are gone. All state (users, services, portfolio, messages, etc.)
+lives in a single Supabase Postgres row, and all uploaded images live in
+a Cloudflare R2 bucket. Both are real, persistent, free-tier services that
+survive redeploys, restarts, and free-tier spin-downs — unlike a host's
+local filesystem.
+
+**Before running the server anywhere (local or deployed), you must set:**
+`SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`,
+`R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PUBLIC_URL`.
+
+Full setup steps (creating the Supabase table, creating the R2 bucket,
+generating the API keys) are in `../docs/SUPABASE_SETUP.md`.
+
+## Deploying to Railway / Render / a VPS
+
+No Volume or persistent disk is required anymore (see "Data storage" above) —
+any of these hosts works the same way now:
+1. Deploy from your GitHub repo, root directory `pixflow-server`.
+2. Set the environment variables listed in "Data storage" above, plus:
    ```
    SESSION_SECRET=<generate one, see above>
    ADMIN_EMAIL=you@example.com
@@ -65,24 +81,12 @@ Keep them as sibling folders, e.g. both inside one project root.
    ADMIN_NAME=Your Name
    NODE_ENV=production
    ```
-   (Don't set `PORT` — Railway injects it automatically.)
-4. **Add a Volume** (Settings → Volumes) and mount it at `/app/data`. This
-   is required — without it, your database (`data/db.json`) is wiped every
-   time you redeploy, since Railway's filesystem is otherwise temporary.
-5. Deploy. Check the deploy logs for `✓ Admin account created` to confirm
-   the auto-seed worked.
-6. Visit your Railway-provided URL, then `/admin` to log in.
-7. Once you have a working login, you can remove `ADMIN_PASSWORD` from the
-   Variables tab if you'd like (optional — it's only read on first boot).
-
-## Deploying elsewhere (Render, a VPS, etc.)
-
-Any Node host works. Checklist:
-- Set `NODE_ENV=production` so session cookies require HTTPS.
-- Put this behind HTTPS — session cookies won't work correctly over plain HTTP in production mode.
-- Make sure `data/` is on persistent storage, not a wiped-on-redeploy filesystem.
-- Back up `data/db.json` regularly — it's the entire database.
-- Never commit `.env` or `data/db.json` (already in `.gitignore`).
+3. Put the site behind HTTPS — session cookies won't work correctly over
+   plain HTTP in production mode.
+4. On Render's Free tier specifically, the service still spins down after
+   ~15 minutes idle (a cold start, not data loss anymore). Ping `/health`
+   every 10–14 minutes with a free uptime monitor (UptimeRobot,
+   cron-job.org) if you want to avoid that delay.
 
 ## What's real now vs. still local-only
 
