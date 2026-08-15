@@ -53,20 +53,20 @@ Keep them as sibling folders, e.g. both inside one project root.
 
 ## Data storage
 
-As of the Supabase/R2 migration, this app **no longer stores anything on
+As of the Supabase migration, this app **no longer stores anything on
 local disk** — the old `data/db.json` (lowdb) and local `data/uploads/`
 folder are gone. All state (users, services, portfolio, messages, etc.)
 lives in a single Supabase Postgres row, and all uploaded images live in
-a Cloudflare R2 bucket. Both are real, persistent, free-tier services that
-survive redeploys, restarts, and free-tier spin-downs — unlike a host's
-local filesystem.
+Supabase Storage — one provider for both, no separate object-storage
+account needed. It's a real, persistent, free-tier service that survives
+redeploys, restarts, and free-tier spin-downs — unlike a host's local
+filesystem.
 
 **Before running the server anywhere (local or deployed), you must set:**
-`SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`,
-`R2_SECRET_ACCESS_KEY`, `R2_BUCKET`, `R2_PUBLIC_URL`.
+`SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `SUPABASE_STORAGE_BUCKET`.
 
-Full setup steps (creating the Supabase table, creating the R2 bucket,
-generating the API keys) are in `../docs/SUPABASE_SETUP.md`.
+Full setup steps (creating the Supabase table, creating the Storage
+bucket, generating the keys) are in `../docs/SUPABASE_SETUP.md`.
 
 ## Deploying to Railway / Render / a VPS
 

@@ -1,15 +1,15 @@
-# راه‌اندازی Supabase + Cloudflare R2 (جایگزین دیتابیس محلی)
+# راه‌اندازی Supabase (دیتابیس + فایل‌ها) — جایگزین ذخیره‌سازی محلی
 
-این راهنما رو یک‌بار دنبال کن تا مشکل «هر بار Render می‌خوابه، دیتام پاک می‌شه» برای همیشه حل بشه.
+این راهنما رو یک‌بار دنبال کن تا مشکل «هر بار Render می‌خوابه، دیتام پاک می‌شه» برای همیشه حل بشه. همه‌چیز (هم دیتابیس، هم عکس‌های آپلودی) توی همین یک سرویس (Supabase) می‌مونه — نیازی به هیچ سرویس دیگه‌ای (مثل Cloudflare) نیست، و **هیچ‌جا کارت بانکی لازم نمی‌شه**.
 
 ---
 
-## بخش ۱ — Supabase (جایگزین db.json)
+## بخش ۱ — دیتابیس (جایگزین db.json)
 
 ### ۱.۱ ساخت پروژه
 1. برو به [supabase.com](https://supabase.com) → ثبت‌نام رایگان.
 2. **New Project** بزن. یک اسم بذار (مثلاً `pixflow-prod`)، یک پسورد قوی برای دیتابیس بساز (جایی ذخیره‌ش کن).
-3. ⚠️ **Region رو حتماً روی `Canada (Central)` بذار** — چون مشتری‌های Pixflow کانادایی هستن، بهتره داده‌هاشون توی همون کشور بمونه (این با انتظارات معمول حریم خصوصی کانادایی هم‌خوانی داره، هرچند PIPEDA به‌خودی‌خود محل نگهداری خاصی رو الزامی نمی‌کنه). این گزینه توی همون صفحه‌ی ساخت پروژه، کنار Database Password هست.
+3. ⚠️ **Region رو حتماً روی `Canada (Central)` بذار** — چون مشتری‌های Pixflow کانادایی هستن.
 4. چند دقیقه صبر کن تا پروژه Provision بشه.
 
 ### ۱.۲ ساخت جدول
@@ -36,41 +36,36 @@ alter table pixflow_state enable row level security;
 
 ---
 
-## بخش ۲ — Cloudflare R2 (جایگزین آپلود عکس محلی)
+## بخش ۲ — Storage (جایگزین آپلود عکس محلی)
+
+از همون پروژه‌ی Supabase که بالا ساختی استفاده می‌کنیم — نیازی به اکانت جدید نیست.
 
 ### ۲.۱ ساخت باکت
-1. برو به [dash.cloudflare.com](https://dash.cloudflare.com) → **R2 Object Storage** → ثبت‌نام (کارت بانکی می‌خواد ولی توی حد مصرف یک سایت کوچیک، صد در صد رایگانه — ۱۰ گیگ فضای رایگان دائمی).
-2. **Create Bucket** بزن، اسمش رو بذار `pixflow-uploads`.
-3. توی بخش **Location Hint** (اختیاری، موقع ساخت باکت)، گزینه‌ی `Eastern North America (ENAM)` رو انتخاب کن تا فایل‌ها به کانادا نزدیک‌تر ذخیره بشن (R2 برخلاف Supabase، Region رسمی جدا نداره، ولی همین Hint کافیه).
+1. توی داشبورد Supabase، از منوی سمت چپ روی **Storage** کلیک کن.
+2. **New Bucket** بزن. اسمش رو بذار `pixflow-uploads`.
+3. گزینه‌ی **Public bucket** رو حتماً روشن کن (تا عکس‌ها بدون نیاز به لاگین قابل نمایش باشن روی سایت).
+4. **Create bucket** بزن.
 
-### ۲.۲ فعال کردن دسترسی عمومی (Public Access)
-1. داخل باکت → **Settings → Public Access** → **Allow Access** رو فعال کن.
-2. آدرس عمومی که می‌ده (چیزی شبیه `https://pub-xxxxxxxxxxxx.r2.dev`) رو کپی کن — این می‌شه `R2_PUBLIC_URL` (بدون `/` آخرش).
+### ۲.۲ محدود کردن نوع/حجم فایل (اختیاری ولی پیشنهادی)
+داخل تنظیمات باکت (Edit bucket)، می‌تونی:
+- **Allowed MIME types**: `image/jpeg, image/png, image/webp, image/gif`
+- **File size limit**: `5MB`
 
-### ۲.۳ ساخت API Token
-1. برو به **R2 → Manage R2 API Tokens → Create API Token**.
-2. Permission: **Object Read & Write**، و دسترسی رو فقط محدود به باکت `pixflow-uploads` کن.
-3. بعد از ساخت، سه مقدار می‌گیری:
-   - `Access Key ID` → می‌شه `R2_ACCESS_KEY_ID`
-   - `Secret Access Key` → می‌شه `R2_SECRET_ACCESS_KEY`
-   - آدرس Account ID (بالای صفحه‌ی R2، یا از خود URL endpoint) → می‌شه `R2_ACCOUNT_ID`
-4. اسم باکتی که ساختی (`pixflow-uploads`) → می‌شه `R2_BUCKET`
+(این یک لایه‌ی امنیتی اضافه‌ست؛ کد سمت سرور هم همین محدودیت‌ها رو مستقل چک می‌کنه.)
+
+هیچ کلید یا Token جدیدی لازم نیست — همون `SUPABASE_URL` و `SUPABASE_SERVICE_KEY` بخش ۱ برای Storage هم استفاده می‌شه.
 
 ---
 
 ## بخش ۳ — تنظیم Environment Variables روی Render
 
-برو به داشبورد Render → سرویس `my_pixflow` → **Environment** → این ۷ متغیر رو اضافه کن:
+برو به داشبورد Render → سرویس `my_pixflow` → **Environment** → این ۳ متغیر رو اضافه کن:
 
 | Key | Value |
 |---|---|
 | `SUPABASE_URL` | از بخش ۱.۳ |
 | `SUPABASE_SERVICE_KEY` | از بخش ۱.۳ (service_role) |
-| `R2_ACCOUNT_ID` | از بخش ۲.۳ |
-| `R2_ACCESS_KEY_ID` | از بخش ۲.۳ |
-| `R2_SECRET_ACCESS_KEY` | از بخش ۲.۳ |
-| `R2_BUCKET` | `pixflow-uploads` |
-| `R2_PUBLIC_URL` | از بخش ۲.۲ (بدون `/` انتهایی) |
+| `SUPABASE_STORAGE_BUCKET` | `pixflow-uploads` |
 
 بعد از ذخیره، Render خودکار سرویس رو Redeploy می‌کنه.
 
@@ -90,5 +85,5 @@ alter table pixflow_state enable row level security;
 ## بخش ۵ — تست نهایی بعد از Deploy
 - [ ] وارد `/admin` شو، لاگین کن — باید کار کنه (یعنی Supabase وصله).
 - [ ] یک نمونه‌کار تستی اضافه کن، بعد از Render Dashboard دستی سرویس رو **Restart** کن (شبیه‌سازی spin-down)، دوباره چک کن نمونه‌کار هنوز هست.
-- [ ] یک عکس آپلود کن، مطمئن شو URL که برمی‌گرده با `R2_PUBLIC_URL` شروع می‌شه و عکس درست لود می‌شه.
+- [ ] یک عکس آپلود کن، مطمئن شو URL که برمی‌گرده به `supabase.co/storage/...` اشاره می‌کنه و عکس درست لود می‌شه.
 - [ ] فرم `/order` یا `/contact` رو تست کن، مطمئن شو پیام توی پنل ادمین ظاهر می‌شه.

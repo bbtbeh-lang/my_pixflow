@@ -2,48 +2,39 @@ import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
 import { randomUUID } from 'crypto';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { createClient } from '@supabase/supabase-js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 
 // ─────────────────────────────────────────────────────────────────────────
-// Uploads now go to Cloudflare R2 (S3-compatible object storage) instead of
-// the local disk. Render's Free tier wipes local files on every restart/
-// redeploy/spin-down, so anything saved to disk was never actually safe.
+// Uploads go to Supabase Storage instead of the local disk. Render's Free
+// tier wipes local files on every restart/redeploy/spin-down, so anything
+// saved to disk was never actually safe.
 //
-// Required env vars (see docs/SUPABASE_SETUP.md for the full setup guide):
-//   R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY,
-//   R2_BUCKET, R2_PUBLIC_URL
+// Uses the same Supabase project as db.js — no separate storage provider
+// needed. Required env vars (see docs/SUPABASE_SETUP.md):
+//   SUPABASE_URL, SUPABASE_SERVICE_KEY, SUPABASE_STORAGE_BUCKET
 // ─────────────────────────────────────────────────────────────────────────
 
-const {
-  R2_ACCOUNT_ID,
-  R2_ACCESS_KEY_ID,
-  R2_SECRET_ACCESS_KEY,
-  R2_BUCKET,
-  R2_PUBLIC_URL, // e.g. https://pub-xxxxxxxx.r2.dev  (no trailing slash)
-} = process.env;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+const BUCKET = process.env.SUPABASE_STORAGE_BUCKET || 'pixflow-uploads';
 
-if (!R2_ACCOUNT_ID || !R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY || !R2_BUCKET || !R2_PUBLIC_URL) {
+if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
   throw new Error(
-    'Missing R2_ACCOUNT_ID / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_BUCKET / R2_PUBLIC_URL. ' +
+    'Missing SUPABASE_URL or SUPABASE_SERVICE_KEY environment variables. ' +
     'See docs/SUPABASE_SETUP.md for setup instructions.'
   );
 }
 
-const s3 = new S3Client({
-  region: 'auto',
-  endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId: R2_ACCESS_KEY_ID,
-    secretAccessKey: R2_SECRET_ACCESS_KEY,
-  },
+const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
+  auth: { persistSession: false },
 });
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_SIZE = 5 * 1024 * 1024; // 5MB
 
-// Files are held in memory only long enough to stream to R2 — never written
-// to the (ephemeral) local disk.
+// Files are held in memory only long enough to stream to Supabase Storage —
+// never written to the (ephemeral) local disk.
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: MAX_SIZE },
@@ -66,15 +57,19 @@ router.post('/', requireAuth, requireRole('edit'), (req, res) => {
     const key = `${randomUUID()}${ext}`;
 
     try {
-      await s3.send(new PutObjectCommand({
-        Bucket: R2_BUCKET,
-        Key: key,
-        Body: req.file.buffer,
-        ContentType: req.file.mimetype,
-      }));
-      res.status(201).json({ url: `${R2_PUBLIC_URL}/${key}` });
+      const { error: uploadError } = await supabase.storage
+        .from(BUCKET)
+        .upload(key, req.file.buffer, {
+          contentType: req.file.mimetype,
+          upsert: false,
+        });
+
+      if (uploadError) throw uploadError;
+
+      const { data: publicUrlData } = supabase.storage.from(BUCKET).getPublicUrl(key);
+      res.status(201).json({ url: publicUrlData.publicUrl });
     } catch (uploadErr) {
-      res.status(502).json({ error: `R2 upload failed: ${uploadErr.message}` });
+      res.status(502).json({ error: `Supabase Storage upload failed: ${uploadErr.message}` });
     }
   });
 });
