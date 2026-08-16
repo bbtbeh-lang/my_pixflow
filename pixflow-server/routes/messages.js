@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 import rateLimit from 'express-rate-limit';
 import { db } from '../db.js';
 import { requireAuth, requireRole } from '../middleware/auth.js';
+import { notifyNewMessage } from '../notify.js';
 
 const router = Router();
 
@@ -30,7 +31,7 @@ router.post('/', contactLimiter, async (req, res) => {
   if (!emailOk) return res.status(400).json({ error: 'Invalid email address' });
 
   await db.read();
-  db.data.messages.push({
+  const savedMessage = {
     id: randomUUID(),
     name: esc(name),
     email: esc(email),
@@ -38,10 +39,15 @@ router.post('/', contactLimiter, async (req, res) => {
     message: esc(message),
     date: new Date().toISOString(),
     status: 'new'
-  });
+  };
+  db.data.messages.push(savedMessage);
   await db.write();
 
   res.status(201).json({ ok: true });
+
+  // Fire-and-forget: don't make the visitor wait on email delivery, and
+  // never fail their submission if the email provider has a hiccup.
+  notifyNewMessage(savedMessage);
 });
 
 // ADMIN — list/read/delete
