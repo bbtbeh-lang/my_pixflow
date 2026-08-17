@@ -10,7 +10,13 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const MODEL = 'gemini-2.0-flash';
+// NOTE: gemini-2.0-flash was deprecated and shut down by Google on
+// June 1, 2026 — every request against it fails. gemini-2.5-flash is the
+// current stable, free-tier-eligible model as of this writing. If Google
+// deprecates this one too in the future, check
+// https://ai.google.dev/gemini-api/docs/pricing for the current free-tier
+// model list and update MODEL below.
+const MODEL = 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 export function isChatConfigured() {
@@ -61,9 +67,12 @@ export async function getChatReply(history, userMessage) {
     { role: 'user', parts: [{ text: userMessage }] },
   ];
 
-  const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
+  const response = await fetch(API_URL, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-goog-api-key': GEMINI_API_KEY,
+    },
     body: JSON.stringify({
       system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
       contents,
