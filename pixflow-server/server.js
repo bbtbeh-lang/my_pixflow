@@ -11,6 +11,7 @@ import settingsRoutes from './routes/settings.js';
 import contentRoutes from './routes/content.js';
 import testimonialsRoutes from './routes/testimonials.js';
 import uploadRoutes from './routes/upload.js';
+import chatRoutes from './routes/chat.js';
 import { makeCollectionRouter } from './routes/collection.js';
 import { ensureAdminSeeded, ensurePagesSeeded } from './seed.js';
 
@@ -50,8 +51,9 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/chat', chatRoutes);
 
-// Uploaded images are now served directly from Cloudflare R2's public URL
+// Uploaded images are now served directly from Supabase Storage's public URL
 // (see routes/upload.js) — no local /uploads static route needed anymore.
 
 // ── Static site (public html files, nested inside this folder) ────
