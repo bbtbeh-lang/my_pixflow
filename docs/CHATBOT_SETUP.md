@@ -41,9 +41,10 @@
 گوگل هر چند وقت یک‌بار مدل‌های قدیمی رو کاملاً خاموش می‌کنه (مثلاً `gemini-2.0-flash` در ۱ ژوئن ۲۰۲۶ رسماً Retire شد). وقتی این اتفاق بیفته، **سایت crash نمی‌کنه** (چون Fail-Safe طراحی شده)، ولی چت‌بات فقط پیام «موقتاً در دسترس نیستم» می‌ده — بدون هیچ خطای واضحی که خودت متوجه بشی.
 
 اگه یه روز چت‌بات دوباره همیشه همین پیام رو داد:
-1. برو [ai.google.dev/gemini-api/docs/pricing](https://ai.google.dev/gemini-api/docs/pricing) و ببین آیا مدلی که استفاده می‌کنیم هنوز فعاله یا Deprecated شده.
-2. اگه Deprecated شده، توی فایل `pixflow-server/chat.js`، خط `const MODEL = '...'` رو با اسم مدل جدید (که گوگل پیشنهاد می‌ده) عوض کن.
-3. Commit و Push کن.
+1. برو Render → Logs، دنبال خط `Chat reply failed: Gemini API error 404` بگرد — گوگل معمولاً **مستقیم داخل همون پیام خطا** می‌گه کدوم مدل رو جایگزین کنی (مثلاً «Please update your code to use models/gemini-X.X-flash»).
+2. یا برو [ai.google.dev/gemini-api/docs/pricing](https://ai.google.dev/gemini-api/docs/pricing) و ببین کدوم مدل الان فعاله.
+3. توی فایل `pixflow-server/chat.js`، خط `const MODEL = '...'` رو با اسم مدل جدید عوض کن.
+4. Commit و Push کن.
 
 ### محدودیت مصرف
 برای جلوگیری از سوءاستفاده، هر بازدیدکننده (بر اساس IP) حداکثر ۲۰ پیام در هر ۱۵ دقیقه می‌تونه بفرسته. این هم از هزینه (که صفره چون رایگانه) جلوگیری نمی‌کنه، بلکه فقط از تمام شدن سهمیه‌ی روزانه‌ی رایگان توسط یک نفر جلوگیری می‌کنه.

@@ -10,13 +10,15 @@
 // ─────────────────────────────────────────────────────────────────────────
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-// NOTE: gemini-2.0-flash was deprecated and shut down by Google on
-// June 1, 2026 — every request against it fails. gemini-2.5-flash is the
-// current stable, free-tier-eligible model as of this writing. If Google
-// deprecates this one too in the future, check
-// https://ai.google.dev/gemini-api/docs/pricing for the current free-tier
-// model list and update MODEL below.
-const MODEL = 'gemini-2.5-flash';
+// NOTE: Google deprecates Gemini model names surprisingly often.
+// gemini-2.0-flash was shut down June 1, 2026. gemini-2.5-flash stopped
+// being available to new API keys shortly after (confirmed via the
+// Gemini API's own error message, which named gemini-3.6-flash as the
+// replacement). If this model also stops working, check
+// https://ai.google.dev/gemini-api/docs/pricing for the current
+// free-tier model list, or read the error text in Render's logs — Google
+// usually names the exact replacement model in the error itself.
+const MODEL = 'gemini-3.6-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 
 export function isChatConfigured() {
