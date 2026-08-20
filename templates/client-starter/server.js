@@ -51,9 +51,8 @@ app.use('/api/content', contentRoutes);
 app.use('/api/testimonials', testimonialsRoutes);
 app.use('/api/upload', uploadRoutes);
 
-// Serve uploaded images — this folder lives inside data/, which is why it
-// MUST be on the same persistent Volume as db.json (see README).
-app.use('/uploads', express.static(path.join(__dirname, 'data', 'uploads')));
+// Uploaded images are served directly from Supabase Storage's public URL
+// (see routes/upload.js) — no local /uploads static route needed anymore.
 
 // ── Static site (public html files, nested inside this folder) ────
 // `extensions: ['html']` lets clean URLs like /about resolve to about.html —

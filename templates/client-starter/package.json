@@ -11,13 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.47.10",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.2",
     "express-session": "^1.19.0",
-    "lowdb": "^7.0.1",
-    "multer": "^2.2.0",
-    "uuid": "^14.0.1"
+    "multer": "^2.2.0"
   }
 }

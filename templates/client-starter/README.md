@@ -16,6 +16,9 @@ Edit `.env`:
   `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"`
 - `ADMIN_EMAIL` / `ADMIN_PASSWORD` / `ADMIN_NAME` — your first admin login.
   `ADMIN_PASSWORD` must be at least 10 characters.
+- `SUPABASE_URL` / `SUPABASE_SERVICE_KEY` / `SUPABASE_STORAGE_BUCKET` —
+  required for both the database and file uploads. Create a fresh Supabase
+  project (free tier) per client — see `../../docs/SUPABASE_SETUP.md`.
 
 **The server auto-seeds on first boot** — the first admin account and 5
 starter pages are created automatically from your `.env` values the first
@@ -64,11 +67,13 @@ Keep them as sibling folders, e.g. both inside one project root.
    ADMIN_PASSWORD=<a strong password, 10+ characters>
    ADMIN_NAME=Your Name
    NODE_ENV=production
+   SUPABASE_URL=<from your Supabase project>
+   SUPABASE_SERVICE_KEY=<from your Supabase project>
+   SUPABASE_STORAGE_BUCKET=pixflow-uploads
    ```
    (Don't set `PORT` — Railway injects it automatically.)
-4. **Add a Volume** (Settings → Volumes) and mount it at `/app/data`. This
-   is required — without it, your database (`data/db.json`) is wiped every
-   time you redeploy, since Railway's filesystem is otherwise temporary.
+4. No Volume needed — the database and uploaded files both live in
+   Supabase, not on local disk, so nothing is wiped on redeploy.
 5. Deploy. Check the deploy logs for `✓ Admin account created` to confirm
    the auto-seed worked.
 6. Visit your Railway-provided URL, then `/admin` to log in.
@@ -80,9 +85,11 @@ Keep them as sibling folders, e.g. both inside one project root.
 Any Node host works. Checklist:
 - Set `NODE_ENV=production` so session cookies require HTTPS.
 - Put this behind HTTPS — session cookies won't work correctly over plain HTTP in production mode.
-- Make sure `data/` is on persistent storage, not a wiped-on-redeploy filesystem.
-- Back up `data/db.json` regularly — it's the entire database.
-- Never commit `.env` or `data/db.json` (already in `.gitignore`).
+- Set the same `SUPABASE_*` env vars as above — no persistent volume or
+  local file backup needed, since all state lives in Supabase.
+- On Render's free tier specifically, add a `/health` uptime monitor to
+  avoid cold-start delays — see `../../docs/RENDER_COLD_START.md`.
+- Never commit `.env` (already in `.gitignore`).
 
 ## What's real now vs. still local-only
 
