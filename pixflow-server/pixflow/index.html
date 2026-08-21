@@ -164,6 +164,16 @@
     .portfolio-title { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); }
     .portfolio-cta { text-align: center; }
 
+    /* ── Process ─────────────────────────────────────────────── */
+    .process { background: var(--white); padding: 64px 0; }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .process-step { padding-inline-start: 20px; border-inline-start: 1px solid var(--line); }
+    .process-step:first-child { border-inline-start: none; padding-inline-start: 0; }
+    .process-num { font-family: var(--font-serif); font-size: 2.2rem; color: var(--line); line-height: 1; margin-bottom: 12px; }
+    .process-title { font-family: var(--font-serif); font-size: 1.05rem; color: var(--ink); margin-bottom: 8px; }
+    html[lang="fa"] .process-title { font-family: var(--font-fa); font-weight: 700; }
+    .process-desc { font-size: 0.85rem; color: var(--ink-mid); font-weight: 300; line-height: 1.6; }
+
     /* ── Why ─────────────────────────────────────────────────── */
     .why { background: var(--cream); position: relative; z-index: 1; }
     .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -206,6 +216,7 @@
       .hero-inner, .services-grid, .portfolio-grid, .why-grid { grid-template-columns: 1fr; }
       .hero { padding: 64px 0; }
       .hero-visual { max-width: 460px; margin: 0 auto; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
       .footer-inner { grid-template-columns: 1fr 1fr; }
       .footer-brand { grid-column: 1 / -1; }
     }
@@ -216,6 +227,9 @@
       .browser-body { padding: 16px; gap: 12px; }
       .mock-cards { gap: 7px; }
       .mock-card { padding: 9px; }
+      .process-grid { grid-template-columns: 1fr; gap: 0; }
+      .process-step { border-inline-start: none; padding-inline-start: 0; border-block-start: 1px solid var(--line); padding-block-start: 20px; margin-block-start: 20px; }
+      .process-step:first-child { border-block-start: none; padding-block-start: 0; margin-block-start: 0; }
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -330,24 +344,24 @@
   <div class="container">
     <header class="section-header anim">
       <span class="label"><span class="en">What We Do</span><span class="fa">خدمات ما</span></span>
-      <h2 class="section-title" id="services-heading"><span class="en">Services built for results</span><span class="fa">خدماتی برای نتیجه واقعی</span></h2>
-      <p class="section-sub"><span class="en">Each service is designed to help businesses present themselves clearly, look professional, and turn visitors into leads.</span><span class="fa">هر خدمت برای این طراحی شده که کسب‌وکارها را واضح‌تر معرفی کند، حرفه‌ای‌تر نشان دهد و بازدیدکنندگان را به مشتری تبدیل نماید.</span></p>
+      <h2 class="section-title" id="services-heading"><span class="en">What we actually build</span><span class="fa">چیزی که واقعاً می‌سازیم</span></h2>
+      <p class="section-sub"><span class="en">Every project follows the same process — Strategy, Design, Development, Launch — so you always know what to expect.</span><span class="fa">هر پروژه از همان فرآیند مشخص عبور می‌کند — استراتژی، طراحی، توسعه، راه‌اندازی — تا همیشه بدانید در چه مرحله‌ای هستید.</span></p>
     </header>
     <div class="services-grid">
       <article class="service-card anim">
         <div class="service-num">01</div>
-        <h3 class="service-name"><span class="en">Professional Website Design</span><span class="fa">طراحی وب‌سایت حرفه‌ای</span></h3>
-        <p class="service-desc"><span class="en">Clean, fast, and responsive websites that represent your brand with confidence and convert visitors into customers.</span><span class="fa">وب‌سایت‌های سریع و واکنش‌گرا که برند شما را با اعتماد نشان می‌دهند و بازدیدکنندگان را به مشتری تبدیل می‌کنند.</span></p>
+        <h3 class="service-name"><span class="en">Website Strategy &amp; Structure</span><span class="fa">استراتژی و ساختار وب‌سایت</span></h3>
+        <p class="service-desc"><span class="en">We plan the sitemap, page structure, and information architecture around one goal: guiding visitors toward contact.</span><span class="fa">نقشه‌ی سایت، ساختار صفحات و معماری اطلاعات را حول یک هدف طراحی می‌کنیم: هدایت بازدیدکننده به سمت تماس.</span></p>
       </article>
       <article class="service-card anim">
         <div class="service-num">02</div>
-        <h3 class="service-name"><span class="en">Brand-Focused Web Presentation</span><span class="fa">ارائه وب متمرکز بر برند</span></h3>
-        <p class="service-desc"><span class="en">Strategic visual storytelling that communicates your value clearly and makes a lasting impression on every visitor.</span><span class="fa">روایت بصری استراتژیک که ارزش شما را واضح بیان می‌کند و در هر بازدیدکننده‌ای اثری ماندگار می‌گذارد.</span></p>
+        <h3 class="service-name"><span class="en">Website Design</span><span class="fa">طراحی وب‌سایت</span></h3>
+        <p class="service-desc"><span class="en">Responsive interfaces with a considered typography and visual system, built to work cleanly on mobile, tablet, and desktop.</span><span class="fa">رابط‌های کاربری واکنش‌گرا با تایپوگرافی و سیستم بصری هماهنگ، که روی موبایل، تبلت و دسکتاپ به‌درستی نمایش داده می‌شوند.</span></p>
       </article>
       <article class="service-card anim">
         <div class="service-num">03</div>
-        <h3 class="service-name"><span class="en">Lead Generation Structure</span><span class="fa">ساختار جذب مشتری</span></h3>
-        <p class="service-desc"><span class="en">Website architecture designed to guide visitors toward action — from first impression to first contact.</span><span class="fa">معماری وب‌سایتی که بازدیدکنندگان را به سمت اقدام هدایت می‌کند — از اولین نگاه تا اولین تماس.</span></p>
+        <h3 class="service-name"><span class="en">Website Development</span><span class="fa">توسعه وب‌سایت</span></h3>
+        <p class="service-desc"><span class="en">Responsive, performance-conscious code with working forms and contact functionality — deployed and ready to go live.</span><span class="fa">کدنویسی واکنش‌گرا و سریع همراه با فرم‌ها و قابلیت تماس فعال — آماده برای استقرار و راه‌اندازی.</span></p>
       </article>
     </div>
     <div style="text-align:center;margin-top:48px;" class="anim">
@@ -375,29 +389,62 @@
   </div>
 </section>
 
+<!-- ═══════════════ PROCESS ═══════════════ -->
+<section class="process" aria-labelledby="process-heading">
+  <div class="container">
+    <header class="section-header anim">
+      <span class="label"><span class="en">How It Works</span><span class="fa">چطور کار می‌کنیم</span></span>
+      <h2 class="section-title" id="process-heading"><span class="en">How It Works</span><span class="fa">چطور کار می‌کنیم</span></h2>
+      <p class="section-sub"><span class="en">From strategy to launch, every project follows a clear process.</span><span class="fa">از استراتژی تا راه‌اندازی، هر پروژه یک فرآیند مشخص را دنبال می‌کند.</span></p>
+    </header>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="process-num"><span class="en">01</span><span class="fa">۰۱</span></div>
+        <h3 class="process-title"><span class="en">Strategy</span><span class="fa">استراتژی</span></h3>
+        <p class="process-desc"><span class="en">Define goals, pages, content structure, and conversion path.</span><span class="fa">اهداف، صفحات، ساختار محتوا و مسیر تبدیل را مشخص می‌کنیم.</span></p>
+      </div>
+      <div class="process-step">
+        <div class="process-num"><span class="en">02</span><span class="fa">۰۲</span></div>
+        <h3 class="process-title"><span class="en">Design</span><span class="fa">طراحی</span></h3>
+        <p class="process-desc"><span class="en">Create the visual system and responsive page layouts.</span><span class="fa">سیستم بصری و چیدمان ریسپانسیو صفحات را طراحی می‌کنیم.</span></p>
+      </div>
+      <div class="process-step">
+        <div class="process-num"><span class="en">03</span><span class="fa">۰۳</span></div>
+        <h3 class="process-title"><span class="en">Development</span><span class="fa">توسعه</span></h3>
+        <p class="process-desc"><span class="en">Turn the approved design into a fast, responsive website.</span><span class="fa">طرح تأییدشده را به یک وب‌سایت سریع و ریسپانسیو تبدیل می‌کنیم.</span></p>
+      </div>
+      <div class="process-step">
+        <div class="process-num"><span class="en">04</span><span class="fa">۰۴</span></div>
+        <h3 class="process-title"><span class="en">Launch</span><span class="fa">راه‌اندازی</span></h3>
+        <p class="process-desc"><span class="en">Test, optimize, and prepare the website for production.</span><span class="fa">سایت را تست، بهینه و برای انتشار آماده می‌کنیم.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════ WHY PIXFLOW ═══════════════ -->
 <section class="why" aria-labelledby="why-heading">
   <div class="container">
     <header class="section-header">
       <span class="label"><span class="en">Why Pixflow</span><span class="fa">چرا پیکسفلو</span></span>
-      <h2 class="section-title" id="why-heading"><span class="en">Clarity, trust, and results</span><span class="fa">وضوح، اعتماد و نتیجه</span></h2>
-      <p class="section-sub"><span class="en">We focus on what matters — helping businesses communicate clearly and convert confidently.</span><span class="fa">ما بر آنچه اهمیت دارد تمرکز می‌کنیم — کمک به کسب‌وکارها برای ارتباط واضح و تبدیل با اطمینان.</span></p>
+      <h2 class="section-title" id="why-heading"><span class="en">How we work</span><span class="fa">چطور کار می‌کنیم</span></h2>
+      <p class="section-sub"><span class="en">A clear process, from first conversation to launch.</span><span class="fa">یک فرآیند شفاف، از اولین گفتگو تا راه‌اندازی.</span></p>
     </header>
     <div class="why-grid">
       <div class="why-card">
         <span class="why-icon">◈</span>
-        <h3 class="why-title"><span class="en">Minimal &amp; Modern Design</span><span class="fa">طراحی مینیمال و مدرن</span></h3>
-        <p class="why-desc"><span class="en">Clean interfaces that load fast, look sharp, and communicate professionalism from the first second.</span><span class="fa">رابط‌های کاربری تمیز که سریع بارگذاری می‌شوند و از همان ثانیه اول حرفه‌ای بودن را نشان می‌دهند.</span></p>
+        <h3 class="why-title"><span class="en">Clear from the Start</span><span class="fa">وضوح از همان ابتدا</span></h3>
+        <p class="why-desc"><span class="en">We define the pages, goals, content structure, and next steps before development begins.</span><span class="fa">قبل از شروع توسعه، صفحات، اهداف، ساختار محتوا و مراحل بعدی را مشخص می‌کنیم.</span></p>
       </div>
       <div class="why-card">
         <span class="why-icon">◎</span>
-        <h3 class="why-title"><span class="en">Clear Communication</span><span class="fa">ارتباط واضح</span></h3>
-        <p class="why-desc"><span class="en">Every word and layout choice is made to help your audience understand your value quickly and clearly.</span><span class="fa">هر کلمه و چیدمانی برای این انتخاب شده که مخاطبان شما ارزش‌تان را سریع و واضح درک کنند.</span></p>
+        <h3 class="why-title"><span class="en">Built for Real Visitors</span><span class="fa">ساخته‌شده برای بازدیدکننده واقعی</span></h3>
+        <p class="why-desc"><span class="en">Every page is structured around clarity, usability, mobile experience, and a clear path to contact.</span><span class="fa">هر صفحه با تمرکز بر وضوح، تجربه کاربری، موبایل و مسیر مشخص برای تماس ساخته می‌شود.</span></p>
       </div>
       <div class="why-card">
         <span class="why-icon">◉</span>
-        <h3 class="why-title"><span class="en">Built to Convert</span><span class="fa">طراحی برای تبدیل</span></h3>
-        <p class="why-desc"><span class="en">Strong focus on trust signals and calls to action that guide visitors toward becoming clients.</span><span class="fa">تمرکز قوی بر نشانه‌های اعتماد و دعوت به اقدام که بازدیدکنندگان را به مشتری تبدیل می‌کند.</span></p>
+        <h3 class="why-title"><span class="en">Ready to Launch</span><span class="fa">آماده راه‌اندازی</span></h3>
+        <p class="why-desc"><span class="en">We build with performance, responsiveness, accessibility, and a clean handoff in mind.</span><span class="fa">سایت با در نظر گرفتن سرعت، ریسپانسیو بودن، دسترسی‌پذیری و تحویل منظم ساخته می‌شود.</span></p>
       </div>
     </div>
   </div>
