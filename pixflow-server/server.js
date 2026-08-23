@@ -64,7 +64,7 @@ app.use(express.static(PUBLIC_DIR, { extensions: ['html'] }));
 
 // admin.html must never be indexed by search engines
 app.get('/robots.txt', (req, res) => {
-  res.type('text/plain').send('User-agent: *\nDisallow: /admin.html\n');
+  res.type('text/plain').send('User-agent: *\nDisallow: /admin.html\nDisallow: /api/\nSitemap: https://pixflow.one/sitemap.xml\n');
 });
 
 // Lightweight endpoint for uptime monitors (UptimeRobot, cron-job.org, etc.)
