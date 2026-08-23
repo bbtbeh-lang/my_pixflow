@@ -174,6 +174,12 @@
     html[lang="fa"] .process-title { font-family: var(--font-fa); font-weight: 700; }
     .process-desc { font-size: 0.85rem; color: var(--ink-mid); font-weight: 300; line-height: 1.6; }
 
+    /* ── Trust Signal ────────────────────────────────────────── */
+    .trust-signal { background: var(--white); padding: 48px 0; text-align: center; }
+    .trust-signal-inner { max-width: 620px; margin: 0 auto; }
+    .trust-signal-heading { font-family: var(--font-serif); font-size: 1.3rem; color: var(--ink); margin: 10px 0 10px; }
+    .trust-signal-desc { font-size: 0.9rem; color: var(--ink-mid); font-weight: 300; line-height: 1.7; }
+
     /* ── Why ─────────────────────────────────────────────────── */
     .why { background: var(--cream); position: relative; z-index: 1; }
     .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
@@ -187,6 +193,14 @@
     .testimonial-company { font-size: 0.78rem; color: var(--ink-low); font-weight: 400; }
     .why-title { font-family: var(--font-serif); font-size: 1.2rem; color: var(--ink); margin-bottom: 12px; }
     .why-desc { font-size: 0.9rem; color: var(--ink-mid); font-weight: 400; line-height: 1.7; }
+
+    /* ── Pricing Teaser ──────────────────────────────────────── */
+    .pricing-teaser { background: var(--cream); border-block: 1px solid var(--line); padding: 40px 0; }
+    .pricing-teaser-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .pricing-teaser-price { font-family: var(--font-serif); font-size: 1.5rem; color: var(--ink); margin: 6px 0 4px; }
+    .pricing-teaser-sub { font-size: 0.85rem; color: var(--ink-mid); font-weight: 300; }
+    .pricing-teaser-link { flex-shrink: 0; font-size: 0.9rem; font-weight: 600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+    .pricing-teaser-link:hover, .pricing-teaser-link:focus-visible { color: var(--ink); }
 
     /* ── Final CTA ───────────────────────────────────────────── */
     .final-cta { background: var(--white); text-align: center; padding: 120px 0; position: relative; overflow: hidden; }
@@ -230,6 +244,8 @@
       .process-grid { grid-template-columns: 1fr; gap: 0; }
       .process-step { border-inline-start: none; padding-inline-start: 0; border-block-start: 1px solid var(--line); padding-block-start: 20px; margin-block-start: 20px; }
       .process-step:first-child { border-block-start: none; padding-block-start: 0; margin-block-start: 0; }
+      .pricing-teaser { padding: 32px 0; }
+      .pricing-teaser-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
       .footer-inner { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
@@ -422,6 +438,15 @@
   </div>
 </section>
 
+<!-- ═══════════════ TRUST SIGNAL ═══════════════ -->
+<section class="trust-signal" aria-labelledby="trust-signal-heading">
+  <div class="container trust-signal-inner">
+    <span class="label"><span class="en">Capability</span><span class="fa">توانمندی</span></span>
+    <h2 class="trust-signal-heading" id="trust-signal-heading"><span class="en">Built with a system, not guesswork.</span><span class="fa">ساخته‌شده با سیستم، نه حدس و آزمون.</span></h2>
+    <p class="trust-signal-desc"><span class="en">Every website follows a clear process built around strategy, usability, performance, and conversion.</span><span class="fa">هر وب‌سایت بر اساس فرآیندی شفاف و با تمرکز بر استراتژی، تجربه کاربری، عملکرد و تبدیل ساخته می‌شود.</span></p>
+  </div>
+</section>
+
 <!-- ═══════════════ WHY PIXFLOW ═══════════════ -->
 <section class="why" aria-labelledby="why-heading">
   <div class="container">
@@ -458,6 +483,18 @@
       <h2 class="section-title" id="testimonials-heading"><span class="en">Trusted by businesses like yours</span><span class="fa">مورد اعتماد کسب‌وکارهایی مثل شما</span></h2>
     </div>
     <div class="why-grid" id="testimonials-grid"></div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRICING TEASER ═══════════════ -->
+<section class="pricing-teaser" aria-labelledby="pricing-teaser-heading">
+  <div class="container pricing-teaser-inner">
+    <div class="pricing-teaser-text">
+      <span class="label"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></span>
+      <h2 class="pricing-teaser-price" id="pricing-teaser-heading"><span class="en">Starting from $649 CAD</span><span class="fa">شروع از ۶۴۹ دلار کانادا</span></h2>
+      <p class="pricing-teaser-sub"><span class="en">Early client pricing — limited time.</span><span class="fa">قیمت ویژه‌ی مشتریان اولیه — برای مدت محدود.</span></p>
+    </div>
+    <a href="/pricing" class="pricing-teaser-link"><span class="en">See Full Pricing →</span><span class="fa">مشاهده قیمت کامل ←</span></a>
   </div>
 </section>
 
