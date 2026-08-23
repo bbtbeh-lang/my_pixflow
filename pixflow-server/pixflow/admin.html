@@ -882,13 +882,7 @@ const SEED={
     {id:'t3',name:'Tom Bryce',company:'Harvest',rating:'4',quote:'Great process and a site that converts.',status:'published'},
     {id:'t4',name:'Nadia Rezaei',company:'Grove Health',rating:'5',quote:'Professional, clear, and on time.',status:'pending'}
   ],
-  activity:[
-    {color:'#2e7d52',text:'<strong>New message</strong> received from Sarah K.',time:'2 hours ago'},
-    {color:'#4B3AA6',text:'<strong>Portfolio item</strong> edited — Vantage Studio.',time:'5 hours ago'},
-    {color:'#1d4ed8',text:'<strong>Testimonial</strong> from Nadia R. awaiting approval.',time:'Yesterday'},
-    {color:'#2e7d52',text:'<strong>Project</strong> Apex Brand updated to Review.',time:'2 days ago'},
-    {color:'#4B3AA6',text:'<strong>Service</strong> description updated.',time:'3 days ago'}
-  ]
+  activity:[]
 };
 ['pages','testimonials','activity'].forEach(k=>S.init(k,SEED[k]));
 
@@ -1063,6 +1057,7 @@ const Dash={
   },
   activity(){
     const acts=S.get('activity')||[];
+    if(!acts.length){G('d-activity').innerHTML='<p style="color:var(--low);font-size:0.85rem;">No recent activity yet.</p>';return}
     G('d-activity').innerHTML=acts.map(a=>`<div class="ai"><div class="adot" style="background:${a.color}"></div><div><div class="at">${a.text}</div><div class="atm">${a.time}</div></div></div>`).join('');
   },
   msgsTbl(){
