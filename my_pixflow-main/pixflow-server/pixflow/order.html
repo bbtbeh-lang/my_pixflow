@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Order your project with Pixflow — tell us about your business and get a clear plan back." />
+  <title>Order a Project — Pixflow</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://pixflow.one/order" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pixflow.one/order" />
+  <meta property="og:title" content="Order a Project — Pixflow" />
+  <meta property="og:description" content="Order your project with Pixflow — tell us about your business and get a clear plan back." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Order a Project — Pixflow" />
+  <meta name="twitter:description" content="Order your project with Pixflow — tell us about your business and get a clear plan back." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F0F3F8; --white: #FFFFFF; --ink: #111010;
+      --ink-mid: #2e2b28; --ink-low: #4a4540; --accent: #4B3AA6;
+      --accent-lt: #8D7FE0; --line: rgba(20,30,60,0.08);
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --font-fa: 'Vazirmatn', system-ui, sans-serif;
+      --max: 1160px; --r: 3px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    html[lang="fa"] body { font-family: var(--font-fa); direction: rtl; }
+    html[lang="fa"] .page-hero-headline,
+    html[lang="fa"] .section-title,
+    html[lang="fa"] .form-header h2,
+    html[lang="fa"] .aside-card h3 { font-family: var(--font-fa); font-weight: 700; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .en { display: inherit; } .fa { display: none; }
+    html[lang="fa"] .en { display: none; } html[lang="fa"] .fa { display: inherit; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--r); padding: 14px 28px; cursor: pointer; transition: all 0.22s ease; border: 1.5px solid transparent; }
+    html[lang="fa"] .btn { letter-spacing: 0; }
+    .btn-primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .btn-accent { background: var(--accent); color: var(--white); border-color: var(--accent); width: 100%; font-size: 0.9rem; padding: 16px; }
+    .btn-accent:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+    .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+    html[lang="fa"] .label { letter-spacing: 0; font-size: 0.8rem; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { opacity: 0; } .anim.visible { animation: fadeUp 0.6s ease forwards; }
+
+    /* ── Header (identical to the rest of the site) ─────────── */
+    header { position: sticky; top: 0; z-index: 200; background: rgba(253,252,250,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; }
+    .logo-text { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+    .logo-text .pix { color: var(--ink); } .logo-text .flow { color: var(--accent); }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    nav a { font-size: 0.875rem; color: var(--ink-mid); transition: color 0.2s; }
+    nav a:hover { color: var(--ink); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a.active { color: var(--accent); font-weight: 500; }
+    .lang-toggle { display: flex; align-items: center; background: var(--cream); border: 1px solid var(--line); border-radius: 20px; padding: 3px; gap: 2px; }
+    .lang-btn { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500; padding: 5px 12px; border-radius: 16px; border: none; background: transparent; color: var(--ink-mid); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: var(--ink); color: var(--white); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+    .mobile-menu { display: none; flex-direction: column; background: var(--white); border-bottom: 1px solid var(--line); max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+    .mobile-menu.open { max-height: 460px; padding: 16px 0 24px; }
+    .mobile-menu a { padding: 12px 24px; font-size: 1rem; color: var(--ink-mid); border-bottom: 1px solid var(--line); display: block; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .btn { margin: 16px 24px 0; }
+    .mobile-lang { display: none; padding: 12px 24px; border-bottom: 1px solid var(--line); }
+
+    section { padding: 96px 0; position: relative; z-index: 1; }
+
+    /* ── Page Hero ────────────────────────────────────── */
+    .page-hero { background: var(--cream); border-bottom: 1px solid var(--line); padding: 72px 0; overflow: hidden; position: relative; z-index: 1; }
+    .page-hero::before { content: ''; position: absolute; top: -60px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(75,58,166,0.10) 0%, transparent 70%); pointer-events: none; }
+    html[lang="fa"] .page-hero::before { right: auto; left: -80px; }
+    .page-hero-inner { max-width: 640px; position: relative; z-index: 1; }
+    .page-hero .label { display: block; margin-bottom: 16px; }
+    .page-hero-headline { font-family: var(--font-serif); font-size: clamp(2.2rem, 4.5vw, 3.2rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px; }
+    .page-hero-headline em { font-style: italic; color: var(--accent); }
+    html[lang="fa"] .page-hero-headline em { font-style: normal; }
+    .page-hero-sub { font-size: 1.05rem; color: var(--ink-mid); font-weight: 300; line-height: 1.75; max-width: 480px; }
+
+    /* ── Order Main ───────────────────────────────────── */
+    .order-main { background: var(--white); padding: 96px 0; }
+    .order-inner { display: grid; grid-template-columns: 3fr 2fr; gap: 64px; align-items: start; }
+
+    .form-header { margin-bottom: 32px; }
+    .form-header .label { display: block; margin-bottom: 12px; }
+    .form-header h2 { font-family: var(--font-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; }
+    .form-header p { font-size: 0.95rem; color: var(--ink-mid); font-weight: 300; line-height: 1.7; }
+
+    fieldset { border: none; padding: 0; margin: 0; }
+    .order-form { display: flex; flex-direction: column; gap: 28px; }
+    .form-block { display: flex; flex-direction: column; gap: 16px; padding-top: 24px; border-top: 1px solid var(--line); }
+    .form-block:first-child { padding-top: 0; border-top: none; }
+    .form-block-title { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+    html[lang="fa"] .form-block-title { letter-spacing: 0; font-size: 0.88rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--ink); letter-spacing: 0.04em; text-transform: uppercase; }
+    html[lang="fa"] .form-group label { letter-spacing: 0; font-size: 0.85rem; }
+    .required { color: var(--accent); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      font-family: inherit; font-size: 0.95rem; color: var(--ink);
+      background: var(--cream); border: 1.5px solid var(--line);
+      border-radius: var(--r); padding: 14px 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none; width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(75,58,166,0.12);
+      background: var(--white);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--ink-low); font-weight: 300; }
+    .form-group textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234a4540' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+    html[lang="fa"] .form-group select { background-position: left 16px center; padding-right: 16px; padding-left: 40px; }
+
+    /* Package cards */
+    .package-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .package-card { position: relative; display: block; border: 1.5px solid var(--line); border-radius: var(--r); padding: 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s; background: var(--cream); }
+    .package-card:hover { border-color: var(--accent-lt); }
+    .package-card input { position: absolute; top: 14px; inset-inline-end: 14px; accent-color: var(--accent); }
+    .package-card-name { font-weight: 700; color: var(--ink); font-size: 0.95rem; display: block; margin-bottom: 4px; }
+    .package-card-desc { font-size: 0.78rem; color: var(--ink-low); font-weight: 300; line-height: 1.5; display: block; }
+    .package-card:has(input:checked) { border-color: var(--accent); background: var(--white); box-shadow: 0 0 0 3px rgba(75,58,166,0.1); }
+
+    /* Checkbox / radio grids */
+    .check-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .check-item, .radio-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.85rem; color: var(--ink-mid); font-weight: 400;
+      background: var(--cream); border: 1.5px solid var(--line); border-radius: var(--r);
+      padding: 12px 14px; cursor: pointer; transition: border-color 0.2s;
+    }
+    .check-item:hover, .radio-item:hover { border-color: var(--accent-lt); }
+    .check-item input, .radio-item input { accent-color: var(--accent); }
+    .radio-stack { display: flex; flex-direction: column; gap: 8px; }
+    .radio-item strong { color: var(--ink); font-weight: 500; }
+
+    .form-note { font-size: 0.8rem; color: var(--ink-low); line-height: 1.6; }
+
+    /* Success state */
+    .form-success { display: none; text-align: center; padding: 48px 32px; background: var(--cream); border: 1px solid var(--line); border-radius: 6px; }
+    .form-success .success-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+    .form-success h3 { font-family: var(--font-serif); font-size: 1.5rem; color: var(--ink); margin-bottom: 10px; }
+    html[lang="fa"] .form-success h3 { font-family: var(--font-fa); font-weight: 700; }
+    .form-success p { font-size: 0.95rem; color: var(--ink-mid); font-weight: 300; }
+    .form-error { display: none; color: #b3413c; font-size: 0.85rem; }
+
+    /* Aside — live order summary */
+    .order-aside { position: sticky; top: 88px; }
+    .aside-card { background: var(--ink); color: rgba(240,243,248,0.9); border-radius: 6px; padding: 28px; }
+    .aside-card h3 { font-family: var(--font-serif); font-size: 1.1rem; color: var(--white); margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .summary-row { display: flex; justify-content: space-between; gap: 12px; font-size: 0.85rem; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .summary-row dt { color: rgba(240,243,248,0.55); }
+    .summary-row dd { color: var(--accent-lt); font-weight: 500; text-align: right; }
+    html[lang="fa"] .summary-row dd { text-align: left; }
+    .summary-features-title { font-size: 0.75rem; color: rgba(240,243,248,0.55); margin: 16px 0 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+    html[lang="fa"] .summary-features-title { letter-spacing: 0; }
+    .summary-features-list { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .summary-features-list li { font-size: 0.72rem; background: rgba(255,255,255,0.08); padding: 4px 10px; border-radius: 20px; }
+    .summary-features-empty { color: rgba(240,243,248,0.4); background: transparent !important; padding: 0 !important; }
+    .aside-note { font-size: 0.75rem; color: rgba(240,243,248,0.5); line-height: 1.6; }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer { background: var(--ink); color: rgba(240,243,248,0.55); border-top: 1px solid rgba(255,255,255,0.06); padding: 56px 0 36px; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 0.875rem; line-height: 1.7; font-weight: 300; max-width: 280px; margin-top: 16px; }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+    html[lang="fa"] .footer-col h4 { letter-spacing: 0; font-size: 0.85rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.875rem; color: rgba(240,243,248,0.5); transition: color 0.2s; font-weight: 300; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; }
+    .footer-bottom a:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; } .mobile-menu { display: flex; } .mobile-lang { display: block; }
+      .order-inner { grid-template-columns: 1fr; gap: 48px; }
+      .order-aside { position: static; }
+      .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; }
+      .package-cards { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 64px 0; } .page-hero { padding: 56px 0; }
+      .form-row, .check-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+<script src="/assets/apply-branding.js" defer></script>
+<script src="/assets/whatsapp-button.js" defer></script>
+<script src="/assets/chat-widget.js" defer></script>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Pixflow home">
+        <svg height="38" width="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text"><span class="pix">Pix</span><span class="flow">flow</span></span>
+      </a>
+      <nav><ul class="nav-links">
+        <li><a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a></li>
+        <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
+        <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
+        <li><a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a></li>
+        <li><a href="/order" class="active"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
+      </ul></nav>
+      <div class="header-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" onclick="setLang('fa')">فا</button>
+        </div>
+        <a href="/order" class="btn btn-primary nav-cta"><span class="en">Order a Project</span><span class="fa">ثبت سفارش</span></a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-lang"><div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fa')">فا</button>
+    </div></div>
+    <a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a>
+    <a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a>
+    <a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a>
+    <a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a>
+    <a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a>
+    <a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a>
+    <a href="/order" class="btn btn-primary"><span class="en">Order a Project</span><span class="fa">ثبت سفارش</span></a>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="page-hero" aria-labelledby="order-heading">
+  <div class="container">
+    <div class="page-hero-inner">
+      <span class="label anim"><span class="en">Start Your Project</span><span class="fa">شروع پروژه شما</span></span>
+      <h1 class="page-hero-headline anim" id="order-heading">
+        <span class="en">Tell us your business.<br>We'll build the <em>plan.</em></span>
+        <span class="fa">کسب‌وکارتان را بگویید.<br>ما <em>برنامه</em> را می‌سازیم.</span>
+      </h1>
+      <p class="page-hero-sub anim">
+        <span class="en">Fill in the details below and our team will review your request, validate it against your chosen package, and follow up with next steps within one business day.</span>
+        <span class="fa">جزئیات زیر را پر کنید؛ تیم ما درخواست شما را بررسی می‌کند، با پکیج انتخابی تطبیق می‌دهد و ظرف یک روز کاری با مراحل بعدی پاسخ می‌دهد.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ORDER MAIN ═══ -->
+<section class="order-main" aria-label="Order form">
+  <div class="container">
+    <div class="order-inner">
+
+      <!-- FORM -->
+      <div>
+        <div class="form-header anim">
+          <span class="label"><span class="en">Project Order</span><span class="fa">سفارش پروژه</span></span>
+          <h2><span class="en">Tell us about your business</span><span class="fa">درباره کسب‌وکار خود بگویید</span></h2>
+          <p><span class="en">The more accurate this is, the more accurate your plan will be.</span><span class="fa">هرچه دقیق‌تر پر کنید، برنامه‌ی ارائه‌شده دقیق‌تر خواهد بود.</span></p>
+        </div>
+
+        <form class="order-form anim" id="order-form" novalidate>
+
+          <!-- Contact person -->
+          <div class="form-block">
+            <span class="form-block-title"><span class="en">Your Contact Info</span><span class="fa">اطلاعات تماس شما</span></span>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contactName"><span class="en">Full Name</span><span class="fa">نام کامل</span> <span class="required">*</span></label>
+                <input type="text" id="contactName" name="contactName" autocomplete="name" required />
+              </div>
+              <div class="form-group">
+                <label for="contactEmail"><span class="en">Email Address</span><span class="fa">آدرس ایمیل</span> <span class="required">*</span></label>
+                <input type="email" id="contactEmail" name="contactEmail" autocomplete="email" placeholder="you@example.com" required />
+              </div>
+            </div>
+          </div>
+
+          <!-- Business info -->
+          <div class="form-block">
+            <span class="form-block-title"><span class="en">Business Information</span><span class="fa">اطلاعات کسب‌وکار</span></span>
+            <div class="form-group">
+              <label for="businessName"><span class="en">Business Name</span><span class="fa">نام کسب‌وکار</span> <span class="required">*</span></label>
+              <input type="text" id="businessName" name="businessName" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="industry"><span class="en">Industry / Niche</span><span class="fa">صنعت / حوزه فعالیت</span> <span class="required">*</span></label>
+                <input type="text" id="industry" name="industry" required />
+              </div>
+              <div class="form-group">
+                <label for="location"><span class="en">Service Area</span><span class="fa">منطقه خدمات‌رسانی</span> <span class="required">*</span></label>
+                <input type="text" id="location" name="location" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="goal"><span class="en">Primary Goal</span><span class="fa">هدف اصلی</span> <span class="required">*</span></label>
+              <select id="goal" name="goal" required>
+                <option value="" disabled selected>— <span class="en">Select</span><span class="fa">انتخاب کنید</span> —</option>
+                <option value="calls"><span class="en">More phone calls</span><span class="fa">تماس تلفنی بیشتر</span></option>
+                <option value="leads"><span class="en">Form leads</span><span class="fa">دریافت فرم لید</span></option>
+                <option value="sales"><span class="en">Online sales</span><span class="fa">فروش آنلاین</span></option>
+                <option value="bookings"><span class="en">Bookings</span><span class="fa">رزرو / نوبت‌دهی</span></option>
+                <option value="other"><span class="en">Other</span><span class="fa">سایر</span></option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Package -->
+          <div class="form-block">
+            <span class="form-block-title"><span class="en">Package</span><span class="fa">پکیج</span> <span class="required">*</span></span>
+            <div class="package-cards">
+              <label class="package-card">
+                <input type="radio" name="package" value="Basic" required>
+                <span class="package-card-name">Basic</span>
+                <span class="package-card-desc"><span class="en">Up to 3 pages, responsive, simple contact form.</span><span class="fa">تا ۳ صفحه، ریسپانسیو، فرم تماس ساده.</span></span>
+              </label>
+              <label class="package-card">
+                <input type="radio" name="package" value="Professional">
+                <span class="package-card-name">Professional</span>
+                <span class="package-card-desc"><span class="en">5–6 pages, advanced UI, content admin.</span><span class="fa">۵-۶ صفحه، UI پیشرفته، مدیریت محتوا.</span></span>
+              </label>
+              <label class="package-card">
+                <input type="radio" name="package" value="Growth">
+                <span class="package-card-name">Growth</span>
+                <span class="package-card-desc"><span class="en">10+ pages, booking/store, advanced admin.</span><span class="fa">۱۰+ صفحه، رزرو/فروشگاه، ادمین پیشرفته.</span></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Features -->
+          <div class="form-block">
+            <span class="form-block-title"><span class="en">Requested Features</span><span class="fa">امکانات مورد نیاز</span></span>
+            <div class="check-grid" id="featureChecks">
+              <label class="check-item"><input type="checkbox" name="features" value="Gallery"><span class="en">Gallery</span><span class="fa">گالری تصاویر</span></label>
+              <label class="check-item"><input type="checkbox" name="features" value="Contact Form"><span class="en">Contact Form</span><span class="fa">فرم تماس</span></label>
+              <label class="check-item"><input type="checkbox" name="features" value="Booking System"><span class="en">Booking System</span><span class="fa">سیستم رزرو</span></label>
+              <label class="check-item"><input type="checkbox" name="features" value="Multilingual"><span class="en">Multilingual</span><span class="fa">چندزبانه</span></label>
+              <label class="check-item"><input type="checkbox" name="features" value="Payment Gateway"><span class="en">Payment Gateway</span><span class="fa">درگاه پرداخت</span></label>
+              <label class="check-item"><input type="checkbox" name="features" value="Online Store"><span class="en">Online Store</span><span class="fa">فروشگاه آنلاین</span></label>
+            </div>
+          </div>
+
+          <!-- Domain & Admin -->
+          <div class="form-block">
+            <span class="form-block-title"><span class="en">Domain & Admin</span><span class="fa">دامنه و سطح مدیریت</span></span>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="domainStatus"><span class="en">Domain Status</span><span class="fa">وضعیت دامنه</span></label>
+                <select id="domainStatus" name="domainStatus">
+                  <option value="existing"><span class="en">I have a domain</span><span class="fa">دامنه دارم</span></option>
+                  <option value="new"><span class="en">Need to buy one</span><span class="fa">نیاز به خرید دامنه دارم</span></option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="adminLevel"><span class="en">Admin Level</span><span class="fa">سطح ادمین</span></label>
+                <select id="adminLevel" name="adminLevel">
+                  <option value="0"><span class="en">Level 0 — Static</span><span class="fa">سطح ۰ — استاتیک</span></option>
+                  <option value="1" selected><span class="en">Level 1 — Basic edits</span><span class="fa">سطح ۱ — ویرایش پایه</span></option>
+                  <option value="2"><span class="en">Level 2 — Content panel</span><span class="fa">سطح ۲ — پنل محتوا</span></option>
+                  <option value="3"><span class="en">Level 3 — Full dashboard</span><span class="fa">سطح ۳ — داشبورد کامل</span></option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline -->
+          <div class="form-block">
+            <span class="form-block-title"><span class="en">Timeline & Notes</span><span class="fa">زمان‌بندی و توضیحات</span></span>
+            <div class="form-group">
+              <textarea id="timeline" name="timeline" placeholder=""></textarea>
+            </div>
+          </div>
+
+          <!-- Honeypot -->
+          <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="form-error" id="form-error"></div>
+
+          <div class="check-item" style="align-items:flex-start;">
+            <input type="checkbox" id="privacyConsent" name="privacyConsent" required style="margin-top:3px;">
+            <label for="privacyConsent" style="cursor:pointer;">
+              <span class="en">I agree to the <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">Privacy Policy</a>. <span class="required">*</span></span>
+              <span class="fa">با <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;">سیاست حریم خصوصی</a> موافقم. <span class="required">*</span></span>
+            </label>
+          </div>
+
+          <div class="check-item" style="align-items:flex-start;">
+            <input type="checkbox" id="marketingConsent" name="marketingConsent" style="margin-top:3px;">
+            <label for="marketingConsent" style="cursor:pointer;">
+              <span class="en">I agree to receive occasional project/service emails from Pixflow (optional — you can unsubscribe anytime).</span>
+              <span class="fa">موافقم گاهی ایمیل دربارهٔ پروژه/خدمات از Pixflow دریافت کنم (اختیاری — هر زمان می‌توانید لغو کنید).</span>
+            </label>
+          </div>
+
+          <p class="form-note">
+            <span class="en">Submitting this form sends your info to our team to prepare a project plan. See our <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);">Privacy Policy</a> for how it's stored and your rights.</span>
+            <span class="fa">ارسال این فرم اطلاعات شما را برای تیم ما جهت آماده‌سازی برنامهٔ پروژه ارسال می‌کند. برای نحوهٔ ذخیره‌سازی و حقوق خود، <a href="/privacy" target="_blank" rel="noopener" style="color:var(--accent);">سیاست حریم خصوصی</a> را ببینید.</span>
+          </p>
+
+          <button type="submit" class="btn btn-accent">
+            <span class="en">Submit Order →</span>
+            <span class="fa">ارسال سفارش ←</span>
+          </button>
+        </form>
+
+        <div class="form-success" id="form-success">
+          <span class="success-icon">✦</span>
+          <h3><span class="en">Order received!</span><span class="fa">سفارش دریافت شد!</span></h3>
+          <p id="success-detail"><span class="en">Thank you. We'll review your request and get back to you within one business day.</span><span class="fa">ممنون. درخواست شما را بررسی کرده و ظرف یک روز کاری پاسخ می‌دهیم.</span></p>
+        </div>
+      </div>
+
+      <!-- ASIDE — live order summary -->
+      <aside class="order-aside" aria-label="Order summary">
+        <div class="aside-card">
+          <h3><span class="en">Order Summary</span><span class="fa">خلاصه سفارش</span></h3>
+          <dl>
+            <div class="summary-row"><dt><span class="en">Business</span><span class="fa">کسب‌وکار</span></dt><dd id="sumBusiness">—</dd></div>
+            <div class="summary-row"><dt><span class="en">Package</span><span class="fa">پکیج</span></dt><dd id="sumPackage"><span class="en">Not selected</span><span class="fa">انتخاب نشده</span></dd></div>
+            <div class="summary-row"><dt><span class="en">Admin</span><span class="fa">ادمین</span></dt><dd id="sumAdmin">Level 1</dd></div>
+            <div class="summary-row" style="border-bottom:none;margin-bottom:0;"><dt><span class="en">Domain</span><span class="fa">دامنه</span></dt><dd id="sumDomain"><span class="en">Have one</span><span class="fa">دارم</span></dd></div>
+          </dl>
+          <p class="summary-features-title"><span class="en">Features</span><span class="fa">امکانات</span></p>
+          <ul class="summary-features-list" id="sumFeatures">
+            <li class="summary-features-empty"><span class="en">None selected yet</span><span class="fa">هنوز چیزی انتخاب نشده</span></li>
+          </ul>
+          <p class="aside-note"><span class="en">This is just for your review. Final pricing follows package validation by the Pixflow team.</span><span class="fa">این فقط برای مرور شماست. قیمت نهایی پس از بررسی پکیج توسط تیم Pixflow اعلام می‌شود.</span></p>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo"><svg height="36" width="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="logo-text"><span class="pix" style="color:white;">Pix</span><span class="flow" style="color:#4B3AA6;">flow</span></span></a>
+        <p>Fast, professional websites for small businesses that want a stronger online presence and more customer inquiries.</p>
+      </div>
+      <div class="footer-col"><h4><span class="en">Pages</span><span class="fa">صفحات</span></h4><ul>
+        <li><a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a></li>
+        <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
+        <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
+        <li><a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a></li>
+        <li><a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
+      </ul></div>
+      <div class="footer-col"><h4><span class="en">Services</span><span class="fa">خدمات</span></h4><ul>
+        <li><a href="/services"><span class="en">Web Design</span><span class="fa">طراحی وب</span></a></li>
+        <li><a href="/services"><span class="en">Brand Presentation</span><span class="fa">ارائه برند</span></a></li>
+        <li><a href="/services"><span class="en">Lead Generation</span><span class="fa">جذب مشتری</span></a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p><span class="en">© <span id="cy-en">2025</span> Pixflow. All rights reserved.</span><span class="fa">© <span id="cy-fa">۱۴۰۴</span> پیکسفلو. تمامی حقوق محفوظ است.</span></p>
+      <a href="/privacy">Privacy</a> &middot; <a href="mailto:hello@pixflow.one">hello@pixflow.one</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    const now = new Date();
+    const enEl = document.getElementById('cy-en');
+    if (enEl) enEl.textContent = now.getFullYear();
+    const faEl = document.getElementById('cy-fa');
+    if (faEl) { try { faEl.textContent = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(now); } catch (e) {} }
+  })();
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    localStorage.setItem('pixflow-lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', (lang==='en' && btn.textContent.trim()==='EN') || (lang==='fa' && btn.textContent.trim()==='فا'));
+    });
+  }
+  const saved = localStorage.getItem('pixflow-lang');
+  if (saved === 'fa') setLang('fa');
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    const o = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', o);
+  });
+
+  /* ── Live order summary ──────────────────────── */
+  const form = document.getElementById('order-form');
+  const ADMIN_LABELS = { '0': 'Level 0', '1': 'Level 1', '2': 'Level 2', '3': 'Level 3' };
+  const ADMIN_LABELS_FA = { '0': 'سطح ۰', '1': 'سطح ۱', '2': 'سطح ۲', '3': 'سطح ۳' };
+
+  function updateSummary() {
+    const isFa = document.documentElement.lang === 'fa';
+    const business = form.businessName.value.trim();
+    const pkg = form.querySelector('input[name="package"]:checked');
+    const admin = form.adminLevel.value;
+    const domain = form.domainStatus.value;
+    const features = Array.from(form.querySelectorAll('input[name="features"]:checked'));
+
+    document.getElementById('sumBusiness').textContent = business || '—';
+    document.getElementById('sumPackage').textContent = pkg ? pkg.value : (isFa ? 'انتخاب نشده' : 'Not selected');
+    document.getElementById('sumAdmin').textContent = isFa ? ADMIN_LABELS_FA[admin] : ADMIN_LABELS[admin];
+    document.getElementById('sumDomain').textContent = domain === 'existing'
+      ? (isFa ? 'دارم' : 'Have one')
+      : (isFa ? 'نیاز به خرید' : 'Need to buy');
+
+    const list = document.getElementById('sumFeatures');
+    list.innerHTML = '';
+    if (features.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'summary-features-empty';
+      li.textContent = isFa ? 'هنوز چیزی انتخاب نشده' : 'None selected yet';
+      list.appendChild(li);
+    } else {
+      features.forEach(f => {
+        const li = document.createElement('li');
+        li.textContent = f.value;
+        list.appendChild(li);
+      });
+    }
+  }
+  form.addEventListener('input', updateSummary);
+  form.addEventListener('change', updateSummary);
+  updateSummary();
+
+  /* ── Submit — reuses the existing /api/messages endpoint,          ── */
+  /* ── so orders land in the same admin inbox as contact messages,   ── */
+  /* ── formatted as a structured order summary in the message body.  ── */
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const errBox = document.getElementById('form-error');
+    const submitBtn = form.querySelector('button[type="submit"]');
+    errBox.style.display = 'none';
+
+    const pkgEl = form.querySelector('input[name="package"]:checked');
+    if (!pkgEl) {
+      errBox.textContent = document.documentElement.lang === 'fa' ? 'لطفاً یک پکیج انتخاب کنید.' : 'Please select a package.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    if (!form.privacyConsent.checked) {
+      errBox.textContent = document.documentElement.lang === 'fa' ? 'برای ارسال، باید با سیاست حریم خصوصی موافقت کنید.' : 'You must agree to the Privacy Policy to submit.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    const features = Array.from(form.querySelectorAll('input[name="features"]:checked')).map(f => f.value).join(', ') || '—';
+    const intakeId = 'PF-' + Date.now().toString(36).toUpperCase();
+
+    const messageBody =
+`New project order [${intakeId}]
+
+Business Name: ${form.businessName.value.trim()}
+Industry: ${form.industry.value.trim()}
+Service Area: ${form.location.value.trim()}
+Primary Goal: ${form.goal.value}
+Package: ${pkgEl.value}
+Features: ${features}
+Domain Status: ${form.domainStatus.value === 'existing' ? 'Has a domain' : 'Needs to buy a domain'}
+Admin Level: ${form.adminLevel.value}
+Timeline / Notes: ${form.timeline.value.trim() || '—'}
+
+--- CASL / Privacy consent record ---
+Privacy Policy agreed: Yes (required, timestamped ${new Date().toISOString()})
+Marketing emails consent: ${form.marketingConsent.checked ? 'Yes (opted in)' : 'No (not opted in)'}`;
+
+    const payload = {
+      name: form.contactName.value.trim(),
+      email: form.contactEmail.value.trim(),
+      subject: `Project Order — ${form.businessName.value.trim() || 'Untitled'}`,
+      message: messageBody,
+      hp: form.website.value
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.6';
+
+    try {
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again.');
+
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } catch (err) {
+      errBox.textContent = err.message || 'Could not send your order. Please try again or email us directly.';
+      errBox.style.display = 'block';
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '';
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

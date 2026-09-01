@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pixflow pricing — transparent packages for professional web design, brand presentation, and lead generation." />
+  <title>Pricing — Pixflow</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://pixflow.one/pricing" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pixflow.one/pricing" />
+  <meta property="og:title" content="Pricing — Pixflow" />
+  <meta property="og:description" content="Pixflow pricing — transparent packages for professional web design, brand presentation, and lead generation." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Pricing — Pixflow" />
+  <meta name="twitter:description" content="Pixflow pricing — transparent packages for professional web design, brand presentation, and lead generation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F0F3F8; --white: #FFFFFF; --ink: #111010;
+      --ink-mid: #2e2b28; --ink-low: #4a4540; --accent: #4B3AA6;
+      --accent-lt: #8D7FE0; --line: rgba(20,30,60,0.08);
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --font-fa: 'Vazirmatn', system-ui, sans-serif;
+      --max: 1160px; --r: 3px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    html[lang="fa"] body { font-family: var(--font-fa); direction: rtl; }
+    html[lang="fa"] .page-hero-headline, html[lang="fa"] .section-title,
+    html[lang="fa"] .plan-name, html[lang="fa"] .faq-q { font-family: var(--font-fa); font-weight: 700; }
+    img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; }
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .en { display: inherit; } .fa { display: none; }
+    html[lang="fa"] .en { display: none; } html[lang="fa"] .fa { display: inherit; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-family: inherit; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--r); padding: 14px 28px; cursor: pointer; transition: all 0.22s ease; border: 1.5px solid transparent; }
+    html[lang="fa"] .btn { letter-spacing: 0; }
+    .btn-primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--white); }
+    .btn-accent { background: var(--accent); color: var(--white); border-color: var(--accent); width: 100%; }
+    .btn-accent:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+    html[lang="fa"] .label { letter-spacing: 0; font-size: 0.8rem; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { opacity: 0; } .anim.visible { animation: fadeUp 0.6s ease forwards; }
+    .anim:nth-child(2).visible { animation-delay: 0.1s; } .anim:nth-child(3).visible { animation-delay: 0.2s; }
+
+    header { position: sticky; top: 0; z-index: 200; background: rgba(253,252,250,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; }
+    .logo-text { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+    .logo-text .pix { color: var(--ink); } .logo-text .flow { color: var(--accent); }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    nav a { font-size: 0.875rem; color: var(--ink-mid); transition: color 0.2s; }
+    nav a:hover { color: var(--ink); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .lang-toggle { display: flex; align-items: center; background: var(--cream); border: 1px solid var(--line); border-radius: 20px; padding: 3px; gap: 2px; }
+    .lang-btn { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500; padding: 5px 12px; border-radius: 16px; border: none; background: transparent; color: var(--ink-mid); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: var(--ink); color: var(--white); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+    .mobile-menu { display: none; flex-direction: column; background: var(--white); border-bottom: 1px solid var(--line); max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+    .mobile-menu.open { max-height: 420px; padding: 16px 0 24px; }
+    .mobile-menu a { padding: 12px 24px; font-size: 1rem; color: var(--ink-mid); border-bottom: 1px solid var(--line); display: block; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .btn { margin: 16px 24px 0; }
+    .mobile-lang { display: none; padding: 12px 24px; border-bottom: 1px solid var(--line); }
+
+    section { padding: 96px 0; position: relative; z-index: 1; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); margin-bottom: 16px; }
+    .section-sub { font-size: 1rem; color: var(--ink-mid); font-weight: 300; max-width: 520px; line-height: 1.7; }
+
+    .page-hero { background: var(--cream); border-bottom: 1px solid var(--line); padding: 80px 0 72px; text-align: center; overflow: hidden; position: relative; z-index: 1; }
+    .page-hero::before { content: ''; position: absolute; top: -60px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(200,155,60,0.10) 0%, transparent 70%); pointer-events: none; }
+    .page-hero-headline { font-family: var(--font-serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px; }
+    .page-hero-headline em { font-style: italic; color: var(--accent); }
+    html[lang="fa"] .page-hero-headline em { font-style: normal; }
+    .page-hero-sub { font-size: 1.05rem; color: var(--ink-mid); font-weight: 300; line-height: 1.75; max-width: 540px; margin: 0 auto; }
+
+    .plans { background: var(--white); }
+    .plans-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; max-width: 1140px; margin: 0 auto; align-items: stretch; }
+    .plan-card { background: var(--white); border: 1.5px solid var(--line); border-radius: 8px; padding: 40px 32px; display: flex; flex-direction: column; transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s; }
+    .plan-card:hover { box-shadow: 0 16px 48px rgba(26,23,20,0.08); transform: translateY(-4px); }
+    .plan-card.featured { border-color: var(--accent); border-width: 2px; position: relative; }
+    .plan-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--white); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+    html[lang="fa"] .plan-badge { letter-spacing: 0; }
+    .plan-name { font-family: var(--font-serif); font-size: 1.5rem; color: var(--ink); margin-bottom: 8px; }
+    .plan-desc { font-size: 0.875rem; color: var(--ink-mid); font-weight: 300; line-height: 1.6; margin-bottom: 24px; min-height: 42px; }
+    .plan-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 4px; }
+    .plan-price .amount { font-family: var(--font-serif); font-size: 2.6rem; color: var(--ink); line-height: 1; }
+    .plan-price .currency { font-size: 1rem; color: var(--ink-mid); }
+    .plan-price-note { font-size: 0.78rem; color: var(--ink-low); margin-bottom: 28px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 13px; margin-bottom: 32px; flex: 1; }
+    .plan-features li { font-size: 0.875rem; color: var(--ink-mid); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+    .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .plans-note { text-align: center; max-width: 620px; margin: 40px auto 0; font-size: 0.85rem; color: var(--ink-low); line-height: 1.7; }
+
+    .early-client-badge { display: block; text-align: center; margin: 0 auto 32px; }
+    .early-client-badge span { display: inline-flex; align-items: center; gap: 8px; background: var(--cream); border: 1px solid var(--accent); color: var(--accent); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 18px; border-radius: 20px; }
+    html[lang="fa"] .early-client-badge span { letter-spacing: 0; font-size: 0.85rem; }
+    .early-client-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+    .addons { background: var(--cream); }
+    .addons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .addon-card { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 28px 24px; }
+    .addon-title { font-family: var(--font-serif); font-size: 1.05rem; color: var(--ink); margin-bottom: 8px; }
+    .addon-desc { font-size: 0.85rem; color: var(--ink-mid); font-weight: 300; line-height: 1.65; }
+
+    .faq { background: var(--white); }
+    .faq-inner { max-width: 760px; margin: 0 auto; }
+    .faq-list { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+    .faq-item { border-bottom: 1px solid var(--line); } .faq-item:last-child { border-bottom: none; }
+    .faq-q { width: 100%; background: var(--white); border: none; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; text-align: left; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 500; color: var(--ink); transition: background 0.2s; }
+    html[lang="fa"] .faq-q { text-align: right; font-family: var(--font-fa); font-weight: 600; }
+    .faq-q:hover { background: var(--cream); } .faq-q.open { background: var(--cream); }
+    .faq-arrow { font-size: 1rem; color: var(--accent); flex-shrink: 0; transition: transform 0.25s; }
+    .faq-q.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; background: var(--white); font-size: 0.875rem; color: var(--ink-mid); font-weight: 300; line-height: 1.75; padding: 0 24px; }
+    .faq-a.open { max-height: 200px; padding: 0 24px 20px; }
+
+    .final-cta { background: var(--ink); text-align: center; padding: 100px 0; position: relative; overflow: hidden; }
+    .final-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(200,155,60,0.08) 0%, transparent 60%); pointer-events: none; }
+    .final-cta .label { color: var(--accent-lt); display: block; margin-bottom: 16px; }
+    .final-cta .section-title { color: #fff; max-width: 560px; margin: 0 auto 16px; }
+    .final-cta .section-sub { color: rgba(240,243,248,0.8); margin: 0 auto 40px; font-weight: 400; }
+    .final-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .btn-white { background: var(--white); color: var(--ink); border-color: var(--white); }
+    .btn-white:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.3); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.6); }
+
+    footer { background: var(--ink); color: rgba(240,243,248,0.55); border-top: 1px solid rgba(255,255,255,0.06); padding: 56px 0 36px; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 0.875rem; line-height: 1.7; font-weight: 300; max-width: 280px; margin-top: 16px; }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+    html[lang="fa"] .footer-col h4 { letter-spacing: 0; font-size: 0.85rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.875rem; color: rgba(240,243,248,0.5); transition: color 0.2s; font-weight: 300; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; } .hamburger { display: flex; } .mobile-menu { display: flex; } .mobile-lang { display: block; }
+      .plans-grid { grid-template-columns: 1fr; max-width: 420px; }
+      .addons-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 64px 0; } .page-hero { padding: 56px 0; } .final-cta { padding: 72px 0; }
+      .footer-inner { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+<script src="/assets/apply-branding.js" defer></script>
+<script src="/assets/whatsapp-button.js" defer></script>
+<script src="/assets/chat-widget.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Pixflow home">
+        <svg height="38" width="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="logo-text"><span class="pix">Pix</span><span class="flow">flow</span></span>
+      </a>
+      <nav><ul class="nav-links">
+        <li><a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a></li>
+        <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
+        <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
+        <li><a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a></li>
+        <li><a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
+      </ul></nav>
+      <div class="header-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" onclick="setLang('fa')">فا</button>
+        </div>
+        <a href="/contact" class="btn btn-primary nav-cta"><span class="en">Get in Touch</span><span class="fa">تماس با ما</span></a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-lang"><div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fa')">فا</button>
+    </div></div>
+    <a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a>
+    <a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a>
+    <a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a>
+    <a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a>
+    <a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a>
+    <a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a>
+    <a href="/contact" class="btn btn-primary"><span class="en">Get in Touch</span><span class="fa">تماس با ما</span></a>
+  </div>
+</header>
+
+<section class="page-hero" aria-labelledby="pricing-heading">
+  <div class="container">
+    <span class="label anim" style="display:block;margin-bottom:16px;"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></span>
+    <h1 class="page-hero-headline anim" id="pricing-heading">
+      <span class="en">Simple pricing.<br>No <em>surprises.</em></span>
+      <span class="fa">قیمت‌گذاری ساده.<br>بدون <em>غافلگیری.</em></span>
+    </h1>
+    <p class="page-hero-sub anim"><span class="en">Three straightforward packages. Every project starts with a free consultation so you know exactly what you're getting before you commit.</span><span class="fa">سه پکیج ساده و شفاف. هر پروژه با یک مشاوره رایگان شروع می‌شود تا دقیقاً بدانید قبل از تعهد چه چیزی دریافت می‌کنید.</span></p>
+  </div>
+</section>
+
+<section class="plans">
+  <div class="container">
+    <div class="early-client-badge anim">
+      <span><span class="dot"></span><span class="en">Early Client Pricing — limited time</span><span class="fa">قیمت ویژه‌ی مشتریان اولیه — زمان محدود</span></span>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card anim">
+        <span class="plan-name"><span class="en">Basic</span><span class="fa">پایه</span></span>
+        <p class="plan-desc"><span class="en">A clean, professional launch for a new business.</span><span class="fa">یک شروع تمیز و حرفه‌ای برای کسب‌وکار جدید.</span></p>
+        <div class="plan-price"><span class="amount">649</span><span class="currency">CAD</span></div>
+        <p class="plan-price-note"><span class="en">One-time — starting price, final quote after a free consultation</span><span class="fa">یک‌بار — قیمت شروع، قیمت نهایی پس از مشاوره رایگان</span></p>
+        <ul class="plan-features">
+          <li><span class="en">Up to 5 responsive pages</span><span class="fa">تا ۵ صفحه واکنش‌گرا</span></li>
+          <li><span class="en">Mobile-first design</span><span class="fa">طراحی موبایل‌اول</span></li>
+          <li><span class="en">Basic on-page SEO</span><span class="fa">سئوی پایه صفحات</span></li>
+          <li><span class="en">Working contact form</span><span class="fa">فرم تماس فعال</span></li>
+          <li><span class="en">1 round of revisions</span><span class="fa">یک دور اصلاحات</span></li>
+        </ul>
+        <a href="/contact" class="btn btn-outline"><span class="en">Get Started</span><span class="fa">شروع کنید</span></a>
+      </div>
+
+      <div class="plan-card featured anim">
+        <span class="plan-badge"><span class="en">Most Popular</span><span class="fa">پرطرفدارترین</span></span>
+        <span class="plan-name"><span class="en">Professional</span><span class="fa">حرفه‌ای</span></span>
+        <p class="plan-desc"><span class="en">Everything in Basic, plus a self-managed admin panel.</span><span class="fa">همه چیز پکیج پایه، به‌علاوه پنل مدیریت مستقل.</span></p>
+        <div class="plan-price"><span class="amount">1,199</span><span class="currency">CAD</span></div>
+        <p class="plan-price-note"><span class="en">One-time — starting price, final quote after a free consultation</span><span class="fa">یک‌بار — قیمت شروع، قیمت نهایی پس از مشاوره رایگان</span></p>
+        <ul class="plan-features">
+          <li><span class="en">Everything in Basic</span><span class="fa">همه امکانات پکیج پایه</span></li>
+          <li><span class="en">Admin panel — edit content yourself</span><span class="fa">پنل ادمین — ویرایش محتوا توسط خودتان</span></li>
+          <li><span class="en">Portfolio / services / testimonials manager</span><span class="fa">مدیریت نمونه‌کار / خدمات / نظرات</span></li>
+          <li><span class="en">Lead inbox with status tracking</span><span class="fa">صندوق لید با پیگیری وضعیت</span></li>
+          <li><span class="en">CASL / PIPEDA compliant forms</span><span class="fa">فرم‌های منطبق با CASL / PIPEDA</span></li>
+          <li><span class="en">2 rounds of revisions</span><span class="fa">دو دور اصلاحات</span></li>
+        </ul>
+        <a href="/contact" class="btn btn-accent"><span class="en">Get Started</span><span class="fa">شروع کنید</span></a>
+      </div>
+
+      <div class="plan-card anim">
+        <span class="plan-name"><span class="en">Growth</span><span class="fa">رشد</span></span>
+        <p class="plan-desc"><span class="en">Everything in Professional, built to sell and scale online.</span><span class="fa">همه چیز پکیج حرفه‌ای، برای فروش و رشد آنلاین.</span></p>
+        <div class="plan-price"><span class="amount">1,999</span><span class="currency">CAD</span></div>
+        <p class="plan-price-note"><span class="en">One-time — starting price, final quote after a free consultation</span><span class="fa">یک‌بار — قیمت شروع، قیمت نهایی پس از مشاوره رایگان</span></p>
+        <ul class="plan-features">
+          <li><span class="en">Everything in Professional</span><span class="fa">همه امکانات پکیج حرفه‌ای</span></li>
+          <li><span class="en">Online store with payments</span><span class="fa">فروشگاه آنلاین با درگاه پرداخت</span></li>
+          <li><span class="en">Simple built-in CRM</span><span class="fa">CRM ساده داخلی</span></li>
+          <li><span class="en">Analytics dashboard</span><span class="fa">داشبورد آنالیتیکس</span></li>
+          <li><span class="en">Email / SMS automation</span><span class="fa">اتوماسیون ایمیل / پیامک</span></li>
+          <li><span class="en">3 rounds of revisions</span><span class="fa">سه دور اصلاحات</span></li>
+        </ul>
+        <a href="/contact" class="btn btn-outline"><span class="en">Get Started</span><span class="fa">شروع کنید</span></a>
+      </div>
+    </div>
+    <p class="plans-note anim"><span class="en">Prices are starting points — every project gets a fixed quote after a free consultation, so there are never surprise costs.</span><span class="fa">قیمت‌ها نقطه شروع هستند — هر پروژه پس از یک مشاوره رایگان قیمت نهایی و ثابت دریافت می‌کند، بدون هزینه‌ی غافلگیرکننده.</span></p>
+    <p class="plans-note anim" style="margin-top:12px;"><span class="en">Most Canadian agencies charge $3,500–$10,000+ for a comparable small-business website. Because Pixflow builds on a proven, reusable foundation instead of starting from scratch, we pass that saving on to you.</span><span class="fa">اکثر آژانس‌های کانادایی برای یک سایت مشابه کسب‌وکار کوچک بین ۳٬۵۰۰ تا بیش از ۱۰٬۰۰۰ دلار دریافت می‌کنند. چون Pixflow روی یک زیرساخت اثبات‌شده و قابل‌استفادهٔ مجدد ساخته می‌شود نه از صفر، این صرفه‌جویی را به شما منتقل می‌کنیم.</span></p>
+  </div>
+</section>
+
+<section class="addons">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;" class="anim">
+      <span class="label" style="display:block;margin-bottom:12px;"><span class="en">Optional Add-ons</span><span class="fa">افزونه‌های اختیاری</span></span>
+      <h2 class="section-title" style="margin:0 auto;"><span class="en">Grow beyond the basics</span><span class="fa">فراتر از امکانات پایه</span></h2>
+    </div>
+    <div class="addons-grid">
+      <div class="addon-card anim">
+        <h3 class="addon-title"><span class="en">Monthly Maintenance</span><span class="fa">نگهداری ماهانه</span></h3>
+        <p class="addon-desc"><span class="en">Hosting, backups, and content updates handled for you.</span><span class="fa">هاست، بک‌آپ و بروزرسانی محتوا برای شما انجام می‌شود.</span></p>
+      </div>
+      <div class="addon-card anim">
+        <h3 class="addon-title"><span class="en">Extra Pages</span><span class="fa">صفحات اضافی</span></h3>
+        <p class="addon-desc"><span class="en">Need more than 5 pages? Priced per additional page.</span><span class="fa">بیش از ۵ صفحه نیاز دارید؟ قیمت بر اساس هر صفحه اضافی.</span></p>
+      </div>
+      <div class="addon-card anim">
+        <h3 class="addon-title"><span class="en">Bilingual Content</span><span class="fa">محتوای دوزبانه</span></h3>
+        <p class="addon-desc"><span class="en">Full English + Persian site, like this one.</span><span class="fa">سایت کامل انگلیسی + فارسی، مثل همین سایت.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="container faq-inner">
+    <div style="text-align:center;margin-bottom:40px;" class="anim">
+      <span class="label" style="display:block;margin-bottom:12px;"><span class="en">Questions</span><span class="fa">سوالات</span></span>
+      <h2 class="section-title" style="margin:0 auto;"><span class="en">Pricing FAQ</span><span class="fa">سوالات متداول قیمت‌گذاری</span></h2>
+    </div>
+    <div class="faq-list anim">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span><span class="en">Is the first consultation really free?</span><span class="fa">آیا مشاوره اولیه واقعاً رایگان است؟</span></span><span class="faq-arrow">↓</span></button>
+        <div class="faq-a" role="region"><span class="en">Yes. We review your goals and recommend the right package before any payment.</span><span class="fa">بله. قبل از هرگونه پرداخت، اهداف شما را بررسی و پکیج مناسب را پیشنهاد می‌دهیم.</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span><span class="en">Can I upgrade from Basic to Professional later?</span><span class="fa">آیا می‌توانم بعداً از پایه به حرفه‌ای ارتقا دهم؟</span></span><span class="faq-arrow">↓</span></button>
+        <div class="faq-a" role="region"><span class="en">Yes — we add the admin panel on top of your existing site; you only pay the difference.</span><span class="fa">بله — پنل ادمین را به سایت موجود شما اضافه می‌کنیم؛ فقط تفاوت قیمت را پرداخت می‌کنید.</span></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false"><span><span class="en">What's not included in either package?</span><span class="fa">چه چیزی در هیچ‌کدام از پکیج‌ها شامل نمی‌شود؟</span></span><span class="faq-arrow">↓</span></button>
+        <div class="faq-a" role="region"><span class="en">Domain registration, third-party subscriptions, and paid ad campaigns are billed separately.</span><span class="fa">ثبت دامنه، اشتراک‌های شخص ثالث و کمپین‌های تبلیغاتی جداگانه محاسبه می‌شوند.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" aria-labelledby="cta-heading">
+  <div class="container">
+    <span class="label anim"><span class="en">Ready to Start?</span><span class="fa">آماده شروع هستید؟</span></span>
+    <h2 class="section-title anim" id="cta-heading"><span class="en">Let's find the right package for you.</span><span class="fa">پکیج مناسب شما را پیدا کنیم.</span></h2>
+    <p class="section-sub anim"><span class="en">No pressure, no jargon — just a clear recommendation based on your goals.</span><span class="fa">بدون فشار، بدون اصطلاحات پیچیده — فقط یک پیشنهاد واضح بر اساس اهداف شما.</span></p>
+    <div class="final-cta-btns anim">
+      <a href="/contact" class="btn btn-white"><span class="en">Contact Pixflow</span><span class="fa">تماس با پیکسفلو</span></a>
+      <a href="/services" class="btn btn-ghost"><span class="en">View Services</span><span class="fa">مشاهده خدمات</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo"><svg height="36" width="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="logo-text"><span class="pix" style="color:white;">Pix</span><span class="flow" style="color:#4B3AA6;">flow</span></span></a>
+        <p>Fast, professional websites for small businesses that want a stronger online presence and more customer inquiries.</p>
+      </div>
+      <div class="footer-col"><h4><span class="en">Pages</span><span class="fa">صفحات</span></h4><ul>
+        <li><a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a></li>
+        <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
+        <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
+        <li><a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
+      </ul></div>
+      <div class="footer-col"><h4><span class="en">Services</span><span class="fa">خدمات</span></h4><ul>
+        <li><a href="/services"><span class="en">Web Design</span><span class="fa">طراحی وب</span></a></li>
+        <li><a href="/services"><span class="en">Brand Presentation</span><span class="fa">ارائه برند</span></a></li>
+        <li><a href="/services"><span class="en">Lead Generation</span><span class="fa">جذب مشتری</span></a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p><span class="en">© <span id="cy-en">2025</span> Pixflow. All rights reserved.</span><span class="fa">© <span id="cy-fa">۱۴۰۴</span> پیکسفلو. تمامی حقوق محفوظ است.</span></p>
+      <a href="/privacy">Privacy</a> &middot; <a href="mailto:hello@pixflow.one">hello@pixflow.one</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    const now = new Date();
+    document.getElementById('cy-en').textContent = now.getFullYear();
+    try { document.getElementById('cy-fa').textContent = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(now); } catch (e) {}
+  })();
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    localStorage.setItem('pixflow-lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', (lang==='en' && btn.textContent.trim()==='EN') || (lang==='fa' && btn.textContent.trim()==='فا'));
+    });
+  }
+  const saved = localStorage.getItem('pixflow-lang');
+  if (saved === 'fa') setLang('fa');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.setAttribute('aria-expanded', o); });
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+      document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-q').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); });
+      if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

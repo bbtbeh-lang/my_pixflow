@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pixflow offers professional web design, brand presentation, and lead generation services." />
+  <title>Services — Pixflow</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="canonical" href="https://pixflow.one/services" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pixflow.one/services" />
+  <meta property="og:title" content="Services — Pixflow" />
+  <meta property="og:description" content="Pixflow offers professional web design, brand presentation, and lead generation services." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Services — Pixflow" />
+  <meta name="twitter:description" content="Pixflow offers professional web design, brand presentation, and lead generation services." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #F0F3F8; --white: #FFFFFF; --ink: #111010;
+      --ink-mid: #2e2b28; --ink-low: #4a4540; --accent: #4B3AA6;
+      --accent-lt: #8D7FE0; --line: rgba(20,30,60,0.08);
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --font-fa: 'Vazirmatn', system-ui, sans-serif;
+      --max: 1160px; --r: 3px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-sans); background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    html[lang="fa"] body { font-family: var(--font-fa); direction: rtl; }
+    html[lang="fa"] .page-hero-headline, html[lang="fa"] .section-title,
+    html[lang="fa"] .svc-title, html[lang="fa"] .strip-title,
+    html[lang="fa"] .p-title, html[lang="fa"] .benefit-title { font-family: var(--font-fa); font-weight: 700; }
+    img { display: block; max-width: 100%; } a { color: inherit; text-decoration: none; }
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    .en { display: inherit; } .fa { display: none; }
+    html[lang="fa"] .en { display: none; } html[lang="fa"] .fa { display: inherit; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: inherit; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; border-radius: var(--r); padding: 14px 28px; cursor: pointer; transition: all 0.22s ease; border: 1.5px solid transparent; }
+    html[lang="fa"] .btn { letter-spacing: 0; }
+    .btn-primary { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); color: var(--white); }
+    .btn-outline { background: transparent; color: var(--ink); border-color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--white); }
+    .btn-accent { background: var(--accent); color: var(--white); border-color: var(--accent); }
+    .btn-accent:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+    .label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); }
+    html[lang="fa"] .label { letter-spacing: 0; font-size: 0.8rem; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .anim { opacity: 0; } .anim.visible { animation: fadeUp 0.6s ease forwards; }
+    .anim:nth-child(2).visible { animation-delay: 0.1s; } .anim:nth-child(3).visible { animation-delay: 0.2s; } .anim:nth-child(4).visible { animation-delay: 0.3s; }
+
+    header { position: sticky; top: 0; z-index: 200; background: rgba(253,252,250,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; }
+    .logo-text { font-family: var(--font-sans); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.04em; line-height: 1; }
+    .logo-text .pix { color: var(--ink); } .logo-text .flow { color: var(--accent); }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    nav a { font-size: 0.875rem; color: var(--ink-mid); transition: color 0.2s; }
+    nav a:hover { color: var(--ink); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .lang-toggle { display: flex; align-items: center; background: var(--cream); border: 1px solid var(--line); border-radius: 20px; padding: 3px; gap: 2px; }
+    .lang-btn { font-family: var(--font-sans); font-size: 0.72rem; font-weight: 500; padding: 5px 12px; border-radius: 16px; border: none; background: transparent; color: var(--ink-mid); cursor: pointer; transition: all 0.2s; }
+    .lang-btn.active { background: var(--ink); color: var(--white); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+    .mobile-menu { display: none; flex-direction: column; background: var(--white); border-bottom: 1px solid var(--line); max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+    .mobile-menu.open { max-height: 420px; padding: 16px 0 24px; }
+    .mobile-menu a { padding: 12px 24px; font-size: 1rem; color: var(--ink-mid); border-bottom: 1px solid var(--line); display: block; }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu .btn { margin: 16px 24px 0; }
+    .mobile-lang { display: none; padding: 12px 24px; border-bottom: 1px solid var(--line); }
+
+    section { padding: 96px 0; position: relative; z-index: 1; }
+    .section-title { font-family: var(--font-serif); font-size: clamp(1.8rem, 3.5vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); margin-bottom: 16px; }
+    .section-sub { font-size: 1rem; color: var(--ink-mid); font-weight: 300; max-width: 520px; line-height: 1.7; }
+
+    .page-hero { background: var(--cream); border-bottom: 1px solid var(--line); padding: 80px 0 88px; overflow: hidden; position: relative; z-index: 1; }
+    .page-hero::before { content: ''; position: absolute; top: -60px; right: -80px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(200,155,60,0.10) 0%, transparent 70%); pointer-events: none; }
+    html[lang="fa"] .page-hero::before { right: auto; left: -80px; }
+    .page-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .page-hero-headline { font-family: var(--font-serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 24px; }
+    .page-hero-headline em { font-style: italic; color: var(--accent); }
+    html[lang="fa"] .page-hero-headline em { font-style: normal; }
+    .page-hero-sub { font-size: 1.05rem; color: var(--ink-mid); font-weight: 300; line-height: 1.75; max-width: 440px; margin-bottom: 36px; }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .services-nav { display: flex; flex-direction: column; gap: 12px; }
+    .svc-nav-item { display: flex; align-items: center; gap: 16px; background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 20px 24px; transition: border-color 0.2s, box-shadow 0.2s; cursor: pointer; }
+    .svc-nav-item:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(26,23,20,0.06); }
+    .svc-nav-num { font-family: var(--font-serif); font-size: 1.4rem; color: rgba(200,155,60,0.4); line-height: 1; flex-shrink: 0; }
+    .svc-nav-name { font-family: var(--font-serif); font-size: 1rem; color: var(--ink); }
+    html[lang="fa"] .svc-nav-name { font-family: var(--font-fa); }
+    .svc-nav-arrow { margin-left: auto; color: var(--accent); }
+    html[lang="fa"] .svc-nav-arrow { margin-left: 0; margin-right: auto; }
+
+    .overview-strip { background: var(--white); padding: 48px 0; border-bottom: 1px solid var(--line); }
+    .strip-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+    .strip-item { background: var(--white); padding: 32px 28px; }
+    .strip-num { font-family: var(--font-serif); font-size: 2rem; color: var(--accent); opacity: 0.5; line-height: 1; margin-bottom: 12px; }
+    .strip-title { font-family: var(--font-serif); font-size: 1.1rem; color: var(--ink); margin-bottom: 8px; }
+    .strip-desc { font-size: 0.85rem; color: var(--ink-mid); font-weight: 300; line-height: 1.6; }
+
+    .service-block { padding: 96px 0; border-bottom: 1px solid var(--line); }
+    .service-block:nth-child(odd) { background: var(--white); }
+    .service-block:nth-child(even) { background: var(--cream); }
+    .service-block-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .service-block:nth-child(even) .service-block-inner { direction: rtl; }
+    html[lang="fa"] .service-block:nth-child(even) .service-block-inner { direction: ltr; }
+    .service-block:nth-child(even) .service-block-inner > * { direction: ltr; }
+    html[lang="fa"] .service-block:nth-child(even) .service-block-inner > * { direction: rtl; }
+    .svc-label { display: block; margin-bottom: 16px; }
+    .svc-num { font-family: var(--font-serif); font-size: 4rem; color: var(--line); line-height: 1; margin-bottom: 8px; }
+    .svc-title { font-family: var(--font-serif); font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--ink); letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 20px; }
+    .svc-desc { font-size: 1rem; color: var(--ink-mid); font-weight: 300; line-height: 1.8; margin-bottom: 32px; }
+    .svc-desc p { margin-bottom: 16px; } .svc-desc p:last-child { margin-bottom: 0; }
+    .svc-aside { display: flex; flex-direction: column; gap: 16px; }
+    .benefit-card { background: var(--white); border: 1px solid var(--line); border-radius: 6px; padding: 24px; display: flex; gap: 16px; align-items: flex-start; transition: box-shadow 0.22s, transform 0.22s; }
+    .benefit-card:hover { box-shadow: 0 8px 28px rgba(26,23,20,0.07); transform: translateY(-2px); }
+    .benefit-icon { width: 34px; height: 34px; border-radius: 50%; background: var(--cream); border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; margin-top: 2px; }
+    .benefit-title { font-weight: 500; font-size: 0.9rem; color: var(--ink); margin-bottom: 4px; }
+    .benefit-desc { font-size: 0.825rem; color: var(--ink-mid); font-weight: 300; line-height: 1.6; }
+    .svc-tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .svc-tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); background: var(--cream); border: 1px solid var(--line); border-radius: 2px; padding: 6px 12px; }
+    html[lang="fa"] .svc-tag { letter-spacing: 0; }
+
+    .process { background: var(--ink); padding: 96px 0; }
+    .process .section-title { color: #fff; } .process .section-sub { color: rgba(240,243,248,0.88); font-weight: 400; } .process .label { color: var(--accent-lt); }
+    .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .process-card { border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 32px 24px; transition: border-color 0.25s, background 0.25s; }
+    .process-card:hover { border-color: var(--accent); background: rgba(200,155,60,0.05); }
+    .p-num { font-family: var(--font-serif); font-size: 2rem; color: var(--accent); opacity: 0.5; line-height: 1; margin-bottom: 16px; }
+    .p-title { font-family: var(--font-serif); font-size: 1.05rem; color: #fff; margin-bottom: 10px; }
+    .p-desc { font-size: 0.85rem; color: rgba(240,243,248,0.75); font-weight: 300; line-height: 1.7; }
+
+    .final-cta { background: var(--white); text-align: center; padding: 120px 0; position: relative; overflow: hidden; }
+    .final-cta::before { content: ''; position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(200,155,60,0.08) 0%, transparent 60%); pointer-events: none; }
+    .final-cta .section-title { max-width: 560px; margin: 0 auto 16px; }
+    .final-cta .section-sub { margin: 0 auto 40px; }
+    .final-cta-btns { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    footer { background: var(--ink); color: rgba(240,243,248,0.55); border-top: 1px solid rgba(255,255,255,0.06); padding: 56px 0 36px; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 0.875rem; line-height: 1.7; font-weight: 300; max-width: 280px; margin-top: 16px; }
+    .footer-col h4 { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+    html[lang="fa"] .footer-col h4 { letter-spacing: 0; font-size: 0.85rem; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.875rem; color: rgba(240,243,248,0.5); transition: color 0.2s; font-weight: 300; }
+    .footer-col ul li a:hover { color: var(--white); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; font-size: 0.8rem; }
+    .footer-bottom a:hover { color: var(--accent); }
+
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; } .hamburger { display: flex; } .mobile-menu { display: flex; } .mobile-lang { display: block; }
+      .page-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .strip-inner { grid-template-columns: 1fr; }
+      .service-block-inner { grid-template-columns: 1fr; gap: 40px; }
+      .service-block:nth-child(even) .service-block-inner { direction: ltr; }
+      html[lang="fa"] .service-block:nth-child(even) .service-block-inner { direction: rtl; }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 64px 0; } .page-hero { padding: 56px 0; } .service-block { padding: 64px 0; } .final-cta { padding: 80px 0; }
+      .process-grid { grid-template-columns: 1fr; } .footer-inner { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+<script src="/assets/apply-branding.js" defer></script>
+<script src="/assets/whatsapp-button.js" defer></script>
+<script src="/assets/chat-widget.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="header-inner">
+      <a href="/" class="logo" aria-label="Pixflow home">
+        <svg height="38" width="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text"><span class="pix">Pix</span><span class="flow">flow</span></span>
+      </a>
+      <nav><ul class="nav-links">
+        <li><a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a></li>
+        <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
+        <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
+        <li><a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a></li>
+        <li><a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
+      </ul></nav>
+      <div class="header-right">
+        <div class="lang-toggle">
+          <button class="lang-btn active" onclick="setLang('en')">EN</button>
+          <button class="lang-btn" onclick="setLang('fa')">فا</button>
+        </div>
+        <a href="/contact" class="btn btn-primary nav-cta"><span class="en">Get in Touch</span><span class="fa">تماس با ما</span></a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-lang"><div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('fa')">فا</button>
+    </div></div>
+    <a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a>
+    <a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a>
+    <a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a>
+    <a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a>
+    <a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a>
+    <a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a>
+    <a href="/contact" class="btn btn-primary"><span class="en">Get in Touch</span><span class="fa">تماس با ما</span></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="page-hero" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div>
+        <span class="label anim" style="display:block;margin-bottom:16px;"><span class="en">Our Services</span><span class="fa">خدمات ما</span></span>
+        <h1 class="page-hero-headline anim" id="services-heading">
+          <span class="en">Every service built<br>for one goal —<br><em>your growth.</em></span>
+          <span class="fa">هر خدمت برای<br>یک هدف ساخته شده —<br><em>رشد شما.</em></span>
+        </h1>
+        <p class="page-hero-sub anim"><span class="en">Three focused services designed to help businesses present themselves with clarity, build trust, and convert attention into leads.</span><span class="fa">سه خدمت متمرکز طراحی شده تا به کسب‌وکارها کمک کند با وضوح خود را معرفی کنند، اعتماد بسازند و توجه را به مشتری تبدیل کنند.</span></p>
+        <div class="hero-ctas anim">
+          <a href="/contact" class="btn btn-primary"><span class="en">Start a Project</span><span class="fa">شروع پروژه</span></a>
+          <a href="/portfolio" class="btn btn-outline"><span class="en">See Our Work</span><span class="fa">نمونه کارها</span></a>
+        </div>
+      </div>
+      <nav class="services-nav anim">
+        <a class="svc-nav-item" href="#web-design">
+          <span class="svc-nav-num">01</span>
+          <span class="svc-nav-name"><span class="en">Professional Website Design</span><span class="fa">طراحی وب‌سایت حرفه‌ای</span></span>
+          <span class="svc-nav-arrow">↓</span>
+        </a>
+        <a class="svc-nav-item" href="#brand-presentation">
+          <span class="svc-nav-num">02</span>
+          <span class="svc-nav-name"><span class="en">Brand-Focused Web Presentation</span><span class="fa">ارائه وب متمرکز بر برند</span></span>
+          <span class="svc-nav-arrow">↓</span>
+        </a>
+        <a class="svc-nav-item" href="#lead-generation">
+          <span class="svc-nav-num">03</span>
+          <span class="svc-nav-name"><span class="en">Lead Generation Structure</span><span class="fa">ساختار جذب مشتری</span></span>
+          <span class="svc-nav-arrow">↓</span>
+        </a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="overview-strip">
+  <div class="container">
+    <div class="strip-inner">
+      <div class="strip-item">
+        <div class="strip-num">01</div>
+        <h2 class="strip-title"><span class="en">Website Design</span><span class="fa">طراحی وب‌سایت</span></h2>
+        <p class="strip-desc"><span class="en">Clean, responsive, fast-loading websites that represent your brand with confidence.</span><span class="fa">وب‌سایت‌های تمیز، واکنش‌گرا و سریع که برند شما را با اعتماد نشان می‌دهند.</span></p>
+      </div>
+      <div class="strip-item">
+        <div class="strip-num">02</div>
+        <h2 class="strip-title"><span class="en">Brand Presentation</span><span class="fa">ارائه برند</span></h2>
+        <p class="strip-desc"><span class="en">Strategic visual storytelling that communicates your value and builds lasting impressions.</span><span class="fa">روایت بصری استراتژیک که ارزش شما را بیان می‌کند و تأثیرات ماندگار می‌سازد.</span></p>
+      </div>
+      <div class="strip-item">
+        <div class="strip-num">03</div>
+        <h2 class="strip-title"><span class="en">Lead Generation</span><span class="fa">جذب مشتری</span></h2>
+        <p class="strip-desc"><span class="en">Website architecture designed to guide visitors from first impression to first contact.</span><span class="fa">معماری وب‌سایت طراحی شده برای هدایت بازدیدکنندگان از اولین نگاه تا اولین تماس.</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 01 -->
+<article class="service-block" id="web-design">
+  <div class="container">
+    <div class="service-block-inner">
+      <div>
+        <span class="label svc-label"><span class="en">Service 01</span><span class="fa">خدمت ۰۱</span></span>
+        <div class="svc-num">01</div>
+        <h2 class="svc-title"><span class="en">Professional Website Design</span><span class="fa">طراحی وب‌سایت حرفه‌ای</span></h2>
+        <div class="svc-desc">
+          <p><span class="en">Your website is the first thing most clients see. It needs to load fast, look sharp, and communicate exactly what you do — in seconds.</span><span class="fa">وب‌سایت شما اولین چیزی است که اکثر مشتریان می‌بینند. باید سریع بارگذاری شود، واضح باشد و در چند ثانیه دقیقاً کاری که انجام می‌دهید را بیان کند.</span></p>
+          <p><span class="en">We design every page with your audience in mind: what they need to see, feel, and do next.</span><span class="fa">هر صفحه را با ذهن مخاطبان شما طراحی می‌کنیم: آنچه باید ببینند، احساس کنند و سپس انجام دهند.</span></p>
+        </div>
+        <div class="svc-tag-list">
+          <span class="svc-tag"><span class="en">Responsive</span><span class="fa">واکنش‌گرا</span></span>
+          <span class="svc-tag"><span class="en">Mobile-first</span><span class="fa">موبایل اول</span></span>
+          <span class="svc-tag"><span class="en">Fast loading</span><span class="fa">بارگذاری سریع</span></span>
+          <span class="svc-tag"><span class="en">SEO-ready</span><span class="fa">سئو آماده</span></span>
+        </div>
+      </div>
+      <div class="svc-aside">
+        <div class="benefit-card anim"><div class="benefit-icon">◈</div><div><div class="benefit-title"><span class="en">Designed with intention</span><span class="fa">طراحی هدفمند</span></div><div class="benefit-desc"><span class="en">Every layout choice serves a purpose. Nothing is decorative without reason.</span><span class="fa">هر انتخاب چیدمان هدفی دارد. هیچ چیز بدون دلیل تزئینی نیست.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">◎</div><div><div class="benefit-title"><span class="en">Works on every screen</span><span class="fa">روی هر صفحه‌نمایش</span></div><div class="benefit-desc"><span class="en">Mobile-first by default. Perfectly on phones, tablets, and desktops.</span><span class="fa">موبایل اول به صورت پیش‌فرض. روی موبایل، تبلت و دسکتاپ عالی.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">◉</div><div><div class="benefit-title"><span class="en">Loads in seconds</span><span class="fa">بارگذاری در ثانیه‌ها</span></div><div class="benefit-desc"><span class="en">Clean code and optimized assets mean fast load times.</span><span class="fa">کد تمیز و فایل‌های بهینه یعنی زمان بارگذاری سریع.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">✦</div><div><div class="benefit-title"><span class="en">Search engine ready</span><span class="fa">آماده موتورهای جستجو</span></div><div class="benefit-desc"><span class="en">Semantic HTML and clean URLs give your site the best SEO foundation.</span><span class="fa">HTML معنایی و URL‌های تمیز بهترین پایه سئو را به سایت شما می‌دهند.</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- SERVICE 02 -->
+<article class="service-block" id="brand-presentation">
+  <div class="container">
+    <div class="service-block-inner">
+      <div>
+        <span class="label svc-label"><span class="en">Service 02</span><span class="fa">خدمت ۰۲</span></span>
+        <div class="svc-num">02</div>
+        <h2 class="svc-title"><span class="en">Brand-Focused Web Presentation</span><span class="fa">ارائه وب متمرکز بر برند</span></h2>
+        <div class="svc-desc">
+          <p><span class="en">Your brand is more than a logo. It is the impression you leave on every visitor who lands on your site.</span><span class="fa">برند شما بیش از یک لوگو است. تأثیری است که روی هر بازدیدکننده‌ای که به سایتتان می‌آید می‌گذارید.</span></p>
+          <p><span class="en">We translate your brand identity into a web presence that feels professional, coherent, and credible.</span><span class="fa">هویت برند شما را به یک حضور وب تبدیل می‌کنیم که حرفه‌ای، منسجم و معتبر به نظر برسد.</span></p>
+        </div>
+        <div class="svc-tag-list">
+          <span class="svc-tag"><span class="en">Visual identity</span><span class="fa">هویت بصری</span></span>
+          <span class="svc-tag"><span class="en">Typography</span><span class="fa">تایپوگرافی</span></span>
+          <span class="svc-tag"><span class="en">Color systems</span><span class="fa">سیستم رنگی</span></span>
+          <span class="svc-tag"><span class="en">Consistency</span><span class="fa">ثبات</span></span>
+        </div>
+      </div>
+      <div class="svc-aside">
+        <div class="benefit-card anim"><div class="benefit-icon">◈</div><div><div class="benefit-title"><span class="en">Instant credibility</span><span class="fa">اعتبار فوری</span></div><div class="benefit-desc"><span class="en">A polished brand presence signals professionalism before visitors read a word.</span><span class="fa">یک حضور برند صیقلی قبل از خواندن هر کلمه‌ای حرفه‌ای بودن را نشان می‌دهد.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">◎</div><div><div class="benefit-title"><span class="en">Visual consistency</span><span class="fa">ثبات بصری</span></div><div class="benefit-desc"><span class="en">Fonts, colors, spacing work together as one coherent system.</span><span class="fa">فونت‌ها، رنگ‌ها و فاصله‌ها به عنوان یک سیستم منسجم با هم کار می‌کنند.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">◉</div><div><div class="benefit-title"><span class="en">Memorable first impression</span><span class="fa">اولین تأثیر ماندگار</span></div><div class="benefit-desc"><span class="en">We design experiences that stick long after the visit ends.</span><span class="fa">تجربیاتی طراحی می‌کنیم که مدت‌ها بعد از پایان بازدید باقی می‌مانند.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">✦</div><div><div class="benefit-title"><span class="en">Aligned with your audience</span><span class="fa">همسو با مخاطبانتان</span></div><div class="benefit-desc"><span class="en">Brand presentation tailored to what your specific audience responds to.</span><span class="fa">ارائه برند متناسب با چیزی که مخاطبان خاص شما به آن پاسخ می‌دهند.</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- SERVICE 03 -->
+<article class="service-block" id="lead-generation">
+  <div class="container">
+    <div class="service-block-inner">
+      <div>
+        <span class="label svc-label"><span class="en">Service 03</span><span class="fa">خدمت ۰۳</span></span>
+        <div class="svc-num">03</div>
+        <h2 class="svc-title"><span class="en">Lead Generation Structure</span><span class="fa">ساختار جذب مشتری</span></h2>
+        <div class="svc-desc">
+          <p><span class="en">A beautiful website that doesn't convert is just decoration. The structure of your site determines whether visitors contact you or leave.</span><span class="fa">یک وب‌سایت زیبا که تبدیل نمی‌کند فقط تزئین است. ساختار سایت شما تعیین می‌کند بازدیدکنندگان با شما تماس می‌گیرند یا می‌روند.</span></p>
+          <p><span class="en">We design websites with a clear conversion path from the very first page.</span><span class="fa">وب‌سایت‌هایی با مسیر تبدیل واضح از همان صفحه اول طراحی می‌کنیم.</span></p>
+        </div>
+        <div class="svc-tag-list">
+          <span class="svc-tag"><span class="en">CTA strategy</span><span class="fa">استراتژی CTA</span></span>
+          <span class="svc-tag"><span class="en">Contact forms</span><span class="fa">فرم‌های تماس</span></span>
+          <span class="svc-tag"><span class="en">Trust signals</span><span class="fa">نشانه‌های اعتماد</span></span>
+          <span class="svc-tag"><span class="en">Page flow</span><span class="fa">جریان صفحه</span></span>
+        </div>
+      </div>
+      <div class="svc-aside">
+        <div class="benefit-card anim"><div class="benefit-icon">◈</div><div><div class="benefit-title"><span class="en">Clear conversion path</span><span class="fa">مسیر تبدیل واضح</span></div><div class="benefit-desc"><span class="en">Every page guides visitors toward the next logical step — no dead ends.</span><span class="fa">هر صفحه بازدیدکنندگان را به قدم بعدی منطقی هدایت می‌کند — بدون بن‌بست.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">◎</div><div><div class="benefit-title"><span class="en">Strong calls to action</span><span class="fa">دعوت به اقدام قوی</span></div><div class="benefit-desc"><span class="en">CTAs placed where they make sense and written to motivate action.</span><span class="fa">CTAها در جایی که منطقی است قرار داده شده و برای انگیزش نوشته شده‌اند.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">◉</div><div><div class="benefit-title"><span class="en">Trust signals throughout</span><span class="fa">نشانه‌های اعتماد در سراسر</span></div><div class="benefit-desc"><span class="en">Testimonials and professional presentation reduce hesitation and encourage contact.</span><span class="fa">نظرات و ارائه حرفه‌ای تردید را کاهش داده و تماس را تشویق می‌کنند.</span></div></div></div>
+        <div class="benefit-card anim"><div class="benefit-icon">✦</div><div><div class="benefit-title"><span class="en">Forms that get filled</span><span class="fa">فرم‌هایی که پر می‌شوند</span></div><div class="benefit-desc"><span class="en">Simple, frictionless contact forms that make visitors feel comfortable reaching out.</span><span class="fa">فرم‌های تماس ساده و بدون اصطکاک که بازدیدکنندگان را راحت می‌کنند.</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span class="label" style="display:block;margin-bottom:12px;"><span class="en">How It Works</span><span class="fa">چگونه کار می‌کند</span></span>
+      <h2 class="section-title"><span class="en">From brief to launch</span><span class="fa">از بریف تا راه‌اندازی</span></h2>
+      <p class="section-sub" style="margin:0 auto;"><span class="en">A simple, focused process with no surprises.</span><span class="fa">یک فرآیند ساده و متمرکز بدون غافلگیری.</span></p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card"><div class="p-num">01</div><h3 class="p-title"><span class="en">Discovery call</span><span class="fa">جلسه کشف</span></h3><p class="p-desc"><span class="en">We start by understanding your business, audience, and the outcome you need.</span><span class="fa">با درک کسب‌وکار، مخاطب و نتیجه مورد نیاز شما شروع می‌کنیم.</span></p></div>
+      <div class="process-card"><div class="p-num">02</div><h3 class="p-title"><span class="en">Strategy &amp; plan</span><span class="fa">استراتژی و برنامه</span></h3><p class="p-desc"><span class="en">We define the page structure, content flow, and visual direction.</span><span class="fa">ساختار صفحه، جریان محتوا و جهت بصری را تعریف می‌کنیم.</span></p></div>
+      <div class="process-card"><div class="p-num">03</div><h3 class="p-title"><span class="en">Design &amp; build</span><span class="fa">طراحی و ساخت</span></h3><p class="p-desc"><span class="en">Clean design, precise development, and copy that works.</span><span class="fa">طراحی تمیز، توسعه دقیق و محتوایی که کار می‌کند.</span></p></div>
+      <div class="process-card"><div class="p-num">04</div><h3 class="p-title"><span class="en">Review &amp; launch</span><span class="fa">بررسی و راه‌اندازی</span></h3><p class="p-desc"><span class="en">We test everything and deliver a site ready from day one.</span><span class="fa">همه چیز را آزمایش می‌کنیم و یک سایت آماده از روز اول تحویل می‌دهیم.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="final-cta">
+  <div class="container">
+    <span class="label anim" style="display:block;margin-bottom:16px;"><span class="en">Ready to Start?</span><span class="fa">آماده شروع هستید؟</span></span>
+    <h2 class="section-title anim"><span class="en">Let's build something that works.</span><span class="fa">بیایید چیزی بسازیم که کار کند.</span></h2>
+    <p class="section-sub anim"><span class="en">Tell us about your project and we'll show you how Pixflow can help.</span><span class="fa">درباره پروژه‌تان بگویید و ما نشان می‌دهیم پیکسفلو چگونه می‌تواند کمک کند.</span></p>
+    <div class="final-cta-btns anim">
+      <a href="/contact" class="btn btn-accent"><span class="en">Contact Pixflow</span><span class="fa">تماس با پیکسفلو</span></a>
+      <a href="/portfolio" class="btn btn-outline"><span class="en">View Our Work</span><span class="fa">نمونه کارها</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="/" class="logo"><svg height="36" width="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="logo-text"><span class="pix" style="color:white;">Pix</span><span class="flow" style="color:#4B3AA6;">flow</span></span></a>
+        <p>Fast, professional websites for small businesses that want a stronger online presence and more customer inquiries.</p>
+      </div>
+      <div class="footer-col"><h4><span class="en">Pages</span><span class="fa">صفحات</span></h4><ul>
+        <li><a href="/about"><span class="en">About</span><span class="fa">درباره ما</span></a></li>
+        <li><a href="/services"><span class="en">Services</span><span class="fa">خدمات</span></a></li>
+        <li><a href="/pricing"><span class="en">Pricing</span><span class="fa">قیمت‌گذاری</span></a></li>
+        <li><a href="/portfolio"><span class="en">Portfolio</span><span class="fa">نمونه کارها</span></a></li>
+        <li><a href="/order"><span class="en">Order</span><span class="fa">سفارش پروژه</span></a></li>
+        <li><a href="/contact"><span class="en">Contact</span><span class="fa">تماس</span></a></li>
+      </ul></div>
+      <div class="footer-col"><h4><span class="en">Services</span><span class="fa">خدمات</span></h4><ul>
+        <li><a href="#web-design"><span class="en">Web Design</span><span class="fa">طراحی وب</span></a></li>
+        <li><a href="#brand-presentation"><span class="en">Brand Presentation</span><span class="fa">ارائه برند</span></a></li>
+        <li><a href="#lead-generation"><span class="en">Lead Generation</span><span class="fa">جذب مشتری</span></a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p><span class="en">© <span id="cy-en">2025</span> Pixflow. All rights reserved.</span><span class="fa">© <span id="cy-fa">۱۴۰۴</span> پیکسفلو. تمامی حقوق محفوظ است.</span></p>
+      <a href="/privacy">Privacy</a> &middot; <a href="mailto:hello@pixflow.one">hello@pixflow.one</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Dynamic copyright year (EN + Jalali/FA) ─────────────────
+  (function() {
+    const now = new Date();
+    const enEl = document.getElementById('cy-en');
+    if (enEl) enEl.textContent = now.getFullYear();
+    const faEl = document.getElementById('cy-fa');
+    if (faEl) {
+      try {
+        faEl.textContent = new Intl.DateTimeFormat('fa-IR-u-ca-persian', { year: 'numeric' }).format(now);
+      } catch (e) { /* leave fallback value */ }
+    }
+  })();
+
+  function setLang(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr';
+    localStorage.setItem('pixflow-lang', lang);
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', (lang==='en' && btn.textContent.trim()==='EN') || (lang==='fa' && btn.textContent.trim()==='فا'));
+    });
+  }
+  const saved = localStorage.getItem('pixflow-lang');
+  if (saved === 'fa') setLang('fa');
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.setAttribute('aria-expanded', o); });
+  const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
+  document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
