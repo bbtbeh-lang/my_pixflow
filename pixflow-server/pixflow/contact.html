@@ -340,7 +340,7 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name"><span class="en">Full Name</span><span class="fa">نام کامل</span></label>
-              <input type="text" id="name" name="name" autocomplete="name" placeholder="John Smith / علی رضایی" required />
+              <input type="text" id="name" name="name" autocomplete="name" placeholder="John Smith" required />
             </div>
             <div class="form-group">
               <label for="email"><span class="en">Email Address</span><span class="fa">آدرس ایمیل</span></label>
@@ -603,6 +603,9 @@
     if (ta) ta.placeholder = lang === 'fa'
       ? 'درباره پروژه‌تان بگویید — هدف، مخاطبان هدف و هر چیزی که باید بدانیم...'
       : 'Tell us about your project — your goals, target audience, and anything else we should know...';
+    // Update name field placeholder
+    const nameEl = document.getElementById('name');
+    if (nameEl) nameEl.placeholder = lang === 'fa' ? 'علی رضایی' : 'John Smith';
   }
   const saved = localStorage.getItem('pixflow-lang');
   if (saved === 'fa') setLang('fa');
