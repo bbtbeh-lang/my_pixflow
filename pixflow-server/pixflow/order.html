@@ -323,12 +323,12 @@
             <div class="form-group">
               <label for="goal"><span class="en">Primary Goal</span><span class="fa">هدف اصلی</span> <span class="required">*</span></label>
               <select id="goal" name="goal" required>
-                <option value="" disabled selected>— <span class="en">Select</span><span class="fa">انتخاب کنید</span> —</option>
-                <option value="calls"><span class="en">More phone calls</span><span class="fa">تماس تلفنی بیشتر</span></option>
-                <option value="leads"><span class="en">Form leads</span><span class="fa">دریافت فرم لید</span></option>
-                <option value="sales"><span class="en">Online sales</span><span class="fa">فروش آنلاین</span></option>
-                <option value="bookings"><span class="en">Bookings</span><span class="fa">رزرو / نوبت‌دهی</span></option>
-                <option value="other"><span class="en">Other</span><span class="fa">سایر</span></option>
+                <option value="" disabled selected data-en="— Select —" data-fa="— انتخاب کنید —">— Select —</option>
+                <option value="calls" data-en="More phone calls" data-fa="تماس تلفنی بیشتر">More phone calls</option>
+                <option value="leads" data-en="Form leads" data-fa="دریافت فرم لید">Form leads</option>
+                <option value="sales" data-en="Online sales" data-fa="فروش آنلاین">Online sales</option>
+                <option value="bookings" data-en="Bookings" data-fa="رزرو / نوبت‌دهی">Bookings</option>
+                <option value="other" data-en="Other" data-fa="سایر">Other</option>
               </select>
             </div>
           </div>
@@ -375,17 +375,17 @@
               <div class="form-group">
                 <label for="domainStatus"><span class="en">Domain Status</span><span class="fa">وضعیت دامنه</span></label>
                 <select id="domainStatus" name="domainStatus">
-                  <option value="existing"><span class="en">I have a domain</span><span class="fa">دامنه دارم</span></option>
-                  <option value="new"><span class="en">Need to buy one</span><span class="fa">نیاز به خرید دامنه دارم</span></option>
+                  <option value="existing" data-en="I have a domain" data-fa="دامنه دارم">I have a domain</option>
+                  <option value="new" data-en="Need to buy one" data-fa="نیاز به خرید دامنه دارم">Need to buy one</option>
                 </select>
               </div>
               <div class="form-group">
                 <label for="adminLevel"><span class="en">Admin Level</span><span class="fa">سطح ادمین</span></label>
                 <select id="adminLevel" name="adminLevel">
-                  <option value="0"><span class="en">Level 0 — Static</span><span class="fa">سطح ۰ — استاتیک</span></option>
-                  <option value="1" selected><span class="en">Level 1 — Basic edits</span><span class="fa">سطح ۱ — ویرایش پایه</span></option>
-                  <option value="2"><span class="en">Level 2 — Content panel</span><span class="fa">سطح ۲ — پنل محتوا</span></option>
-                  <option value="3"><span class="en">Level 3 — Full dashboard</span><span class="fa">سطح ۳ — داشبورد کامل</span></option>
+                  <option value="0" data-en="Level 0 — Static" data-fa="سطح ۰ — استاتیک">Level 0 — Static</option>
+                  <option value="1" selected data-en="Level 1 — Basic edits" data-fa="سطح ۱ — ویرایش پایه">Level 1 — Basic edits</option>
+                  <option value="2" data-en="Level 2 — Content panel" data-fa="سطح ۲ — پنل محتوا">Level 2 — Content panel</option>
+                  <option value="3" data-en="Level 3 — Full dashboard" data-fa="سطح ۳ — داشبورد کامل">Level 3 — Full dashboard</option>
                 </select>
               </div>
             </div>
@@ -507,6 +507,10 @@
     localStorage.setItem('pixflow-lang', lang);
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', (lang==='en' && btn.textContent.trim()==='EN') || (lang==='fa' && btn.textContent.trim()==='فا'));
+    });
+    // <option> elements can't hold HTML, so switch their text directly
+    document.querySelectorAll('option[data-en]').forEach(opt => {
+      opt.textContent = lang === 'fa' ? opt.dataset.fa : opt.dataset.en;
     });
   }
   const saved = localStorage.getItem('pixflow-lang');
