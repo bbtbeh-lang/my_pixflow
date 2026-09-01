@@ -351,14 +351,12 @@
           <div class="form-group">
             <label for="subject"><span class="en">Subject</span><span class="fa">موضوع</span></label>
             <select id="subject" name="subject" required>
-              <option value="" disabled selected>
-                — <span class="en">Select a topic</span><span class="fa">یک موضوع انتخاب کنید</span> —
-              </option>
-              <option value="web-design"><span class="en">Website Design</span><span class="fa">طراحی وب‌سایت</span></option>
-              <option value="branding"><span class="en">Brand Presentation</span><span class="fa">ارائه برند</span></option>
-              <option value="lead-gen"><span class="en">Lead Generation</span><span class="fa">جذب مشتری</span></option>
-              <option value="redesign"><span class="en">Website Redesign</span><span class="fa">بازطراحی وب‌سایت</span></option>
-              <option value="other"><span class="en">Something Else</span><span class="fa">چیز دیگری</span></option>
+              <option value="" disabled selected data-en="— Select a topic —" data-fa="— یک موضوع انتخاب کنید —">— Select a topic —</option>
+              <option value="web-design" data-en="Website Design" data-fa="طراحی وب‌سایت">Website Design</option>
+              <option value="branding" data-en="Brand Presentation" data-fa="ارائه برند">Brand Presentation</option>
+              <option value="lead-gen" data-en="Lead Generation" data-fa="جذب مشتری">Lead Generation</option>
+              <option value="redesign" data-en="Website Redesign" data-fa="بازطراحی وب‌سایت">Website Redesign</option>
+              <option value="other" data-en="Something Else" data-fa="چیز دیگری">Something Else</option>
             </select>
           </div>
 
@@ -606,6 +604,10 @@
     // Update name field placeholder
     const nameEl = document.getElementById('name');
     if (nameEl) nameEl.placeholder = lang === 'fa' ? 'علی رضایی' : 'John Smith';
+    // <option> elements can't hold HTML, so switch their text directly
+    document.querySelectorAll('option[data-en]').forEach(opt => {
+      opt.textContent = lang === 'fa' ? opt.dataset.fa : opt.dataset.en;
+    });
   }
   const saved = localStorage.getItem('pixflow-lang');
   if (saved === 'fa') setLang('fa');
