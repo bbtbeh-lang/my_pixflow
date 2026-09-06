@@ -5,15 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Pixflow designs and builds fast, professional websites for small businesses that want a stronger online presence and more customer inquiries." />
   <title>Pixflow — Web Design & Development for Small Businesses</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Pixflow",
+    "url": "https://pixflow.one",
+    "logo": "https://pixflow.one/favicon.svg",
+    "image": "https://pixflow.one/assets/og-image.png",
+    "description": "Pixflow designs and builds fast, professional websites for small businesses that want a stronger online presence and more customer inquiries.",
+    "email": "hello@pixflow.one",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toronto",
+      "addressCountry": "CA"
+    },
+    "areaServed": "Worldwide",
+    "knowsLanguage": ["en", "fa"]
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href="https://pixflow.one/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://pixflow.one/" />
   <meta property="og:title" content="Pixflow — Web Design & Development for Small Businesses" />
   <meta property="og:description" content="Pixflow designs and builds fast, professional websites for small businesses that want a stronger online presence and more customer inquiries." />
+  <meta property="og:image" content="https://pixflow.one/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Pixflow — Web Design & Development for Small Businesses" />
   <meta name="twitter:description" content="Pixflow designs and builds fast, professional websites for small businesses that want a stronger online presence and more customer inquiries." />
+  <meta name="twitter:image" content="https://pixflow.one/assets/og-image.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -188,6 +211,13 @@
     .trust-signal-inner { max-width: 620px; margin: 0 auto; }
     .trust-signal-heading { font-family: var(--font-serif); font-size: 1.3rem; color: var(--ink); margin: 10px 0 10px; }
     .trust-signal-desc { font-size: 0.9rem; color: var(--ink-mid); font-weight: 300; line-height: 1.7; }
+    .marquee-strip { background: var(--accent); overflow: hidden; padding: 14px 0; }
+    .marquee-track { display: flex; width: max-content; animation: marqueeScroll 28s linear infinite; }
+    .marquee-strip:hover .marquee-track { animation-play-state: paused; }
+    .marquee-item { display: flex; align-items: center; white-space: nowrap; padding: 0 28px; color: var(--white); font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em; }
+    .marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.5); margin-inline-start: 28px; flex-shrink: 0; }
+    @keyframes marqueeScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
     /* ── Why ─────────────────────────────────────────────────── */
     .why { background: var(--cream); position: relative; z-index: 1; }
@@ -364,6 +394,32 @@
   </div>
 </section>
 
+<!-- ═══════════════ MARQUEE / TRUST STRIP ═══════════════ -->
+<div class="marquee-strip" role="img" aria-label="Free consultation, no commitment. Fixed-price quotes, no surprises. We reply within one business day. English and Persian support. Based in Toronto, Canada.">
+  <div class="marquee-track" aria-hidden="true">
+    <span class="marquee-item"><span class="en">Free consultation — no commitment</span><span class="fa">مشاوره رایگان — بدون تعهد</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">Fixed-price quotes, no surprises</span><span class="fa">قیمت ثابت، بدون هزینه غافلگیرکننده</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">We reply within one business day</span><span class="fa">پاسخ‌گویی ظرف یک روز کاری</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">English &amp; Persian (Farsi) support</span><span class="fa">پشتیبانی به زبان انگلیسی و فارسی</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">Based in Toronto, Canada</span><span class="fa">مستقر در تورنتو، کانادا</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">Free consultation — no commitment</span><span class="fa">مشاوره رایگان — بدون تعهد</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">Fixed-price quotes, no surprises</span><span class="fa">قیمت ثابت، بدون هزینه غافلگیرکننده</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">We reply within one business day</span><span class="fa">پاسخ‌گویی ظرف یک روز کاری</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">English &amp; Persian (Farsi) support</span><span class="fa">پشتیبانی به زبان انگلیسی و فارسی</span></span>
+    <span class="marquee-dot"></span>
+    <span class="marquee-item"><span class="en">Based in Toronto, Canada</span><span class="fa">مستقر در تورنتو، کانادا</span></span>
+    <span class="marquee-dot"></span>
+  </div>
+</div>
+
 <!-- ═══════════════ SERVICES ═══════════════ -->
 <section class="services" aria-labelledby="services-heading">
   <div class="container">
@@ -405,7 +461,10 @@
     </header>
     <div class="portfolio-grid">
     <div class="portfolio-grid" id="home-portfolio-grid">
-      <!-- populated dynamically from /api/portfolio (featured items) -->
+      <!-- static fallback for no-JS/crawlers; overwritten by fetch('/api/portfolio') below -->
+      <p class="anim" style="grid-column:1/-1;text-align:center;color:var(--ink-low);padding:20px 0;">
+        <span class="en">Featured projects coming soon.</span><span class="fa">پروژه‌های ویژه به‌زودی.</span>
+      </p>
     </div>
     </div>
     <div class="portfolio-cta anim">

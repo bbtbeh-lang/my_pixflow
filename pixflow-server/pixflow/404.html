@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, follow" />
+  <title>Page Not Found — Pixflow</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream:   #F0F3F8;
+      --white:   #FFFFFF;
+      --ink:     #111010;
+      --ink-mid: #2e2b28;
+      --accent:  #4B3AA6;
+      --font-serif: 'DM Serif Display', Georgia, serif;
+      --font-sans:  'DM Sans', system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cream);
+      font-family: var(--font-sans);
+      color: var(--ink);
+      text-align: center;
+      padding: 24px;
+    }
+    .wrap { max-width: 480px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 40px; text-decoration: none; }
+    .logo-text { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.04em; }
+    .logo-text .pix { color: var(--ink); }
+    .logo-text .flow { color: var(--accent); }
+    .code { font-family: var(--font-serif); font-size: clamp(3rem, 10vw, 5rem); color: var(--accent); margin: 0; line-height: 1; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 1.8rem); margin: 12px 0 12px; }
+    p { color: var(--ink-mid); font-weight: 300; line-height: 1.6; margin: 0 0 32px; }
+    .btn { display: inline-block; background: var(--accent); color: var(--white); text-decoration: none; font-weight: 500; padding: 12px 28px; border-radius: 3px; }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="/" class="logo" aria-label="Pixflow home">
+      <svg height="38" width="38" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="40" height="40" rx="10" fill="#4B3AA6"/><rect x="6" y="6" width="10" height="10" rx="3" fill="white"/><rect x="6" y="19" width="10" height="10" rx="3" fill="white" opacity="0.55"/><rect x="19" y="6" width="10" height="10" rx="3" fill="white" opacity="0.85"/><path d="M19.5 24.5H30M30 24.5L25.5 20M30 24.5L25.5 29" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="logo-text"><span class="pix">Pix</span><span class="flow">flow</span></span>
+    </a>
+    <p class="code">404</p>
+    <h1>Page not found</h1>
+    <p>The page you're looking for doesn't exist or may have moved.</p>
+    <a href="/" class="btn">Back to homepage</a>
+  </div>
+</body>
+</html>
